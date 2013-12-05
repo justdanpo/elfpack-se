@@ -1,0 +1,60 @@
+BookManager v2.8
+
+Abilities:
+- display/close/switch book/java applications
+- show/switch/show copirights of elfs
+- set shortcuts from elf
+
+On the first tab you can run shortcut by digital keys.
+On the second tab you can run elfs by digital keys.
+
+"#" - hide all.
+Long "#" (on the first tab) - close all.
+
+
+place files in in $DIR_INI$/bookman/:
+
+bookman.ini - includes book names to change
+shortcuts.ini - includes shortcuts (file is creating by elf)
+picture files for tabs (if necessary)
+
+
+
+Name displaying (bookman.ini):
+
+  what_see : what_want_to_see
+
+e.g.:
+  Desktop: Main menu
+
+
+shortcuts description (shortcuts.ini):
+
+[S_KEY0] - Shortcut on "0" key on the first tab.
+[L_KEY0] - Shortcut on long "0" key on the first tab.
+[ES_KEY0] - Run elf on "0" key on the second tab.
+[EL_KEY0] - Run elf on long "0" key on the second tab.
+
+
+Java running:
+
+Mask: java:Name//Vendor
+Name - Midlet Name
+Vendor - Midlet Vendor
+You can get this params in "Information" of midlet
+
+e.g.
+[S_KEY0]: java:Jimm//Jimm Project
+ 
+
+
+bookman.bcfg description:
+"Start Button" - key code to start BookManager
+"Tabs images" - имена файлов с картинками для вкладок
+"Ignore Keylock" - Enable/disable BookManager start when keyboard is locked.
+"Display elfs on 1 tab" - Display or not elfs with GUI on the first tab
+"Close when inactive" - Enable/disable BookManager closing when user is inactive
+"Name Books" - Name books as session, they are belong, or display name of books
+"Show after shortcut" - move StandbyBook on the top after shortcut run
+"Active Tab" - tab number to set when BookManager starts
+

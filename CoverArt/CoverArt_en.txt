@@ -1,0 +1,130 @@
+CoverArt in Standby v3.52
+© UltraShot
+Æ IronMaster, Joker XT, 2007KrasH
+*************************************
+Contents
+1) Features
+2) Installing
+3) Working with texts' masks
+4) Editing/creating scripts
+5) Bugs?
+6) Thanks to...
+*************************************
+I. Features.
+New features:
+-showing index of current song (in playlist) and how many tracks are in playlists
+-checking events on start
+-bugfixes
+-speed improvement
+-different consts for standby detection in 2010/2020
+-fix for phones without memory stick
+-little changes
+-bcfg didn't changed
+*************************************
+General features:
+-displaying "time left"
+-bug with music playing from File Manager(standart, not an elf) fixed
+-no more TRACK_ADDRESS!
+-added "New line" options in bcfg, structure of bcfg was remade
+-progressbar of current time + showing current time (using label)
+Possibility to redraw labels every second was added (important for current time)
+-fast working using events
+-showing cover of current song +any other custom image
+-showing ID3 v2.x, m4a, wma, other tags
+-ID3 v1.0 tags support for old phones
+-real (!) bitrate, frequency, song length and mode
+-scrolling of long labels to any side
+-bcfg
+-animated labels (like in SWF)
+-text masks in labels
+-draw on ALL Standby and softs/statusbar when you are not on standby
+-added two scrolling modes +second mode for string length's detecting using 0x300 swi
+-all configuration files can be readed from memory card or phone's memory
+-remaking for old phones
+-Three startup modes - for phones which have problems with launch from Daemons
+-optimization +speed increasing by turning off unneeded redraws of pictures on unneeded places (Standby, softs, status...)
+-support of different encodings. For that you need to put encoding.bin to Config/CoverArt/
+
+-a lot of another features
+
+*************************************
+II. Installing.
+1) Create CoverArt folder in Config on card or on phone's memory
+2) Put there animation files and custom image
+3) Launch elf
+4) Open config using BcfgEdit (http://perk11.info/elfse/BcfgEdit_main.elf)
+5) Edit everything you want
+6) Use=)
+
+*************************************
+III. Text masks
+"$code" changes to need label
+
+$0 = $t - title
+$1 = $a - album
+$2 = $c - composer
+$3 = $g - genre
+$4 = $y - year
+$5 = $b - bitrate
+$6 = $f - frequency
+$7 = $m - mode
+$8 = $l - length
+$9 = $n - track num
+$s = current time
+$e = time left
+$i = number of current song in playlist
+$p = count of tracks in playlists
+
+For example, writing down "$bkb/s | $s/$l/-$e" you will get "320kb/s | 02:31/03:58/-01:27" 
+
+*************************************
+IV. Editing scripts
+There are some base commands:
+[ACTIONS_COUNT]: 112; //Count of actions in script. Must be in every script
+[UPDATE_TIME]: 1000; //Update time. Default = 1000
+[USED_LABELS]: 012; //used in script labels. (you CANT write here cover and custom image!) It really changes labels positions..
+[HIDE_WHEN_ISNT_IN_STANDBY]: 012; //Labels, that you need to hide when you are not in standby
+
+Then goes description of actions. Numeration from 0!
+A): B:C:D:E:F:G:H:I:J:K;
+„‰Â 
+A - index of action
+B - index of label. (from 0!). 10 - cover, 11 - custom image
+C - X-position. Negative characters are supported in all coords!
+D - Y-position
+E - max X position
+F - max Y pos
+G - Main color. Not a hex, it is dec! For example, 0xFF000000 after converting with windows calculator will be 4278190080
+     0 - don't change color
+H - Highlight color
+I - font code. 0 -don't change
+J - Centering. 3 - don't change
+K - How many actions you'll need to do after this. 
+Example: when you enter "4", script will be executed by 4-actions' blocks
+
+Don't forget that you have test-script, here is some usefull info, too =)
+
+*************************************
+V. Bugreports
+1) If you can't see anything on the screen after elf's launch, check following events in DYN_CONST.bin:
+UI_MEDIAPLAYER_STOP_PRESSED_EVENT
+UI_MEDIAPLAYER_PLAY_PRESSED_EVENT
+UI_MEDIAPLAYER_PAUSE_PRESSED_EVENT
+UI_MEDIAPLAYER_CREATED_EVENT
+UI_MEDIAPLAYER_DESTROYED_EVENT
+UI_MEDIAPLAYER_AUDIO_PLAYING_TIME_EVENT
+UI_MEDIAPLAYER_VIDEO_PLAYING_TIME_EVENT
+
+Write all messages about bugs here:
+http://mobilefree.ru/newbb_plus/viewtopic.php?topic_id=3066&start=0
+or
+http://forums.se-nse.net/index.php?showtopic=34229&st=0&start=0
+
+Bugs may be fixed, or I'll give you variant of solving problem
+Don't send repeated bugreports (read topic)
+
+*************************************
+VI. Thanks to...
+Thanks and respect IronMaster, Joker XT, 2007KrasH for help. Also thanks to elfpack's authors ;-)
+With respect, UltraShot
+

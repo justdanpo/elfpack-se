@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\Tamagochi.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>makeall</name>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_CN</configuration>
+      </member>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_CZ</configuration>
+      </member>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_EN</configuration>
+      </member>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_PL</configuration>
+      </member>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_RU</configuration>
+      </member>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_SP</configuration>
+      </member>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_RU_dev</configuration>
+      </member>
+      <member>
+        <project>Tamagochi</project>
+        <configuration>Release_PTB</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+
