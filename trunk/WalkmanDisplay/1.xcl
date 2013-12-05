@@ -1,0 +1,9 @@
+-carm
+-ynpra
+// Declare relocation areas for code, constants and data.
+-V(CODE)CODE_AREA,12
+-V(DATA)DATA_AREA,12
+
+// Place segments into the relocation areas
+-Z(CODE_AREA)ELFBEGIN,DATA_ID,START,CODE,DATA_C,INITTAB,DATA_Z,DATA_N,CONFIG_C,SKIN_C,DYN_CONST,DYN_CONST_DESC,DYN_PAGE,DYN_PAGE_DESC=0-FFFFFFFF
+-Z(DATA_AREA)DATA_I=0-FFFFFFFF

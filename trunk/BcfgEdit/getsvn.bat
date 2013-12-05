@@ -1,0 +1,1 @@
+"svn.exe" info svn://svn.boba.su/SE/BcfgEdit | ..\_SVN_Utility\getsvn.exe

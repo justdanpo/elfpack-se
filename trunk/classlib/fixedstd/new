@@ -1,0 +1,136 @@
+// new standard header -*-c++-*-
+#ifndef _NEW_
+#define _NEW_
+
+#ifndef _SYSTEM_BUILD
+#pragma system_include
+#endif
+
+#include <exception>
+_STD_BEGIN
+
+// CLASS bad_alloc
+class bad_alloc
+  : public exception
+{       // base of all bad allocation exceptions
+public:
+  bad_alloc(const char *_Message = _MESG("bad allocation")) _THROW0()
+    : exception(_Message)
+  {       // construct from message string
+  }
+
+  //  virtual ~bad_alloc() _THROW0()
+  //  {} // destroy the object
+  #if _HAS_EXCEPTIONS
+  #else /* _HAS_EXCEPTIONS */
+
+    protected:
+      virtual void _Doraise() const
+      {       // perform class-specific exception handling
+        _RAISE(*this);
+      }
+  #endif /* _HAS_EXCEPTIONS */
+};
+
+// SUPPORT TYPES
+typedef void (*new_handler)();  // handler for operator new failures
+
+struct nothrow_t
+{       // placement new tag type to suppress exceptions
+};
+
+extern const nothrow_t nothrow; // constant for placement new tag
+
+                // FUNCTION AND OBJECT DECLARATIONS
+__INTRINSIC new_handler set_new_handler(new_handler)
+  _THROW0();      // establish alternate new handler
+
+extern new_handler _New_hand;   // pointer to current new handler
+_STD_END
+
+// new AND delete DECLARATIONS (NB: NOT IN std)
+//__INTRINSIC void operator delete(void *) _THROW0(); // delete allocated storage
+
+//__INTRINSIC void *operator new(_CSTD size_t)
+//  _THROW1(_STD bad_alloc);        // allocate or throw exception
+// Declare a nothrow new for each heap memory
+#pragma language = save
+#pragma language = extended
+#define __HEAP_MEM_HELPER1__(_Mem, _I)                                         \
+__INTRINSIC void _Mem *operator new _Mem(_GLUE3(__DATA_MEM, _I, _SIZE_TYPE__), \
+                                    const _STD nothrow_t&)                     \
+  _THROW0();      // allocate or return null pointer
+//__HEAP_MEMORY_LIST1__()
+#undef __HEAP_MEM_HELPER1__
+
+// Define a placement new for each heap memory
+#define __HEAP_MEM_HELPER1__(_Mem, _I)                                      \
+  inline void _Mem *operator new _Mem(_GLUE3(__DATA_MEM, _I, _SIZE_TYPE__), \
+                                      void _Mem *_Where) _THROW0()          \
+  {       /* construct with placement at _Where */                          \
+    return (_Where);                                                        \
+  }
+//__HEAP_MEMORY_LIST1__()
+#undef __HEAP_MEM_HELPER1__
+
+//__INTRINSIC void operator delete[](void *) _THROW0(); // delete allocated array
+
+//__INTRINSIC void *operator new[](_CSTD size_t)
+//  _THROW1(_STD bad_alloc);        // allocate array or throw exception
+
+// Declare a nothrow array new for each heap memory
+#define __HEAP_MEM_HELPER1__(_Mem, _I)                                          \
+__INTRINSIC void _Mem *operator new[] _Mem(_GLUE3(__DATA_MEM, _I, _SIZE_TYPE__),\
+                                    const _STD nothrow_t&)                      \
+  _THROW0();      // allocate array or return null pointer
+//__HEAP_MEMORY_LIST1__()
+#undef __HEAP_MEM_HELPER1__
+
+// Define a placement array new for each heap memory
+#define __HEAP_MEM_HELPER1__(_Mem, _I)                                        \
+  inline void _Mem *operator new[] _Mem(_GLUE3(__DATA_MEM, _I, _SIZE_TYPE__), \
+                                      void _Mem *_Where) _THROW0()            \
+  {       /* construct arrat with placement at _Where */                      \
+    return (_Where);                                                          \
+  }
+//__HEAP_MEMORY_LIST1__()
+#undef __HEAP_MEM_HELPER1__
+
+#if _HAS_EXCEPTIONS
+// Declare a nothrow delete for each heap memory
+//#define __HEAP_MEM_HELPER1__(_Mem, _I)                               \
+//__INTRINSIC void operator delete(void _Mem *, const _STD nothrow_t&) \
+//  _THROW0();      // delete if nothrow new fails -- REPLACEABLE
+//__HEAP_MEMORY_LIST1__()
+//#undef __HEAP_MEM_HELPER1__
+
+// Declare a nothrow array delete for each heap memory
+//#define __HEAP_MEM_HELPER1__(_Mem, _I)                                 \
+//__INTRINSIC void operator delete[](void _Mem *, const _STD nothrow_t&) \
+//  _THROW0();      // delete if nothrow array new fails -- REPLACEABLE
+//__HEAP_MEMORY_LIST1__()
+//#undef __HEAP_MEM_HELPER1__
+
+// Define a placement delete for each heap memory
+//#define __HEAP_MEM_HELPER1__(_Mem, _I)                            \
+//  inline void operator delete(void _Mem *, void _Mem *) _THROW0() \
+//  {       /* delete if placement new fails */                     \
+//  }
+//__HEAP_MEMORY_LIST1__()
+//#undef __HEAP_MEM_HELPER1__
+
+// Define a placement array new for each heap memory
+//#define __HEAP_MEM_HELPER1__(_Mem, _I)                            \
+//inline void operator delete[](void _Mem *, void _Mem *) _THROW0() \
+//{       /* delete if placement array new fails */                 \
+//}
+//__HEAP_MEMORY_LIST1__()
+//#undef __HEAP_MEM_HELPER1__
+#endif /* _HAS_EXCEPTIONS */
+#pragma language = restore
+#endif /* _NEW_ */
+
+/*
+ * Copyright (c) 1992-2002 by P.J. Plauger.  ALL RIGHTS RESERVED.
+ * Consult your license regarding permissions and restrictions.
+V3.12:0576 */
