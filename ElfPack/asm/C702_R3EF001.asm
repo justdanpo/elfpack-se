@@ -20,7 +20,7 @@ a       EQU     b
 
         defadr  memalloc,0x2AF004F8
         defadr  memfree,0x2AF00520
-        defadr  Timer_Set,0x10E5DAA5
+
 
 LastExtDB EQU 0x11EFBBF0
 

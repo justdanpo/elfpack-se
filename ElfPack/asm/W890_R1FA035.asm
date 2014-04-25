@@ -14,7 +14,7 @@ a       EQU     b
 
         defadr  memalloc,0x1109D078+1
         defadr  memfree,0x1109D088+1
-        defadr  Timer_Set,0x11642681
+
 
 // --- Patch Keyhandler ---
 	EXTERN Keyhandler_Hook
@@ -121,28 +121,6 @@ NEW_KEYHANDLER3:
         LDR     R3,=NEW_KEYHANDLER3
         BX      R3
 
-
-	RSEG  PATCH_KEYHANDLER4
-        RSEG  CODE
-        CODE32
-NEW_KEYHANDLER4:
-
-	MOV	R2, R4
-	BLX	Timer_Set
-	STRH	R0, [R4,#16]
-	LDRH	R0, [R4,#0]
-	LDR	R1, =KEY_LAST
-	CMP	R0, R1
-	LDRNE	R0, =KEY_HOOK_TIMER_RETUN_NE
-	BXNE	R0
-	LDR	R0, =KEY_HOOK_TIMER_RETUN
-	BX	R0
-
-
-	RSEG  PATCH_KEYHANDLER4
-        CODE16
-        LDR     R2,=NEW_KEYHANDLER4
-        BX      R2
 
 
 // --- CreateLists ---
