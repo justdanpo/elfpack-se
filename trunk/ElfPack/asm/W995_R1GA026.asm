@@ -18,7 +18,7 @@ a       EQU     b
 
         defadr  memalloc,0x15454548+1
         defadr  memfree,0x15454580+1
-        defadr  Timer_Set,0x1423DCED
+
 
 // --- Patch Keyhandler ---
 	EXTERN Keyhandler_Hook
