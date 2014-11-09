@@ -1,6 +1,6 @@
 #ifndef _CFG_ITEMS_H_
 	#define _CFG_ITEMS_H_
-	
+
 #include "Types.h"
 
 #define CFGVAR _Pragma("location=\"CONFIG_C\"") __root const

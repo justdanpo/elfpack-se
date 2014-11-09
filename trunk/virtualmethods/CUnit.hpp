@@ -7,7 +7,7 @@ class CUnit
 public:
 	CUnit(){}
 	virtual ~CUnit(){}
-	
+
 	virtual void Draw(GVI_GC gc) = 0;
 	virtual void DoStep() = 0;
 };

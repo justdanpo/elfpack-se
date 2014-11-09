@@ -55,12 +55,12 @@ void CMyBook::OnBack(CBookBase* book, CGuiBase*)
 CMyBook::CMyBook() :CBook((char*)"example",&base_page)
 {
 	gui = new CGuiT<CMyDisp>(this, 0);
-	
+
 	gui->SetStyle(4);
-	
+
 	gui->SetTitleType(1);
 	gui->SoftKeys_SetAction( ACTION_BACK, OnBack );
-	
+
 	gui->SoftKeys_Hide();
 	gui->Show();
 }

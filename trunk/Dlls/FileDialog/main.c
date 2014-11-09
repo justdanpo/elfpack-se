@@ -46,7 +46,7 @@ wchar_t * CreateFD (FILE_DIALOG* fd,
 // -------------------  Private area  ------------------
 // Ввиду того, что нельзя использовать глобальные переменные в Public методах,
 // то описываем переменнуй в DLLFILENAME_private.h используем.
-// Эта переменная будет видна в пределах DLL 
+// Эта переменная будет видна в пределах DLL
 // -----------------------------------------------------
 
 int main ( int Action , FILE_DIALOG * data )
@@ -58,42 +58,42 @@ int main ( int Action , FILE_DIALOG * data )
     // инициалицация Dll_System area. вызывается только один раз, при загрузке в память.
     // если вернуть не ноль, то загрузка прекращается с кодом DLL_ERROR_INIT
     // data == NULL
-    
+
     usage_count=0;
-    
-    
+
+
     return(0);
-    
+
   case DLL_LOAD:
     // инициалицация Private / Public area. вызывается каждый раз, при вызове LoadDLL.
     // data == NULL
-    
+
     usage_count++;                      // увеличение счетчика использования этой DLL
-    
+
     if (!(p = new FILE_DIALOG)) return(0);;       // создание this и инициализация свойств и методов
-    
+
     memset(p,0,sizeof(FILE_DIALOG));
-    
+
     // Public area
     p->CreateFD=CreateFD;
-    
-    
+
+
     // Private area
-    
-    
+
+
     return((int)p);
-    
+
   case DLL_UNLOAD:
     // освобождение Private / Public area. вызывается каждый раз, при вызове UnLoadDLL.
     // data == this
-    
+
     //  освобождеем при необходимости data->...
-    
-    
+
+
     //  освобождеем всегда data
     mfree(data);
     usage_count--;                      // уменьшение счетчика использования этой DLL
-    
+
     // если больше никто не использует...
     if(!usage_count)
     {
@@ -103,7 +103,7 @@ int main ( int Action , FILE_DIALOG * data )
       SUBPROC(elf_exit);
     }
     return(usage_count);
-    
+
   }
   return(0);
 }

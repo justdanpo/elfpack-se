@@ -359,7 +359,7 @@ int sintable[360]={
 	-22,
 	-17,
 	-13,
-	-8         
+	-8
 };
 
 int sin(int i)
@@ -380,7 +380,7 @@ void rotate3d(const int ax, const int ay, int &x, int &y, int& z)
 	int x1=x;
 	int y1=y*cos(ax)/256+z*sin(ax)/256;
 	int z1=z*cos(ax)/256-y*sin(ax)/256;
-	
+
 	x=x1*cos(ay)/256+z1*sin(ay)/256;
 	y=y1;
 	z=z1*cos(ay)/256-x1*sin(ay)/256;
@@ -390,23 +390,23 @@ void rotate(const int az, int &x, int &y)
 {
 	int x1=x*cos(az)/256+y*sin(az)/256;
 	int y1=y*cos(az)/256-x*sin(az)/256;
-	
+
 	x=x1;
-	y=y1; 
+	y=y1;
 }
 
 void translatept(const POINT* frame, POINT& ret)
 {
 	int x11 = (frame[1].x-frame[0].x)*ret.x/256+frame[0].x;
 	int x22 = (frame[2].x-frame[3].x)*ret.x/256+frame[3].x;
-	
+
 	int xn = (x22-x11)*ret.y/256 + x11;
-	
+
 	int y11 = (frame[1].y-frame[0].y)*ret.x/256+frame[0].y;
 	int y22 = (frame[2].y-frame[3].y)*ret.x/256+frame[3].y;
-	
+
 	int yn = (y22-y11)*ret.y/256 + y11;
-	
+
 	ret.x = xn;
 	ret.y = yn;
 }
@@ -415,9 +415,9 @@ int getangle(int i)
 {
 	while(i>180)
 		i-=360;
-	
+
 	while(i<-180)
 		i+=360;
-	
+
 	return i;
 }

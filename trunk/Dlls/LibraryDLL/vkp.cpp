@@ -59,7 +59,7 @@ int Vkp::gettable( void** ret )
         {
             count ++;
             if( ret )
-            {    
+            {
                 *ret++ = (void*)addr;
                 *ret++ = List_Get( values, i );
             }
@@ -76,15 +76,15 @@ bool Vkp::isthatchar(const char* addr,const long size,const long position,long& 
 {
     if(position>=size)
         return false;
-    
-    
+
+
     for(const char* str=ch; *str; str++)
         if(*str==addr[position])
         {
             elementsize = 1;
             return true;
         }
-    
+
     return false;
 }
 
@@ -97,23 +97,23 @@ bool Vkp::eol(const char* addr,long size,long position,long& elementsize)
 {
     elementsize=0;
     bool retcode=false;
-    
+
     if(position>=size)
         return true;
-    
+
     if(addr[elementsize+position]==13)
-    { 
-        elementsize++; 
-        retcode=true; 
+    {
+        elementsize++;
+        retcode=true;
     }
-    
+
     if(position>=size)
         return retcode;
-    
+
     if(addr[elementsize+position]==10)
-    { 
-        elementsize++; 
-        retcode=true; 
+    {
+        elementsize++;
+        retcode=true;
     }
     return retcode;
 }
@@ -121,22 +121,22 @@ bool Vkp::eol(const char* addr,long size,long position,long& elementsize)
 bool Vkp::eos(const char* addr,long size,long position,long& elementsize)
 {
     long t;
-    
+
     for(elementsize=0 ; space(addr,size,elementsize+position,t) ; elementsize+=t);
-    
+
     if(elementsize+position>=size)
         return true;
-    
+
     if(addr[elementsize+position]==';')
     {
         while(! eol(addr,size,elementsize+position,t))
             elementsize++;
     }
-    
+
     if(eol(addr,size,elementsize+position,t))
-    { 
-        elementsize+=t; 
-        return true; 
+    {
+        elementsize+=t;
+        return true;
     }
     return false;
 }
@@ -145,7 +145,7 @@ bool Vkp::anyline(const char* addr,long size,long position,long& elementsize)
 {
     elementsize=0;
     long t;
-    while(! eol(addr,size,elementsize+position,t)) 
+    while(! eol(addr,size,elementsize+position,t))
         elementsize++;
     //    if(eol(addr,size,elementsize+position,t)){ elementsize+=t; return true; }
     //    return false;
@@ -156,10 +156,10 @@ bool Vkp::deltaoffset(const char* addr,long size,long position,long& elementsize
 {
     if(!isthatchar(addr,size,position,elementsize,"+-"))
         return false;
-    
+
     long t;
     int i;
-    //char tmp[10]; 
+    //char tmp[10];
     //tmp[0]=addr[position];
     for(i=0;i<8;i++)
     {
@@ -168,14 +168,14 @@ bool Vkp::deltaoffset(const char* addr,long size,long position,long& elementsize
         //tmp[i+1]=addr[elementsize+position];
         elementsize+=t;
     }
-    
+
     if(i==0)
         return false;
-    
+
     //tmp[i+1]=0;
     if(!eos(addr,size,elementsize+position,t))
         return false;
-    
+
     elementsize+=t;
     //sscanf_s(tmp, "%x", &t, sizeof(t));
     //delta=t;
@@ -189,82 +189,82 @@ bool Vkp::patchstring(const char* addr,long size,long position,long& elementsize
     long t;
     char tmpaddr[9];
     unsigned addrvalue;
-    
+
     char tmpval[3]; tmpval[2]=0;
-    
+
     for(i=0;i<8;i++)
     {
         if(!isthatchar(addr,size,elementsize+position,t,chhexvalues))
             break;
-        
+
         tmpaddr[i]=addr[elementsize+position];
         elementsize+=t;
     }
-    
+
     if(i==0)
         return false;
-    
-    tmpaddr[i]=0; 
+
+    tmpaddr[i]=0;
     addrvalue = hextoint( tmpaddr );
-    
+
     if(!isthatchar(addr,size,elementsize+position,t,":"))
-        return false; 
-    
+        return false;
+
     elementsize+=t;
-    
+
     if(!isthatchar(addr,size,elementsize+position,t," "))
-        return false; 
-    
+        return false;
+
     elementsize+=t;
     int hcount=0;
     while(isthatchar(addr,size,elementsize+position,t,chhexvalues))
     {
         tmpval[0]=addr[elementsize+position];
         elementsize+=t;
-        
+
         if(!isthatchar(addr,size,elementsize+position,t,chhexvalues))
             return false;
-        
+
         tmpval[1]=addr[elementsize+position];
         elementsize+=t;
-        
+
         //оригинальные данные не нужны
         //t = hextoint( tmpval );
         //VKPLINE l;
         //l.addr=addrvalue+hcount+delta;
         //l.data[0]=(BYTE)t;
         //vkpline.push_back(l);
-        
+
         hcount++;
     }
-    
+
     if(!isthatchar(addr,size,elementsize+position,t," "))
-        return false; 
-    
+        return false;
+
     elementsize+=t;
-    
+
     for(int i=0;i<hcount;i++)
     {
         if(!isthatchar(addr,size,elementsize+position,t,chhexvalues))
             return false;
-        
+
         tmpval[0]=addr[elementsize+position];
         elementsize+=t;
-        
+
         if(!isthatchar(addr,size,elementsize+position,t,chhexvalues))
             return false;
-        
+
         tmpval[1]=addr[elementsize+position];
         elementsize+=t;
-        
+
         setbyte( addrvalue + i, hextoint( tmpval ) );
     }
-    
+
     if(!eos(addr,size,elementsize+position,t))
         return false;
-    
+
     elementsize+=t;
-    
+
     return true;
 }
 
@@ -275,7 +275,7 @@ int Vkp::dovkp(const char* addr,long size)
     //errorstring="";
     errorline=0;
     //delta=0;
-    
+
     long position;
     int linenum;
     long elementsize;

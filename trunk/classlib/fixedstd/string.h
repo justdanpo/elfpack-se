@@ -73,108 +73,108 @@ _END_C_LIB_DECL
   _STD_BEGIN
   #ifdef __cplusplus
                 /* First the const overloads for C++. */
-    #pragma inline 
+    #pragma inline
     const void *memchr(const void *_S, int _C, size_t _N)
     {
-      return (_Memchr(_S, _C, _N)); 
+      return (_Memchr(_S, _C, _N));
     }
 
-    #pragma inline 
+    #pragma inline
     const char *strchr(const char *_S, int _C)
     {
-      return (_Strchr(_S, _C)); 
+      return (_Strchr(_S, _C));
     }
 
-    #pragma inline 
+    #pragma inline
     const char *strpbrk(const char *_S, const char *_P)
     {
-      return (_Strpbrk(_S, _P)); 
+      return (_Strpbrk(_S, _P));
     }
 
-    #pragma inline 
+    #pragma inline
     const char *strrchr(const char *_S, int _C)
     {
-      return (_Strrchr(_S, _C)); 
+      return (_Strrchr(_S, _C));
     }
 
-//    #pragma inline 
+//    #pragma inline
 //    const char *strstr(const char *_S, const char *_P)
 //    {
-//      return (_Strstr(_S, _P)); 
+//      return (_Strstr(_S, _P));
 //    }
                 /* Then the non-const overloads for C++. */
-    #pragma inline 
+    #pragma inline
     void *memchr(void *_S, int _C, size_t _N)
     {
-      return (_Memchr(_S, _C, _N)); 
+      return (_Memchr(_S, _C, _N));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strchr(char *_S, int _C)
     {
-      return (_Strchr(_S, _C)); 
+      return (_Strchr(_S, _C));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strpbrk(char *_S, const char *_P)
     {
-      return (_Strpbrk(_S, _P)); 
+      return (_Strpbrk(_S, _P));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strrchr(char *_S, int _C)
     {
-      return (_Strrchr(_S, _C)); 
+      return (_Strrchr(_S, _C));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strstr(char *_S, const char *_P)
     {
-      return (_Strstr(_S, _P)); 
+      return (_Strstr(_S, _P));
     }
 
   #else /* !__cplusplus */
                 /* Then the overloads for C. */
-    #pragma inline 
+    #pragma inline
     void *memchr(const void *_S, int _C, size_t _N)
     {
-      return (_Memchr(_S, _C, _N)); 
+      return (_Memchr(_S, _C, _N));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strchr(const char *_S, int _C)
     {
-      return (_Strchr(_S, _C)); 
+      return (_Strchr(_S, _C));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strpbrk(const char *_S, const char *_P)
     {
-      return (_Strpbrk(_S, _P)); 
+      return (_Strpbrk(_S, _P));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strrchr(const char *_S, int _C)
     {
-      return (_Strrchr(_S, _C)); 
+      return (_Strrchr(_S, _C));
     }
 
-    #pragma inline 
+    #pragma inline
     char *strstr(const char *_S, const char *_P)
     {
-      return (_Strstr(_S, _P)); 
+      return (_Strstr(_S, _P));
     }
   #endif /* __cplusplus */
 
-  #pragma inline 
+  #pragma inline
   char *strerror(int _Err)
   {
-    return (_Strerror(_Err, 0)); 
+    return (_Strerror(_Err, 0));
   }
 
   #ifdef _STRING_MORE_INLINES
-    #pragma inline 
-    int memcmp(const void *s1, const void *s2, size_t n) 
+    #pragma inline
+    int memcmp(const void *s1, const void *s2, size_t n)
       /* Copied from memcmp.c */
     {       /* compare unsigned char s1[n], s2[n] */
       const unsigned char *su1 = (const unsigned char *)s1;
@@ -186,34 +186,34 @@ _END_C_LIB_DECL
       return (0);
     }
 
-    #pragma inline 
+    #pragma inline
     void *memcpy(void *s1, const void *s2, size_t n)
       /* Copied from memcpy.c */
     {       /* copy char s2[n] to s1[n] in any order */
       char *su1 = (char *)s1;
       const char *su2 = (const char *)s2;
-  
+
       for (; 0 < n; ++su1, ++su2, --n)
         *su1 = *su2;
       return (s1);
     }
 
-//    #pragma inline 
+//    #pragma inline
 //    void *memset(void *s, int c, size_t n) /* Copied from memset.c */
 //    {       /* store c throughout unsigned char s[n] */
 //      const unsigned char uc = c;
 //      unsigned char *su = (unsigned char *)s;
-//        
+//
 //      for (; 0 < n; ++su, --n)
 //       *su = uc;
 //      return (s);
 //    }
 
-    #pragma inline 
+    #pragma inline
     char *strcat(char *s1, const char *s2) /* Copied from strcat.c */
     {       /* copy char s2[] to end of s1[] */
       char *s;
-  
+
       for (s = s1; *s != '\0'; ++s)
         ;                   /* find end of s1[] */
       for (; (*s = *s2) != '\0'; ++s, ++s2)
@@ -221,7 +221,7 @@ _END_C_LIB_DECL
       return (s1);
     }
 
-    #pragma inline 
+    #pragma inline
     int strcmp(const char *s1, const char *s2) /* Copied from strcmp.c */
     {       /* compare unsigned char s1[], s2[] */
       for (; *s1 == *s2; ++s1, ++s2)
@@ -231,17 +231,17 @@ _END_C_LIB_DECL
               ? -1 : +1);
     }
 
-    #pragma inline 
+    #pragma inline
     char *strcpy(char *s1, const char *s2) /* Copied from strcpy.c */
     {       /* copy char s2[] to s1[] */
       char *s = s1;
-  
+
       for (s = s1; (*s++ = *s2++) != '\0'; )
         ;
       return (s1);
     }
 
-    #pragma inline 
+    #pragma inline
     size_t strcspn(const char *s1, const char *s2)
       /* Copied from strcspn.c */
     {       /* find index of first s1[i] that matches any s2[] */
@@ -254,7 +254,7 @@ _END_C_LIB_DECL
       return (sc1 - s1);    /* terminating nulls match */
     }
 
-    #pragma inline 
+    #pragma inline
     size_t strlen(const char *s) /* Copied from strlen.c */
     {       /* find length of s[] */
       const char *sc;
@@ -264,12 +264,12 @@ _END_C_LIB_DECL
       return (sc - s);
     }
 
-    #pragma inline 
-    char *strncat(char *s1, const char *s2, size_t n) 
+    #pragma inline
+    char *strncat(char *s1, const char *s2, size_t n)
       /* Copied from strncat.c */
     {       /* copy char s2[max n] to end of s1[] */
       char *s;
-  
+
       for (s = s1; *s != '\0'; ++s)
         ;   /* find end of s1[] */
       for (; 0 < n && *s2 != '\0'; --n)
@@ -278,8 +278,8 @@ _END_C_LIB_DECL
       return (s1);
     }
 
-    #pragma inline 
-    int strncmp(const char *s1, const char *s2, size_t n) 
+    #pragma inline
+    int strncmp(const char *s1, const char *s2, size_t n)
       /* Copied from strncmp.c */
     {       /* compare unsigned char s1[max n], s2[max n] */
       for (; 0 < n; ++s1, ++s2, --n)
@@ -291,12 +291,12 @@ _END_C_LIB_DECL
       return (0);
     }
 
-    #pragma inline 
-    char *strncpy(char *s1, const char *s2, size_t n) 
+    #pragma inline
+    char *strncpy(char *s1, const char *s2, size_t n)
       /* Copied from strncpy.c */
     {       /* copy char s2[max n] to s1[n] */
       char *s;
-        
+
       for (s = s1; 0 < n && *s2 != '\0'; --n)
         *s++ = *s2++;       /* copy at most n chars from s2[] */
       for (; 0 < n; --n)
@@ -304,11 +304,11 @@ _END_C_LIB_DECL
       return (s1);
     }
 
-    #pragma inline 
+    #pragma inline
     size_t strspn(const char *s1, const char *s2) /* Copied from strspn.c */
     {       /* find index of first s1[i] that matches no s2[] */
       const char *sc1, *sc2;
-        
+
       for (sc1 = s1; *sc1 != '\0'; ++sc1)
         for (sc2 = s2; ; ++sc2)
           if (*sc2 == '\0')
@@ -318,35 +318,35 @@ _END_C_LIB_DECL
       return (sc1 - s1);    /* null doesn't match */
     }
 
-    #pragma inline 
+    #pragma inline
     void *_Memchr(const void *s, int c, size_t n) /* Copied from memchr.c */
     {       /* find first occurrence of c in s[n] */
       const unsigned char uc = c;
       const unsigned char *su = (const unsigned char *)s;
-        
+
       for (; 0 < n; ++su, --n)
         if (*su == uc)
           return ((void *)su);
       return (0);
     }
 
-    #pragma inline 
+    #pragma inline
     char *_Strchr(const char *s, int c) /* Copied from strchr.c */
     {       /* find first occurrence of c in char s[] */
       const char ch = c;
-        
+
       for (; *s != ch; ++s)
         if (*s == '\0')
           return (0);
       return ((char *)s);
     }
 
-    #pragma inline 
-    char *_Strpbrk(const char *s1, const char *s2) 
+    #pragma inline
+    char *_Strpbrk(const char *s1, const char *s2)
       /* Copied from strpbrk.c */
     {       /* find index of first s1[i] that matches any s2[] */
       const char *sc1, *sc2;
-  
+
       for (sc1 = s1; *sc1 != '\0'; ++sc1)
         for (sc2 = s2; *sc2 != '\0'; ++sc2)
           if (*sc1 == *sc2)
@@ -354,12 +354,12 @@ _END_C_LIB_DECL
       return (0);   /* terminating nulls match */
     }
 
-    #pragma inline 
+    #pragma inline
     char *_Strrchr(const char *s, int c) /* Copied from strrchr.c */
     {       /* find last occurrence of c in char s[] */
       const char ch = c;
       const char *sc;
-  
+
       for (sc = 0; ; ++s)
       {     /* check another char */
         if (*s == ch)
@@ -369,7 +369,7 @@ _END_C_LIB_DECL
       }
     }
 
-    #pragma inline 
+    #pragma inline
     char *_Strstr(const char *s1, const char *s2) /* Copied from strstr.c */
     {       /* find first occurrence of s2[] in s1[] */
       if (*s2 == '\0')
@@ -377,7 +377,7 @@ _END_C_LIB_DECL
       for (; (s1 = _Strchr(s1, *s2)) != 0; ++s1)
       {     /* match rest of prefix */
         const char *sc1, *sc2;
-          
+
         for (sc1 = s1, sc2 = s2; ; )
           if (*++sc2 == '\0')
             return ((char *)s1);

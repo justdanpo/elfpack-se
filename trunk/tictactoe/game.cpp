@@ -336,7 +336,7 @@ int CGame::ReadStats( const wchar_t* fileName )
 {
 	w_chdir(GetDir(DIR_ELFS_CONFIG|MEM_INTERNAL));
 
-    int f = w_fopen(fileName, WA_Read, 0x1FF, 0);
+	int f = w_fopen(fileName, WA_Read, 0x1FF, 0);
 	if( f >= 0 )
 	{
 		w_fread( f, &scorePC, sizeof(scorePC) );

@@ -783,11 +783,11 @@ __swi __arm DISP_OBJ_METHOD DispObject_GetMethod07( DISP_OBJ* );
 #pragma swi_number=0x236
 __swi __arm void DISP_DESC_SetOnLayout( DISP_DESC*, DISP_OBJ_ONLAYOUT_METHOD );
 #pragma swi_number=0x237
-__swi __arm DISP_OBJ_METHOD DispObject_GetOnLayout( DISP_OBJ* );
+__swi __arm DISP_OBJ_ONLAYOUT_METHOD DispObject_GetOnLayout( DISP_OBJ* );
 #pragma swi_number=0x238
 __swi __arm void DISP_DESC_SetOnConfig( DISP_DESC*, DISP_OBJ_ONCONFIG_METHOD );
 #pragma swi_number=0x239
-__swi __arm DISP_OBJ_METHOD DispObject_GetOnConfig( DISP_OBJ* );
+__swi __arm DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
 #pragma swi_number=0x23A
 __swi __arm void DISP_DESC_SetMethod0A( DISP_DESC*, void (*)( void* ) );
 #pragma swi_number=0x23B

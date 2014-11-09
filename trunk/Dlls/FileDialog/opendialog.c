@@ -45,33 +45,33 @@ static int ExplorerOnCreate(void *, BOOK *bk)
   void * DB_Desc=DataBrowserDesc_Create();
   // ИД книги владельца браузера
   DataBrowserDesc_SetBookID(DB_Desc,BookObj_GetBookID(bk));
-  
+
   // Сканируемые папки
   DataBrowserDesc_SetFolders(DB_Desc,(const wchar_t **)ofd->folders_list->listdata);
   DataBrowserDesc_SetFoldersNumber(DB_Desc,ofd->folders_list->FirstFree);
-  
+
   // "Выбрать" на софткее
   DataBrowserDesc_SetSelectAction(DB_Desc,3);
-  
+
   // заголовок окна
   DataBrowserDesc_SetHeaderText(DB_Desc,ofd->htext);
-  
+
   // фильтр файлов
   DataBrowserDesc_SetFileExtList(DB_Desc,ofd->filters);
-  
+
   // битики из flags
   if (ofd->flags & OFD_SELECT_FOLDER)       DataBrowserDesc_SetSelectActionOnFolders(DB_Desc,1);
   if (ofd->flags & OFD_NEW_FOLDERS_ENABLE)   DataBrowserDesc_SetOption(DB_Desc,"semc/dir");
   if (ofd->flags & OFD_EMPTY_FOLDER_ENABLE)  DataBrowserDesc_SetOpenEmptyFolder(DB_Desc,1);
-  if (ofd->flags & OFD_INSERT_ON_OK_KEY)  
+  if (ofd->flags & OFD_INSERT_ON_OK_KEY)
   {
     TEXTID str_id;
     textidname2id(L"GUI_INSERT_SK",TEXTID_ANY_LEN,&str_id);
     DataBrowserDesc_SetOKSoftKeyText(DB_Desc,str_id);
     DataBrowserDesc_SetSelectActionOnFolders(DB_Desc,1);
   }
-  
-  
+
+
   switch  (ofd->flags & (OFD_SHOW_FILES|OFD_SHOW_FOLDERS))
   {
   case OFD_SHOW_FILES:
@@ -84,23 +84,23 @@ static int ExplorerOnCreate(void *, BOOK *bk)
     DataBrowserDesc_SetItemFilter(DB_Desc,OFD_ShowAllFilter);
     break;
   }
-  
+
   // ACTIONs
   ofd->actions= new char[17];
-  
+
   char * pactions = ofd->actions;
-  
+
   // а вот это наверное лучше в константы......
   if (ofd->flags & OFD_ACT_PREVIEW_ENABLE) *pactions++ = DB_CMD_RUN;
   if (ofd->flags & OFD_ACT_DELETE_ENABLE) *pactions++ = DB_CMD_DELETE;
   if (ofd->flags & OFD_ACT_INFO_ENABLE) *pactions++ = DB_CMD_INFO;
-  
+
   *pactions = DB_CMD_LAST;
-  
+
   DataBrowserDesc_SetActions(DB_Desc,ofd->actions);
-  
+
   DataBrowser_Create(DB_Desc);
-  
+
   int p=BookObj_GetBookID(bk);
   ofd->DataBrowserBook=FindBookEx(isDataBrowser1,&p);
   DataBrowserDesc_Destroy(DB_Desc);
@@ -143,7 +143,7 @@ void onCloseOFDBook(BOOK * book)
   delete(ofd->filters);
   delete(ofd->actions);
   TextID_Destroy(ofd->htext);
-  while (ofd->folders_list->FirstFree) 
+  while (ofd->folders_list->FirstFree)
   {
     delete(List_RemoveAt(ofd->folders_list,ofd->folders_list->FirstFree-1));
   }
@@ -154,9 +154,9 @@ void onCloseOFDBook(BOOK * book)
 int TerminateOFD(void * ,BOOK * book)
 {
   OFD_BOOK * ofd = (OFD_BOOK *)book;
-  
+
   UI_Event_toBookID(CANCEL_EVENT,ofd->parrent_bookID);
-  
+
   FreeBook (ofd->DataBrowserBook);
   FreeBook(book);
   return(1);
@@ -167,7 +167,7 @@ int PossibleDestroyParrentBook(void * book_id,BOOK * book)
 {
   OFD_BOOK * ofd = (OFD_BOOK *)book;
   int * bookid = (int*)book_id;
-  if (*bookid==ofd->parrent_bookID) 
+  if (*bookid==ofd->parrent_bookID)
   {
     FreeBook(book);
     FreeBook (ofd->DataBrowserBook);
@@ -192,18 +192,18 @@ wchar_t * CreateFileDialog (
                             va_list ap
                               )
 {
-  
-  
+
+
   int args;
   wchar_t * ws;
-  
+
   OFD_BOOK  * ofd = new OFD_BOOK;
   CreateBook((BOOK*)ofd,onCloseOFDBook,&odf_base,"Fantom_ExplorerBook",-1,0);
   ofd->parrent_book=book;
   ofd->parrent_bookID=BookObj_GetBookID(book);
   ofd->filters=new wchar_t[wstrlen(filters)+1];
   wstrcpy(ofd->filters,filters);
-  
+
   // проверяем, не TEXTID ли?
   if (((int)header>0x70000000) || ((int)header<0x10000) )
   {
@@ -216,12 +216,12 @@ wchar_t * CreateFileDialog (
   ofd->flags=flags;
   ofd->DataBrowserBook=0;
   ofd->folders_list=List_Create();
-  
+
   ofd->folders=0;
-  
+
   // создаём список папок
   args = va_arg(ap, int);
-  
+
   while (args>=0)
   {
     if (args>0x1000)
@@ -238,7 +238,7 @@ wchar_t * CreateFileDialog (
     args = va_arg(ap, int);
     ofd->folders++;
   }
- 
+
   BookObj_GotoPage((BOOK*)ofd,&ofd_file_dialog_msglist);
   return(0);
 }
