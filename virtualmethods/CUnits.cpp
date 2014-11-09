@@ -15,7 +15,7 @@ enum
 	UNITROUND,
 	UNITSTARS,
 	UNITSINE,
-	
+
 	UNITTYPES
 };
 
@@ -25,9 +25,9 @@ CUnit* GetRandomUnit()
 	CUnitRoundFactory roundFactory;
 	CUnitStarsFactory starsFactory;
 	CUnitSineFactory sineFactory;
-	
+
 	CUnitFactory* factory = NULL;
-	
+
 	switch(rand()%UNITTYPES)
 	{
 	case UNITRECT:
@@ -43,6 +43,6 @@ CUnit* GetRandomUnit()
 		factory = &sineFactory;
 		break;
 	}
-	
+
 	return factory->GetUnit();
 }

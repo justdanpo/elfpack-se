@@ -9,6 +9,6 @@ unsigned long rand (void)
 {
 	//crc32 ;)
 	seed = seed & 1 ? (seed >> 1) ^ 0xEDB88320UL : seed >> 1;
-	
+
 	return seed;
 }

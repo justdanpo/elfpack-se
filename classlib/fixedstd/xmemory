@@ -65,7 +65,7 @@ template<class _T1,
 void _Construct(_T1 *_Ptr, const _T2& _Val)
 {       // construct object at _Ptr with value _Val
   typedef typename _TypeUtil::_CopyMemory<_T1, void>::_Type _Void_type;
-  new ((_Void_type *)_Ptr) _T1(_Val); 
+  new ((_Void_type *)_Ptr) _T1(_Val);
 }
 
 // TEMPLATE FUNCTION _Construct
@@ -80,7 +80,7 @@ void _Construct(const _T1 *const *_Ptr, const _T2 *_Val)
 template<class _Ty> inline
 void _Destroy(_Ty *_Ptr)
 {       // destroy object at _Ptr
-  _DESTRUCTOR(_Ty, _Ptr); 
+  _DESTRUCTOR(_Ty, _Ptr);
 }
 
 template<> inline
@@ -139,12 +139,12 @@ public:
 
   pointer address(reference _Val) const
   {     // return address of mutable _Val
-    return (&_Val); 
+    return (&_Val);
   }
 
   const_pointer address(const_reference _Val) const
   {     // return address of nonmutable _Val
-    return (&_Val); 
+    return (&_Val);
   }
 
   allocator()
@@ -160,12 +160,12 @@ public:
   template<class _Other>
   allocator<_Ty>& operator=(const allocator<_Other>&)
   {     // assign from a related allocator (do nothing)
-    return (*this); 
+    return (*this);
   }
 
   void deallocate(pointer _Ptr, size_type)
   {     // deallocate object at _Ptr, ignore size
-    _Allocator<_Void_type>::deallocate(_Ptr); 
+    _Allocator<_Void_type>::deallocate(_Ptr);
   }
 
   pointer allocate(size_type _Count)
@@ -175,30 +175,30 @@ public:
 
   pointer allocate(size_type _Count, const void *)
   {     // allocate array of _Count elements, ignore hint
-    return (allocate(_Count)); 
+    return (allocate(_Count));
   }
 
   void construct(pointer _Ptr, _ParamTy _Val)
   {     // construct object at _Ptr with value _Val
-    _Construct(_Ptr, _Val); 
+    _Construct(_Ptr, _Val);
   }
   // Provide a template implementation as well, to make it possible to
   // call other constructors than the copy constructor.
   template<typename _Ty2>
   void construct(pointer _Ptr, _Ty2 const & _Val)
   {     // construct object at _Ptr with value _Val
-    _Construct(_Ptr, _Val); 
+    _Construct(_Ptr, _Val);
   }
 
   void destroy(pointer _Ptr)
   {     // destroy object at _Ptr
-    _Destroy(_Ptr); 
+    _Destroy(_Ptr);
   }
 
   size_type max_size() const
   {     // estimate maximum array size
     size_type _Count = (size_type)(-1) / sizeof (_Ty);
-    return (0 < _Count ? _Count : 1); 
+    return (0 < _Count ? _Count : 1);
   }
 };
 
@@ -207,14 +207,14 @@ template<class _Ty,
   class _Other> inline
 bool operator==(const allocator<_Ty>&, const allocator<_Other>&)
 {       // test for allocator equality (always true)
-  return (true); 
+  return (true);
 }
 
 template<class _Ty,
   class _Other> inline
 bool operator!=(const allocator<_Ty>&, const allocator<_Other>&)
 {       // test for allocator inequality (always false)
-  return (false); 
+  return (false);
 }
 
 // CLASS allocator<void>
@@ -286,7 +286,7 @@ void _Destroy_range(_Ty *_First, _Ty *_Last, _Alloc& _Al)
   if (__has_destructor(*_First))
   {
   for (; _First != _Last; ++_First)
-    _Al.destroy(_First); 
+    _Al.destroy(_First);
 }
 }
 

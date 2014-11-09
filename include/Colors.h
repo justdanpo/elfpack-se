@@ -8,7 +8,7 @@
 #define clBlue50 0xFF000080
 #define clWhite 0xFFFFFFFF
 #define clYellow 0xFFFFFF00
-#define clHint 0xFFFFFF80 
+#define clHint 0xFFFFFF80
 
 
 #endif

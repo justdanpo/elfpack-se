@@ -321,7 +321,7 @@ _C_STD_END
   using _CSTD labs; using _CSTD ldiv; using _CSTD malloc;
   using _CSTD mblen; using _CSTD mbstowcs; using _CSTD mbtowc;
   using _CSTD qsort; using _CSTD rand; using _CSTD realloc;
-  using _CSTD srand; using _CSTD strtod; 
+  using _CSTD srand; using _CSTD strtod;
   using _CSTD strtol; using _CSTD strtoul; using _CSTD system;
   using _CSTD wcstombs; using _CSTD wctomb;
   #if _DLIB_ADD_C99_SYMBOLS

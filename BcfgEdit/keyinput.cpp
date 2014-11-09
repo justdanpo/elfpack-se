@@ -7,30 +7,30 @@
 
 void KeyCode_KeyHook( BOOK* bk, int key, int unk, int mode )
 {
-        if (mode==KBD_SHORT_PRESS)
-        {
-         	MyBOOK* mbk = (MyBOOK*) bk;
-         	EP_DATA * epd = (EP_DATA *)get_envp(get_bid(current_process()), "elfpackdata");
-          
-          	if (key==epd->LastKey)
-          	{
-            		Feedback_SetTextExtended( mbk->key_input, TextID_Create( "Key blocked", ENC_LAT1, TEXTID_ANY_LEN ), 0 );
-            		return;
-          	}
-          
-          	wchar_t ustr[64];
-          	TEXTID sid[3];
-          
-          	snwprintf( ustr, MAXELEMS( ustr )-1, L"\n\nHEX: 0x%02X\nDEC: %d", key, key );
-          
-          	mbk->cur_hp.key->keycode = key;
-          
-          	sid[0] = TextID_Create( L"Current key:\n\n", ENC_UCS2, TEXTID_ANY_LEN );
-          	sid[1] = KeyCode2Name( key );
-          	sid[2] = TextID_Create( ustr, ENC_UCS2, TEXTID_ANY_LEN );
-          	Feedback_SetTextExtended( mbk->key_input, TextID_Create( sid, ENC_TEXTID, 3 ), 0 );
-          	Feedback_SetTimeout( mbk->key_input, 3000 );
-        }
+	if (mode==KBD_SHORT_PRESS)
+	{
+		MyBOOK* mbk = (MyBOOK*) bk;
+		EP_DATA * epd = (EP_DATA *)get_envp(get_bid(current_process()), "elfpackdata");
+
+		if (key==epd->LastKey)
+		{
+			Feedback_SetTextExtended( mbk->key_input, TextID_Create( "Key blocked", ENC_LAT1, TEXTID_ANY_LEN ), 0 );
+			return;
+		}
+
+		wchar_t ustr[64];
+		TEXTID sid[3];
+
+		snwprintf( ustr, MAXELEMS( ustr )-1, L"\n\nHEX: 0x%02X\nDEC: %d", key, key );
+
+		mbk->cur_hp.key->keycode = key;
+
+		sid[0] = TextID_Create( L"Current key:\n\n", ENC_UCS2, TEXTID_ANY_LEN );
+		sid[1] = KeyCode2Name( key );
+		sid[2] = TextID_Create( ustr, ENC_UCS2, TEXTID_ANY_LEN );
+		Feedback_SetTextExtended( mbk->key_input, TextID_Create( sid, ENC_TEXTID, 3 ), 0 );
+		Feedback_SetTimeout( mbk->key_input, 3000 );
+	}
 }
 
 void KeyCode_OnClose( BOOK* bk )
@@ -171,7 +171,7 @@ void KeyCodeSelect_OnBack( BOOK* bk, GUI* )
 	MyBOOK* myBook = (MyBOOK*) bk;
 	FREE_GUI( myBook->key_sel_list );
 
-        BookObj_ReturnPage( bk, ACCEPT_EVENT );
+	BookObj_ReturnPage( bk, ACCEPT_EVENT );
 }
 
 void KeyCodeSelect_OnDelete( BOOK* bk, GUI* )

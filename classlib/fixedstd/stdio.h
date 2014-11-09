@@ -108,7 +108,7 @@ typedef _Fpost fpos_t;
   __INTRINSIC FILE * freopen(const char *, const char *, FILE *);
   __SCANFPR __INTRINSIC int fscanf(FILE *, const char *, ...);
   __INTRINSIC int fseek(FILE *, long, int);
-  __INTRINSIC int fsetpos(FILE *, const fpos_t *); 
+  __INTRINSIC int fsetpos(FILE *, const fpos_t *);
   __INTRINSIC long ftell(FILE *);
   __INTRINSIC size_t fwrite(const void *, size_t, size_t, FILE *);
   __INTRINSIC void rewind(FILE *);
@@ -225,7 +225,7 @@ _C_STD_END
   #if _DLIB_ADD_C99_SYMBOLS
     using _CSTD snprintf; using _CSTD vsnprintf;
     using _CSTD vscanf; using _CSTD vsscanf;
-    using _CSTD vfscanf; 
+    using _CSTD vfscanf;
   #endif /* _DLIB_ADD_C99_SYMBOLS */
 
 

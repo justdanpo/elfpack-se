@@ -3,13 +3,13 @@
 
 typedef struct
 {
-  wchar_t * name;
+	wchar_t * name;
 }DLL_DATA;
 
 typedef struct
 {
-  wchar_t * name;
-  int (*EntryPoint)(int Action, DLL_DATA * data);
+	wchar_t * name;
+	int (*EntryPoint)(int Action, DLL_DATA * data);
 }DLL_LIST_ELEMENT;
 
 #define INVALID(__param__)  ((int)__param__<=0)

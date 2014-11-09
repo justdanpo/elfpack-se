@@ -8,14 +8,14 @@ CUnitRect::CUnitRect()
 {
 	xsize = Display_GetWidth(0);
 	ysize = Display_GetHeight(0);
-	
+
 	state = rand() % 360;
 	x = ( rand()%(xsize-40) ) + 20;
 	y = ( rand()%(ysize-40) ) + 20;
-	
+
 	dx = rand()%4 - 2;
 	dy = rand()%4 - 2;
-	
+
 	brush = GVI_CreateSolidBrush(0x8000FF00);
 }
 
@@ -27,7 +27,7 @@ CUnitRect::~CUnitRect()
 void CUnitRect::Draw(GVI_GC gc)
 {
 	POINT p[4];
-	
+
 	int r = sin( state * 3 )*10/256 + 20;
 	for( int i = 0; i < 4; i++ )
 	{
@@ -43,13 +43,13 @@ void CUnitRect::Draw(GVI_GC gc)
 void CUnitRect::DoStep()
 {
 	state = ( state + 1 ) % 360;
-	
+
 	x += dx;
 	y += dy;
-	
+
 	if( x <= 0 || x >= xsize-10 )
 		dx = -dx;
-	
+
 	if( y <= 0 || y >= ysize )
 		dy = -dy;
 }

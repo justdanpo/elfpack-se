@@ -16,13 +16,13 @@ void elf_exit(void)
 int main (void)
 {
 	trace_init();
-	
+
 	DATETIME dt;
 	REQUEST_DATEANDTIME_GET(0,&dt);
-	
+
 	srand( (dt.time.sec<<16) | (dt.time.min<<8) | (dt.time.hour) );
-	
+
 	new CMyBook();
-	
+
 	return 0;
 }
