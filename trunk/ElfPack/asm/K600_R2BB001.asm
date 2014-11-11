@@ -119,32 +119,6 @@ NEW_KEYHANDLER3:
         BX      R3
 
 
-// --- CreateLists ---
-
-        EXTERN  CreateLists
-        RSEG  CODE
-        CODE16
-PATCH_STANDBY:
-
-        MOV     R5,LR
-        ADD     R5,R5,#4
-        PUSH    {R5}
-        STR     R0, [R4,#0x00]
-        STR     R0, [R4,#0x04]
-        STR     R0, [R4,#0x08]
-        STR     R0, [R4,#0x0C]
-        STR     R0, [R4,#0x10]
-        BLX     CreateLists
-        MOV     R0,#0x00
-        POP     {PC}
-
-
-        RSEG  PATCH_STANDBY_CALL
-        CODE16
-        LDR     R1,=PATCH_STANDBY
-        BLX     R1
-
-
 // --- ParseHelperMessage ---
         EXTERN  ParseHelperMessage
         RSEG   CODE

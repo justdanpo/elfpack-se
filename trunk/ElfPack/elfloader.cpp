@@ -706,6 +706,9 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
   if ((fin=elfldr_fopen(foutbuff,"wb"))==NULL) return -1000;
   if (fwrite(base,maxadr-minadr,1,fin)!=1) return -1001; // vit
 #endif
+#ifdef DBG
+  elfldr_debug_printf("     elfload Result=0x%X",retcode);
+#endif
   return retcode;
 }
 

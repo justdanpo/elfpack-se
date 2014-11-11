@@ -11,7 +11,6 @@ a       EQU     b
         ENDM
 
         RSEG  CODE
-        defadr   STANDBY_RET,0x453E90A0+1
         defadr   DB_PATCH_RET,0x44FD9D98+1
         defadr   DB_EXT_RET,0x44FD9B84+1
         defadr   DB_PATCH3_RET,0x44FD9A24+1
@@ -128,28 +127,6 @@ NEW_KEYHANDLER3:
         LDR     R3,=NEW_KEYHANDLER3
         BX      R3
 
-
-
-// --- CreateLists ---
-
-        EXTERN  CreateLists
-        RSEG  CODE
-        CODE16
-PATCH_STANDBY:
-
-        STR     R0, [R5,#8]
-        STR     R0, [R5,#0]
-        STR     R0, [R5,#0xC]
-        STR     R0, [R5,#0x10]
-        BLX     CreateLists
-        MOV     R0, #0
-        LDR     R1,=STANDBY_RET
-        BX      R1
-
-        RSEG  PATCH_STANDBY_CALL
-        CODE16
-        LDR     R1,=PATCH_STANDBY
-        BX      R1
 
 
 // --- ParseHelperMessage ---
