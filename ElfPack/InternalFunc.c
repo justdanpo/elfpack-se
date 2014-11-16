@@ -148,16 +148,16 @@ int Keyhandler_Hook(int key,int mode,int repeat_count, DISP_OBJ* disp)
 {
 	int i=0;
 	int result;
-        if (elfpackdata)
-        {
-        	while(i < elfpackdata->gKbdHookList->FirstFree)
-        	{
-        		KEY_HOOK_ELEM *elem = (KEY_HOOK_ELEM *)List_Get(elfpackdata->gKbdHookList,i++);
-        		result = elem->proc(key,repeat_count,mode,elem->data,disp);
-        		if (result==-1) return KEY_LAST;
-		        if (result>0) return result;
-	        }
-        }
+	if (elfpackdata)
+	{
+		while(i < elfpackdata->gKbdHookList->FirstFree)
+		{
+			KEY_HOOK_ELEM *elem = (KEY_HOOK_ELEM *)List_Get(elfpackdata->gKbdHookList,i++);
+			result = elem->proc(key,repeat_count,mode,elem->data,disp);
+			if (result==-1) return KEY_LAST;
+			if (result>0) return result;
+		}
+	}
 	return key;
 }
 
@@ -214,10 +214,10 @@ int PageAction_Hook2(ACTION *act,void *msg,BOOK * book)
 				my_act->PROC(msg,book,act->page_desc,my_act->ClientData,act->event);
 		}
 	}
-        else
-        {
-                res=act->PROC(msg,book);
-        }
+	else
+	{
+		res=act->PROC(msg,book);
+	}
 	return res;
 }
 
@@ -320,15 +320,15 @@ void CreateLists(void)
 
 void mmi_elfload_int(int p1,void* filename)
 {
-  elfload_int(filename,0,0,0);
-  mfree(filename);
+	elfload_int(filename,0,0,0);
+	mfree(filename);
 }
 
 
 void Init()
 {
-        CreateLists();
-        
+	CreateLists();
+
 	FILELISTITEM* mem = malloc(sizeof(FILELISTITEM));
 
 	FILELISTITEM* fli;
@@ -398,7 +398,7 @@ void Init()
 
 			_printf("     ->...")  ;
 
-                        //run if load not from MMI (e.g. Java)
+			//run if load not from MMI (e.g. Java)
 			MMIPROCExec(mmi_elfload_int,0,filename);
 		}
 	}
