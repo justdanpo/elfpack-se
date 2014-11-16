@@ -79,8 +79,6 @@ int get_page_i(int physAddr)
 
 void apply_vkp(LIST* vkp_data)
 {
-	InitConfig();
-	
 	int EMP_SIZE;
 	int APP_SIZE;
 	
@@ -286,6 +284,8 @@ int vkp_parse(wchar_t* path,wchar_t* name,LIST* vkp_data)
 
 int main (void)
 {
+	InitConfig();
+	
   wchar_t path[250];
   wstrcpy(path,GetDir(DIR_OTHER|MEM_EXTERNAL));
   wstrcat(path,PATCHES_FOLDER_NAME);
