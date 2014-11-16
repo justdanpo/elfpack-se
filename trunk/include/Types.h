@@ -1200,6 +1200,39 @@ typedef enum URISchemeID {
 	vcal=12
 }URISchemeID;
 
+// page cache --------------------------------------------------------------------
+
+typedef struct pageCache
+{
+	int virtAddr;
+	wchar_t prev_i;
+	wchar_t next_i;
+	wchar_t swapPrio;
+	wchar_t x;
+}pageCache;
+
+
+typedef struct pagePool
+{
+	wchar_t locked;
+	char inuse;
+	char x1;
+	wchar_t usedPages;
+	wchar_t x2;
+	int baseAddr;  
+}pagePool;
+
+
+#define FS_MEMMAP_WRITE 0x1
+#define FS_MEMMAP_READ 0x2
+#define FS_MEMMAP_UNMAPPED 0x4
+#define FS_MEMMAP_CACHED 0x8
+#define FS_MEMMAP_BUFFERED 0x10
+#define FS_MEMMAP_NOPERMISSIONS 0x20
+#define FS_MEMMAP_NONCACHED 0x40
+#define FS_MEMMAP_NONBUFFERED 0x80
+
+
 // obsolete --------------------------------------------------------------------
 
 /*

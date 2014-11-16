@@ -1800,6 +1800,30 @@ __swi __arm int ThemeImage_Delete( int theme_image_type );
 #pragma swi_number=0x3DD
 __swi __arm void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
 
+#pragma swi_number=0x3DE
+__swi __arm int fs_memmap( int virtAddr, int physAddr, int size, int flags );
+
+#pragma swi_number=0x3DF
+__swi __arm int fs_GetMemMap( int virtAddr, int* flags );
+
+#pragma swi_number=0x3E0
+__swi __arm int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
+
+#pragma swi_number=0x3E1
+__swi __arm int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
+
+#pragma swi_number=0x3E2
+__swi __arm wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
+
+#pragma swi_number=0x3E3
+__swi __arm void fs_demand_remove_from_queue( pageCache* page_p_to_remove, wchar_t page_i_to_insert );
+
+#pragma swi_number=0x3E4
+__swi __arm int fs_demand_kick_out_page( wchar_t page_i, int intrMask );
+
+#pragma swi_number=0x83E5
+__swi __arm char* getSWAP_DATA_BASE( void );
+
 #ifdef LIBCLARANS
 }
 #endif
