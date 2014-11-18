@@ -81,9 +81,11 @@ void apply_vkp(LIST* vkp_data)
 {
 	int EMP_SIZE;
 	int APP_SIZE;
+	int PCORE_TO_PATCH;
 	
 	sscanf((char*)&EMP_SIZE_str,"%x",&EMP_SIZE);
 	sscanf((char*)&APP_SIZE_str,"%x",&APP_SIZE);
+	sscanf((char*)&PCORE_TO_PATCH_str,"%x",&PCORE_TO_PATCH);
 	
 	int EMP_END_ADDR = EMP_START_ADDR+EMP_SIZE;
 	int APP_END_ADDR = APP_START_ADDR+APP_SIZE;
@@ -111,6 +113,9 @@ void apply_vkp(LIST* vkp_data)
   int intrMask = InterruptsAndFastInterrupts_Off();
   int old_dac_mask = cp15_write_DAC(0xFFFFFFFF);
   
+	char* patch_pcore = (char*)PCORE_TO_PATCH;
+	*patch_pcore=0xE0;
+		
   for (i=0; i < vkp_data->FirstFree; i++)
   {
     vkp_list_elem* elem = (vkp_list_elem*)List_Get(vkp_data,i);

@@ -4,6 +4,7 @@
 
 extern const char EMP_SIZE_str[9];
 extern const char APP_SIZE_str[9];
+extern const char PCORE_TO_PATCH_str[9];
 
 
 #endif
