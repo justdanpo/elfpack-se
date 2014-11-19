@@ -12,6 +12,7 @@
 
 #define PAGE_SIZE 0x400
 #define PAGE_ALIGN_MASK 0xFFFFFC00
+#define STATIC_PAGE_ALIGN_MASK 0xFFFFF000
 #define POOL_SIZE 0x80
 
 #define CXC_BASE_ADDR_MASK 0xFC000000
@@ -19,6 +20,8 @@
 
 #define NEED_TO_LOCK 0x4
 
+LIST* static_list;
+void create_static_list(LIST* vkp_data);
 
 typedef struct
 {
@@ -31,6 +34,7 @@ typedef struct
 extern "C" int InterruptsAndFastInterrupts_Off();
 extern "C" void InterruptsAndFastInterrupts_Restore(int intrMask);
 extern "C" int cp15_write_DAC(int mask);
+extern "C" void patch_pcore_static_cache();
 
 
 //int (*CleanPageCache)(int size,int clean_all_flag)=(int(*)(int size,int clean_all_flag))0x48011329;
@@ -48,6 +52,23 @@ char * strchr(char * str,char c)
 {
   for(;*str;str++)if(*str==c)return str;
   return NULL;
+}
+
+
+extern "C" int check_static_after_map(int virtAddr,int physAddr)
+{
+	int i;
+	int ret = fs_memmap(virtAddr,physAddr,0x1000,FS_MEMMAP_NONBUFFERED|FS_MEMMAP_NOPERMISSIONS|FS_MEMMAP_CACHED|FS_MEMMAP_READ);
+	
+	for (i=0; i < static_list->FirstFree; i++)
+	{
+		vkp_list_elem* elem = (vkp_list_elem*)List_Get(static_list,i);
+		
+		if (virtAddr == (elem->virtAddr&STATIC_PAGE_ALIGN_MASK) )
+			memcpy((void*)elem->virtAddr,elem->newData,elem->dataSize);   //apply vkp
+	}
+	
+	return ret;
 }
 
 
@@ -82,10 +103,14 @@ void apply_vkp(LIST* vkp_data)
 	int EMP_SIZE;
 	int APP_SIZE;
 	int PCORE_TO_PATCH;
+	int PCORE_TO_PATCH_STATIC_CACHE;
+	int PCORE_TO_PATCH_STATIC_CACHE_RETURN;
 	
 	sscanf((char*)&EMP_SIZE_str,"%x",&EMP_SIZE);
 	sscanf((char*)&APP_SIZE_str,"%x",&APP_SIZE);
-	sscanf((char*)&PCORE_TO_PATCH_str,"%x",&PCORE_TO_PATCH);
+	sscanf((char*)&PCORE_TO_PATCH1_str,"%x",&PCORE_TO_PATCH);
+	sscanf((char*)&PCORE_TO_PATCH2_str,"%x",&PCORE_TO_PATCH_STATIC_CACHE);
+	sscanf((char*)&PCORE_TO_PATCH3_str,"%x",&PCORE_TO_PATCH_STATIC_CACHE_RETURN);
 	
 	int EMP_END_ADDR = EMP_START_ADDR+EMP_SIZE;
 	int APP_END_ADDR = APP_START_ADDR+APP_SIZE;
@@ -113,6 +138,7 @@ void apply_vkp(LIST* vkp_data)
   int intrMask = InterruptsAndFastInterrupts_Off();
   int old_dac_mask = cp15_write_DAC(0xFFFFFFFF);
   
+	//patch pcore to remove page pool free
 	char* patch_pcore = (char*)PCORE_TO_PATCH;
 	*patch_pcore=0xE0;
 		
@@ -122,7 +148,7 @@ void apply_vkp(LIST* vkp_data)
 		if (cur_page_addr != (elem->virtAddr&PAGE_ALIGN_MASK))
 		{
 			cur_page_addr = elem->virtAddr&PAGE_ALIGN_MASK;
-			if (physAddr = fs_GetMemMap(cur_page_addr,0), physAddr==0 )    //if not static or already created
+			if (physAddr = fs_GetMemMap(cur_page_addr,0), physAddr==0 )    //if not already created
 			{
 				if (elem->virtAddr & CXC_BASE_ADDR_MASK == EMP_START_ADDR) end_addr=EMP_END_ADDR;
 				else end_addr=APP_END_ADDR;
@@ -174,6 +200,17 @@ void apply_vkp(LIST* vkp_data)
 		}
     memcpy((void*)elem->virtAddr,elem->newData,elem->dataSize);   //apply vkp
   }
+	
+	create_static_list(vkp_data);
+	
+	//patch pcore to catch static page cache
+	((int*)patch_pcore_static_cache)[5] = PCORE_TO_PATCH_STATIC_CACHE_RETURN+1;	//change return address
+	
+	((char*)PCORE_TO_PATCH_STATIC_CACHE)[0] = 0x00;
+	((char*)PCORE_TO_PATCH_STATIC_CACHE)[1] = 0x49;
+	((char*)PCORE_TO_PATCH_STATIC_CACHE)[2] = 0x08;
+	((char*)PCORE_TO_PATCH_STATIC_CACHE)[3] = 0x47;
+	((int*)PCORE_TO_PATCH_STATIC_CACHE)[1] = (int)patch_pcore_static_cache;
   
   cp15_write_DAC(old_dac_mask);
   InterruptsAndFastInterrupts_Restore(intrMask);
@@ -187,17 +224,41 @@ void vkp_elem_free(void * r)
   {
     if (elem->oldData)
       delete elem->oldData;
+		
     if (elem->newData)
       delete elem->newData;
+		
     delete(elem);
   }
 }
 
 
-int vkp_elem_free_filter(void * r0)
+void create_static_list(LIST* vkp_data)
 {
-  if (r0) return(1);
-  return(0);
+	int i;
+	int end_static_addr;
+	int elem_count = vkp_data->FirstFree;
+	
+	char* swap_base = getSWAP_DATA_BASE();
+  int EMP_STATIC_START = *(int*)(swap_base+0xCA8);
+  int APP_STATIC_START = *(int*)(swap_base+0xCAC);
+  int EMP_STATIC_SIZE = *(int*)(swap_base+0xCB4);
+  int APP_STATIC_SIZE = *(int*)(swap_base+0xCB8);
+	
+	static_list = List_Create();
+	
+	for (i=0; i < elem_count; i++)
+	{
+		vkp_list_elem* elem = (vkp_list_elem*)List_Get(vkp_data,i);
+		
+		if (elem->virtAddr & CXC_BASE_ADDR_MASK == EMP_START_ADDR) end_static_addr=EMP_STATIC_START+EMP_STATIC_SIZE;
+		else end_static_addr=APP_STATIC_START+APP_STATIC_SIZE;
+		
+		if (elem->virtAddr < end_static_addr)
+			List_InsertFirst(static_list,elem);
+		else
+			vkp_elem_free(elem);
+	}
 }
 
 
@@ -251,8 +312,14 @@ int vkp_parse(wchar_t* path,wchar_t* name,LIST* vkp_data)
     {
       if (position[0] == '+' || position[0] == '-')
       {
-        sscanf(position,"+%x",&incr);
-        if (position[0] == '-') incr = ~(incr-1);
+				if (position[0] == '+')
+					sscanf(position,"+%x",&incr);
+				
+        if (position[0] == '-')
+				{
+					sscanf(position,"-%x",&incr);
+					incr = ~(incr-1);
+				}
       }
       else
       {
@@ -313,13 +380,11 @@ int main (void)
     }
     
     apply_vkp(vkp_data);
-    
-    List_DestroyElements(vkp_data,vkp_elem_free_filter,vkp_elem_free);
     List_Destroy(vkp_data);
     
     DestroyDirHandle(handle);
     mfree(fli);
   }
   
-  SUBPROC(elf_exit);
+  //SUBPROC(elf_exit);
 }
