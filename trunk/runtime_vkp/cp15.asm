@@ -1,4 +1,4 @@
-        RSEG CODE:CODE:NOROOT(2)
+	RSEG CODE:CODE:NOROOT(2)
 
 	public InterruptsAndFastInterrupts_Off
 InterruptsAndFastInterrupts_Off:
@@ -26,4 +26,4 @@ cp15_write_DAC:
 	MOV	R1, R1
 	BX LR
        
-       end
+	end

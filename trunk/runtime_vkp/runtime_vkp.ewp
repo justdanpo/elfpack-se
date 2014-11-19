@@ -1499,7 +1499,7 @@
         <option>
           <name>ModuleLocalSym</name>
           <version>0</version>
-          <state>2</state>
+          <state>0</state>
         </option>
         <option>
           <name>CrcBitOrder</name>
@@ -1560,7 +1560,7 @@
         </option>
         <option>
           <name>ExtraOutputFile</name>
-          <state>main.a79</state>
+          <state>runtime_vkp.a79</state>
         </option>
         <option>
           <name>ExtraOutputFormat</name>
@@ -2114,6 +2114,9 @@
   </file>
   <file>
     <name>$PROJ_DIR$\main.c</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\patch_pcore.asm</name>
   </file>
 </project>
 
