@@ -258,9 +258,10 @@ LIST *CreateDBExtList()
 	LIST * dbe = List_Create();
 	DB_EXT ** old = (DB_EXT**)EXT_TABLE;
 	int db_ext_count = 0;
+	DB_EXT * last_ext = LastExtDB();
 	do
 	{
 		List_InsertLast(dbe, old[db_ext_count]);
-	}while(old[db_ext_count++] != LastExtDB());
+	}while(old[db_ext_count++] != last_ext);
 	return dbe;
 }
