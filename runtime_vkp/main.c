@@ -23,13 +23,15 @@
 LIST* static_list;
 void create_static_list(LIST* vkp_data);
 
+
 typedef struct
 {
-  int virtAddr;
-  int dataSize;
-  char* oldData;	//maybe in future
-  char* newData;
+	int virtAddr;
+	int dataSize;
+	char* oldData;	//maybe in future
+	char* newData;
 }vkp_list_elem;
+
 
 extern "C" int InterruptsAndFastInterrupts_Off();
 extern "C" void InterruptsAndFastInterrupts_Restore(int intrMask);
@@ -44,14 +46,14 @@ extern "C" void patch_pcore_static_cache();
 void elf_exit(void)
 
 {
-  kill_data(&ELF_BEGIN, (void(*)(void*))mfree_adr());
+	kill_data(&ELF_BEGIN, (void(*)(void*))mfree_adr());
 }
 
 
 char * strchr(char * str,char c)
 {
-  for(;*str;str++)if(*str==c)return str;
-  return NULL;
+	for(;*str;str++)if(*str==c)return str;
+	return NULL;
 }
 
 
@@ -74,27 +76,27 @@ extern "C" int check_static_after_map(int virtAddr,int physAddr)
 
 int get_page_i(int physAddr)
 {
-  char* swap_base = getSWAP_DATA_BASE();
-  pagePool* PagePoolTbl_p = (pagePool*)(swap_base+0x60);
-  int* fs_PageCacheMaxSize = (int*)(swap_base+0x58);
-  
-  int ret = 0xFFFF;
-  int i;
-  int max_pool_i = *fs_PageCacheMaxSize / POOL_SIZE;
-  
-  for (i=0;i<max_pool_i;i++)
-  {
-    pagePool* pool_p = PagePoolTbl_p+i;
-    int physAddr_align = physAddr & PHYS_BASE_ADDR_MASK;
-    if ( pool_p->baseAddr == physAddr_align || pool_p->baseAddr == physAddr_align-0x10000 )
-    {
-      char pos_in_pool = (physAddr - pool_p->baseAddr) / PAGE_SIZE;
-      ret = i*POOL_SIZE+pos_in_pool;
-      //debug_printf("page physAddr = 0x%08X, pool_i = %d, pool baseAddr = 0x%08X, page_i = %d\r\n",physAddr,i,pool_p->baseAddr,ret);
-      return ret;
-    }
-  }
-  return ret;
+	char* swap_base = getSWAP_DATA_BASE();
+	pagePool* PagePoolTbl_p = (pagePool*)(swap_base+0x60);
+	int* fs_PageCacheMaxSize = (int*)(swap_base+0x58);
+	
+	int ret = 0xFFFF;
+	int i;
+	int max_pool_i = *fs_PageCacheMaxSize / POOL_SIZE;
+	
+	for (i=0;i<max_pool_i;i++)
+	{
+		pagePool* pool_p = PagePoolTbl_p+i;
+		int physAddr_align = physAddr & PHYS_BASE_ADDR_MASK;
+		if ( pool_p->baseAddr == physAddr_align || pool_p->baseAddr == physAddr_align-0x10000 )
+		{
+			char pos_in_pool = (physAddr - pool_p->baseAddr) / PAGE_SIZE;
+			ret = i*POOL_SIZE+pos_in_pool;
+			//debug_printf("page physAddr = 0x%08X, pool_i = %d, pool baseAddr = 0x%08X, page_i = %d\r\n",physAddr,i,pool_p->baseAddr,ret);
+			return ret;
+		}
+	}
+	return ret;
 }
 
 
@@ -115,36 +117,35 @@ void apply_vkp(LIST* vkp_data)
 	int EMP_END_ADDR = EMP_START_ADDR+EMP_SIZE;
 	int APP_END_ADDR = APP_START_ADDR+APP_SIZE;
 	
-  char* swap_base = getSWAP_DATA_BASE();
-  wchar_t* SwappedOutFirst = (wchar_t*)(swap_base+0x2);
-  wchar_t* NbrOfSwappedInPages = (wchar_t*)(swap_base+0x6);
-  wchar_t* NbrOfKickedOutPages = (wchar_t*)(swap_base+0xC);
-  wchar_t* NbrOfLockedInPages = (wchar_t*)(swap_base+0xE);
-  wchar_t* SwappedInFirst_p = (wchar_t*)(swap_base+0x10);
-  pageCache** PageCacheTbl_p = (pageCache**)(swap_base+0x50);
-  pagePool* PagePoolTbl_p = (pagePool*)(swap_base+0x60);
-  int EMP_STATIC_START = *(int*)(swap_base+0xCA8);
-  int APP_STATIC_START = *(int*)(swap_base+0xCAC);
-  int EMP_STATIC_SIZE = *(int*)(swap_base+0xCB4);
-  int APP_STATIC_SIZE = *(int*)(swap_base+0xCB8);
+	char* swap_base = getSWAP_DATA_BASE();
+	wchar_t* SwappedOutFirst = (wchar_t*)(swap_base+0x2);
+	wchar_t* NbrOfSwappedInPages = (wchar_t*)(swap_base+0x6);
+	wchar_t* NbrOfKickedOutPages = (wchar_t*)(swap_base+0xC);
+	wchar_t* NbrOfLockedInPages = (wchar_t*)(swap_base+0xE);
+	wchar_t* SwappedInFirst_p = (wchar_t*)(swap_base+0x10);
+	pageCache** PageCacheTbl_p = (pageCache**)(swap_base+0x50);
+	pagePool* PagePoolTbl_p = (pagePool*)(swap_base+0x60);
+	int EMP_STATIC_START = *(int*)(swap_base+0xCA8);
+	int APP_STATIC_START = *(int*)(swap_base+0xCAC);
+	int EMP_STATIC_SIZE = *(int*)(swap_base+0xCB4);
+	int APP_STATIC_SIZE = *(int*)(swap_base+0xCB8);
   
-  int i;
-  int end_addr;
-  int end_static_addr;
-  int physAddr;
-  wchar_t swap_i;
+	int i;
+	int end_addr;
+	int end_static_addr;
+	int physAddr;
+	wchar_t swap_i;
 	int cur_page_addr=0;
-  
-  int intrMask = InterruptsAndFastInterrupts_Off();
-  int old_dac_mask = cp15_write_DAC(0xFFFFFFFF);
-  
+	
+	int intrMask = InterruptsAndFastInterrupts_Off();
+	int old_dac_mask = cp15_write_DAC(0xFFFFFFFF);
+	
 	//patch pcore to remove page pool free
-	char* patch_pcore = (char*)PCORE_TO_PATCH;
-	*patch_pcore=0xE0;
+	*((char*)PCORE_TO_PATCH)=0xE0;
 		
-  for (i=0; i < vkp_data->FirstFree; i++)
-  {
-    vkp_list_elem* elem = (vkp_list_elem*)List_Get(vkp_data,i);
+	for (i=0; i < vkp_data->FirstFree; i++)
+	{
+		vkp_list_elem* elem = (vkp_list_elem*)List_Get(vkp_data,i);
 		if (cur_page_addr != (elem->virtAddr&PAGE_ALIGN_MASK))
 		{
 			cur_page_addr = elem->virtAddr&PAGE_ALIGN_MASK;
@@ -198,8 +199,8 @@ void apply_vkp(LIST* vkp_data)
 				}
 			}
 		}
-    memcpy((void*)elem->virtAddr,elem->newData,elem->dataSize);   //apply vkp
-  }
+		memcpy((void*)elem->virtAddr,elem->newData,elem->dataSize);   //apply vkp
+	}
 	
 	create_static_list(vkp_data);
 	
@@ -212,24 +213,24 @@ void apply_vkp(LIST* vkp_data)
 	((char*)PCORE_TO_PATCH_STATIC_CACHE)[3] = 0x47;
 	((int*)PCORE_TO_PATCH_STATIC_CACHE)[1] = (int)patch_pcore_static_cache;
   
-  cp15_write_DAC(old_dac_mask);
-  InterruptsAndFastInterrupts_Restore(intrMask);
+	cp15_write_DAC(old_dac_mask);
+	InterruptsAndFastInterrupts_Restore(intrMask);
 }
 
 
 void vkp_elem_free(void * r)
 {
-  vkp_list_elem * elem=(vkp_list_elem *)r;
-  if (elem)
-  {
-    if (elem->oldData)
-      delete elem->oldData;
+	vkp_list_elem * elem=(vkp_list_elem *)r;
+	if (elem)
+	{
+		if (elem->oldData)
+			delete elem->oldData;
 		
-    if (elem->newData)
-      delete elem->newData;
+		if (elem->newData)
+			delete elem->newData;
 		
-    delete(elem);
-  }
+		delete(elem);
+	}
 }
 
 
@@ -240,10 +241,10 @@ void create_static_list(LIST* vkp_data)
 	int elem_count = vkp_data->FirstFree;
 	
 	char* swap_base = getSWAP_DATA_BASE();
-  int EMP_STATIC_START = *(int*)(swap_base+0xCA8);
-  int APP_STATIC_START = *(int*)(swap_base+0xCAC);
-  int EMP_STATIC_SIZE = *(int*)(swap_base+0xCB4);
-  int APP_STATIC_SIZE = *(int*)(swap_base+0xCB8);
+	int EMP_STATIC_START = *(int*)(swap_base+0xCA8);
+	int APP_STATIC_START = *(int*)(swap_base+0xCAC);
+	int EMP_STATIC_SIZE = *(int*)(swap_base+0xCB4);
+	int APP_STATIC_SIZE = *(int*)(swap_base+0xCB8);
 	
 	static_list = List_Create();
 	
@@ -265,126 +266,155 @@ void create_static_list(LIST* vkp_data)
 //return line len
 int get_line_len(char* buf)
 {
-  int i=0;
-  int len = strlen(buf);
+	int i=0;
+	int len = strlen(buf);
+	
+	while (buf[i]!='\n' && i<len)
+	{
+		i++;
+	}
   
-  while (buf[i]!='\n' && i<len)
-  {
-    i++;
-  }
+	if (i == len || i+1 == len) return -1;
   
-  if (i == len || i+1 == len) return -1;
-  
-  return i+1;
+	return i+1;
+}
+
+
+char toupper(char chr)
+{
+	if (chr >= 'a' & chr <= 'z') return chr-0x20;
+	return chr;
+}
+
+
+char xdig2char(char chr)
+{
+	if (chr >= '0' & chr <= '9') return chr-0x30;
+	return toupper(chr)-0x37;
+}
+
+
+char xdig2byte(char chr1,char chr2)
+{
+	return xdig2char(chr1)<<4 | xdig2char(chr2);
 }
 
 
 int vkp_parse(wchar_t* path,wchar_t* name,LIST* vkp_data)
 {
-  FSTAT _fstat;
-  int fd;
-  int file_size;
-  char* position;
-  char* new_line;
-  int line_len=0;
-  int incr=0;
-  int elem_count=0;
-  
-  fstat(path,name,&_fstat);
-  
-  file_size = _fstat.fsize;
-  
-  char* file_buf = new char[file_size+1];
-  
-  fd = _fopen(path,name,FSX_O_RDONLY,FSX_S_IREAD|FSX_S_IWRITE,0);
-  fread(fd,file_buf,file_size);
-  fclose(fd);
-  file_buf[file_size]=0;
-  
-  new_line = file_buf;
-  
-  do
-  {
-    new_line = new_line+line_len;
-    position = new_line;
-    
-    if (position[0] != ';' && position[0] != '\r' && position[0] != '\n')
-    {
-      if (position[0] == '+' || position[0] == '-')
-      {
+	FSTAT _fstat;
+	int fd;
+	int file_size;
+	char* position;
+	char* new_line;
+	int count;
+	int line_len=0;
+	int incr=0;
+	int elem_count=0;
+	
+	fstat(path,name,&_fstat);
+	
+	file_size = _fstat.fsize;
+	
+	char* file_buf = new char[file_size+1];
+	
+	fd = _fopen(path,name,FSX_O_RDONLY,FSX_S_IREAD|FSX_S_IWRITE,0);
+	fread(fd,file_buf,file_size);
+	fclose(fd);
+	file_buf[file_size]=0;
+	
+	new_line = file_buf;
+	
+	do
+	{
+		new_line = new_line+line_len;
+		position = new_line;
+		
+		if (position[0] != ';' && position[0] != '\r' && position[0] != '\n')
+		{
+			if (position[0] == '+' || position[0] == '-')
+			{
 				if (position[0] == '+')
 					sscanf(position,"+%x",&incr);
 				
-        if (position[0] == '-')
+				if (position[0] == '-')
 				{
 					sscanf(position,"-%x",&incr);
 					incr = ~(incr-1);
 				}
-      }
-      else
-      {
-        vkp_list_elem* elem = new vkp_list_elem;
-        List_InsertLast(vkp_data,elem);
-        
-        sscanf(position,"%x:",&elem->virtAddr);
-        elem->virtAddr = elem->virtAddr+incr;
-        position = strchr(position,':')+2;  //miss ": "
-        elem->dataSize = (strchr(position,' ')-position)/2;
-        elem->oldData=0;
-        position = position+elem->dataSize*2+1; //miss " " between old and new
-        elem->newData = new char[elem->dataSize];
-        
-        int count=0;
-        int chr;
-        while (count < elem->dataSize)
-        {
-          sscanf(position+count*2,"%2x,",&chr);
-          elem->newData[count]=chr;
-          count=count+1;
-        }
-        elem_count++;
-      }
-    }
-  }
-  while (line_len=get_line_len(new_line), line_len != -1);
-  
-  delete file_buf;
-  
-  return 0;
+			}
+			else
+			{
+				vkp_list_elem* elem = new vkp_list_elem;
+				List_InsertLast(vkp_data,elem);
+				
+				sscanf(position,"%x:",&elem->virtAddr);
+				elem->virtAddr = elem->virtAddr+incr;
+				position = strchr(position,':')+2;  //miss ": "
+				elem->dataSize = (strchr(position,' ')-position)/2;
+				elem->oldData=0;
+				position = position+elem->dataSize*2+1; //skip " " between old and new
+				elem->newData = new char[elem->dataSize];
+
+				//int chr;				
+				count=0;
+				while (count < elem->dataSize)
+				{
+					//sscanf(position+count*2,"%2x,",&chr);
+					elem->newData[count] = xdig2byte(position[count<<1],position[(count<<1)+1]);
+					count=count+1;
+				}
+				elem_count++;
+			}
+		}
+	}
+	while (line_len=get_line_len(new_line), line_len != -1);
+	
+	delete file_buf;
+	
+	return elem_count;
 }
 
 
 int main (void)
 {
-	InitConfig();
+	debug_printf("\r\nruntime_vkp: start\r\n");
 	
-  wchar_t path[250];
-  wstrcpy(path,GetDir(DIR_OTHER|MEM_EXTERNAL));
-  wstrcat(path,PATCHES_FOLDER_NAME);
+	InitConfig();
+	wchar_t path[250];
+	wstrcpy(path,GetDir(DIR_OTHER|MEM_EXTERNAL));
+	wstrcat(path,PATCHES_FOLDER_NAME);
+	
+	FILELISTITEM* fli = (FILELISTITEM*)malloc(sizeof(FILELISTITEM));
   
-  FILELISTITEM* fli = (FILELISTITEM*)malloc(sizeof(FILELISTITEM));
+	DIR_HANDLE* handle = AllocDirHandle(path);
   
-  DIR_HANDLE* handle = AllocDirHandle(path);
-  
-  if (handle)
-  {
-    LIST* vkp_data = List_Create();
+	if (handle)
+	{
+		LIST* vkp_data = List_Create();
+		int vkp_count=0;
     
-    //fill list with data
-    while (GetFname(handle,fli))
-    {
-      if (!wstrcmp(getFileExtention(fli->fname),FILE_FILTER_EXTENSION))
-      {
-        vkp_parse(fli->path,fli->fname,vkp_data);
-      }
-    }
-    
-    apply_vkp(vkp_data);
-    List_Destroy(vkp_data);
-    
-    DestroyDirHandle(handle);
-    mfree(fli);
-  }
+		//fill list with data
+		while (GetFname(handle,fli))
+		{
+			if (!wstrcmp(getFileExtention(fli->fname),FILE_FILTER_EXTENSION))
+			{
+				vkp_parse(fli->path,fli->fname,vkp_data);
+				vkp_count++;
+			}
+		}
+		
+		debug_printf("\r\nruntime_vkp: %d files found\r\n",vkp_count);
+		
+		apply_vkp(vkp_data);
+		
+		List_Destroy(vkp_data);
+		
+		DestroyDirHandle(handle);
+		mfree(fli);
+	}
+	
+	debug_printf("\r\nruntime_vkp: end\r\n");
   
-  //SUBPROC(elf_exit);
+	SUBPROC(elf_exit);
 }
