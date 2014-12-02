@@ -416,5 +416,5 @@ int main (void)
 	
 	debug_printf("\r\nruntime_vkp: end\r\n");
   
-	SUBPROC(elf_exit);
+	//SUBPROC(elf_exit);
 }
