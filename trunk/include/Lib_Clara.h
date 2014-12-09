@@ -1800,11 +1800,9 @@ __swi __arm int ThemeImage_Delete( int theme_image_type );
 #pragma swi_number=0x3DD
 __swi __arm void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
 
-#pragma swi_number=0x3DE
-__swi __arm int fs_memmap( int virtAddr, int physAddr, int size, int flags );
+//#pragma swi_number=0x3DE
 
-#pragma swi_number=0x3DF
-__swi __arm int fs_GetMemMap( int virtAddr, int* flags );
+//#pragma swi_number=0x3DF
 
 #pragma swi_number=0x3E0
 __swi __arm int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
