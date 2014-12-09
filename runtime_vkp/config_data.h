@@ -7,6 +7,8 @@ extern const char APP_SIZE_str[9];
 extern const char PCORE_TO_PATCH1_str[9];
 extern const char PCORE_TO_PATCH2_str[9];
 extern const char PCORE_TO_PATCH3_str[9];
+extern const char PCORE_TO_PATCH4_str[9];
+extern const char PCORE_TO_PATCH5_str[9];
 
 
 #endif
