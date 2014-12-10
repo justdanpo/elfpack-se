@@ -164,10 +164,12 @@ extern "C" int check_static_after_map(int virtAddr,int physAddr)
 }
 
 
-extern "C" int check_nonstatic_after_map(int virtAddr,int physAddr)
+extern "C" int check_nonstatic_after_map(int virtAddr,int physAddr,char* need_to_lock)
 {
 	int i;
 	int j;
+	char lock=0;
+	
 	int ret = fs_memmap(virtAddr,physAddr,0x400,FS_MEMMAP_NONBUFFERED|FS_MEMMAP_NOPERMISSIONS|FS_MEMMAP_CACHED|FS_MEMMAP_READ);
 	
 	for (i=0; i < patch_list->FirstFree; i++)
@@ -179,9 +181,14 @@ extern "C" int check_nonstatic_after_map(int virtAddr,int physAddr)
 			vkp_list_elem* elem = (vkp_list_elem*)List_Get_int(patch_elem->patch_data,j);
 			
 			if ( elem->isStatic == NOT_STATIC && virtAddr == (elem->virtAddr&PAGE_ALIGN_MASK) )
+			{
 				memcpy_int((char*)elem->virtAddr,elem->newData,elem->dataSize);   //apply vkp
+				lock = 1;
+			}
 		}
 	}
+	
+	*need_to_lock |=lock;
 	
 	return ret;
 }
@@ -784,7 +791,7 @@ void patch_pcore_after()
 	debug_printf("\r\nruntime_vkp: pcore patched (static pages)");
 	
 	//patch pcore to catch nonstatic page cache
-	((int*)patch_pcore_nonstatic_cache)[5] = PCORE_TO_PATCH_NONSTATIC_CACHE_RETURN+1;	//change return address
+	((int*)patch_pcore_nonstatic_cache)[6] = PCORE_TO_PATCH_NONSTATIC_CACHE_RETURN+1;	//change return address
 	
 	((char*)PCORE_TO_PATCH_NONSTATIC_CACHE)[0] = 0x00;
 	((char*)PCORE_TO_PATCH_NONSTATIC_CACHE)[1] = 0x49;
