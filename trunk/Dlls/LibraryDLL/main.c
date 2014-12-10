@@ -231,6 +231,9 @@ int dll_GetImageHeight_0( wchar_t imageID )
 void dll_OrangeLED_Control_0( int _free_val, int or_LED_ID, int level, int fade_time )
 {
   Illumination_LedID_SetLevel_Gradually(OrangeLED_ID,level,fade_time);
+#ifdef OrangeLED_ID_2
+	Illumination_LedID_SetLevel_Gradually(OrangeLED_ID_2,level,fade_time);
+#endif
 }
 #endif
 
@@ -657,6 +660,15 @@ int dll_ConnectionManager_Connection_GetState_0()
 }
 #endif
 
+#ifdef DB2010
+#define USE_dll_Browser_OpenURI_0
+int dll_Browser_OpenURI_0( BOOK* book, char* URI, int mode )
+{
+  int one = 1;
+  return REQUEST_WAP_URL_LOAD(&one, 0, 6, URI);
+}
+#endif
+
 #ifdef A2
 #define USE_dll_Timer_ReSet_0
 void dll_Timer_ReSet_0( u16* timer, int time, TIMERPROC onTimer, LPARAM lparam )
@@ -836,6 +848,10 @@ const LIBRARY_DLL_FUNCTIONINFO functions[]=
     0x2BC, (void*) &font_count,
     #endif
 
+    #ifdef USE_dll_Browser_OpenURI_0
+    0x35E, (void*) dll_Browser_OpenURI_0,
+    #endif
+    
     #ifdef USE_dll_Timer_ReSet_0
     0x128, (void*) dll_Timer_ReSet_0,
     #endif
