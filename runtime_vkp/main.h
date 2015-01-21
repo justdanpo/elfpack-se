@@ -46,12 +46,19 @@ typedef enum STATIC_TYPE
 }STATIC_TYPE;
 
 
+typedef enum AREA_TYPE
+{
+	MAIN						= 0,
+	AFTER_MAIN			= 1,
+}AREA_TYPE;
+
+
 typedef struct
 {
 	int virtAddr;
-	wchar_t page_i;
 	CXC_TYPE cxc;
 	STATIC_TYPE isStatic;
+	AREA_TYPE area;
 	int dataSize;
 	char* oldData;
 	char* newData;
