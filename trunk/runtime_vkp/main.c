@@ -64,13 +64,14 @@ void* List_Get_int(LIST* list, int index)
 int List_Find_pages_cmp(void *r0,void *r1)
 {
 	int i;
-	int target_page_i = (int)r1;
+	int target_page_addr = (int)r1;
 	
 	patch_list_elem* patch = (patch_list_elem*)r0;
 	for (i=0; i < patch->patch_data->FirstFree; i++)
 	{
 		vkp_list_elem* elem = (vkp_list_elem*)List_Get_int(patch->patch_data,i);
-		if (elem->isStatic == NOT_STATIC && elem->page_i == target_page_i) return 0;
+		
+		if ((elem->virtAddr&PAGE_ALIGN_MASK) == target_page_addr) return 0;
 	}
 	
 	return 1;
@@ -204,7 +205,7 @@ int get_page_i(VKPBook * vkp_book,int physAddr)
 	{
 		pagePool* pool_p = vkp_book->PagePoolTbl+i;
 		int physAddr_align = physAddr & PHYS_BASE_ADDR_MASK;
-		if ( pool_p->baseAddr == physAddr_align || pool_p->baseAddr == physAddr_align-0x10000 )
+		if ( pool_p->baseAddr == physAddr_align || pool_p->baseAddr == (physAddr_align-0x10000) )
 		{
 			char pos_in_pool = (physAddr - pool_p->baseAddr) / PAGE_SIZE;
 			ret = i*POOL_SIZE+pos_in_pool;
@@ -236,7 +237,7 @@ int check_conflict(VKPBook * vkp_book,LIST* patch_data)
 			{
 				vkp_list_elem* patch_string = (vkp_list_elem*)List_Get_int(patch_elem->patch_data,k);
 				
-				if ( (elem->virtAddr == patch_string->virtAddr) || (elem->virtAddr < patch_string->virtAddr && elem->virtAddr+elem->dataSize > patch_string->virtAddr) || (elem->virtAddr > patch_string->virtAddr && elem->virtAddr < patch_string->virtAddr+patch_string->dataSize) )
+				if ( (elem->virtAddr == patch_string->virtAddr) || (elem->virtAddr < patch_string->virtAddr && (elem->virtAddr+elem->dataSize) > patch_string->virtAddr) || (elem->virtAddr > patch_string->virtAddr && elem->virtAddr < (patch_string->virtAddr+patch_string->dataSize)) )
 				{
 					res = j;
 					break;
@@ -256,7 +257,6 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 	VKP_CHECK_RESULT res;
 	int i;
 	int need_to_check;
-	int end_addr;
 	int cur_page_addr;
 	
 	int intrMask = InterruptsAndFastInterrupts_Off();
@@ -276,10 +276,7 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 			
 			if (!fs_GetMemMap(cur_page_addr,0))
 			{
-				if (elem->cxc == CXC_EMP) end_addr=vkp_book->emp_end_addr;
-				else end_addr=vkp_book->app_end_addr;
-				
-				if (elem->virtAddr < end_addr)
+				if (elem->area == MAIN)
 				{
 					fs_demand_cache_page(elem->virtAddr,2,intrMask);
 				}
@@ -312,7 +309,7 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 				
 				if (!fs_GetMemMap(cur_page_addr,0))
 				{
-					if (elem->isStatic == STATIC)
+					if (elem->area == MAIN)
 					{
 						fs_demand_cache_page(elem->virtAddr,2,intrMask);
 					}
@@ -343,7 +340,6 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 void apply_vkp(VKPBook * vkp_book,LIST* patch_data)
 {
 	int i;
-	int end_addr;
 	int end_static_addr;
 	int physAddr;
 	wchar_t swap_i;
@@ -360,10 +356,7 @@ void apply_vkp(VKPBook * vkp_book,LIST* patch_data)
 			cur_page_addr = elem->virtAddr&PAGE_ALIGN_MASK;
 			if (physAddr = fs_GetMemMap(cur_page_addr,0), physAddr==0 )    //if not already created
 			{
-				if (elem->cxc == CXC_EMP) end_addr=vkp_book->emp_end_addr;
-				else end_addr=vkp_book->app_end_addr;
-				
-				if (elem->virtAddr < end_addr)
+				if (elem->area == MAIN)
 				{
 					fs_demand_cache_page(elem->virtAddr,2|NEED_TO_LOCK,intrMask);
 				}
@@ -410,8 +403,6 @@ void apply_vkp(VKPBook * vkp_book,LIST* patch_data)
 				}
 			}
 		}
-		if (elem->isStatic == NOT_STATIC)
-			elem->page_i =  get_page_i(vkp_book,fs_GetMemMap(cur_page_addr,0));
 		
 		memcpy_int((char*)elem->virtAddr,elem->newData,elem->dataSize);   //apply vkp
 	}
@@ -425,6 +416,7 @@ void uninstall_patch(BOOK* book,GUI*)
 {
 	int i;
 	int j;
+	int cur_page_addr=0;
 	
 	VKPBook* vkp_book = (VKPBook*)book;
 	
@@ -448,18 +440,28 @@ void uninstall_patch(BOOK* book,GUI*)
 		else
 		//create list with unique page_i
 		{
-			if (List_Find(unique_pages,(void*)elem->page_i,List_Find_pagelist_cmp) == LIST_ERROR)
-				List_InsertLast(unique_pages,(void*)elem->page_i);
+			if (cur_page_addr != (elem->virtAddr&PAGE_ALIGN_MASK))
+			{
+				cur_page_addr = elem->virtAddr&PAGE_ALIGN_MASK;
+				
+				if (fs_GetMemMap(cur_page_addr,0))
+				{
+					if (List_Find(unique_pages,(void*)cur_page_addr,List_Find_pagelist_cmp) == LIST_ERROR)
+					{
+						List_InsertLast(unique_pages,(void*)cur_page_addr);
+					}
+				}
+			}
 		}
 	}
 	
 	for (i=0; i < unique_pages->FirstFree; i++)
 	{
-		int kick_out_i = (int)List_Get_int(unique_pages,i);
+		int kick_out_page_addr = (int)List_Get_int(unique_pages,i);
 		
-		if (List_Find(patch_list,(void*)kick_out_i,List_Find_pages_cmp) == LIST_ERROR)
+		if (List_Find(patch_list,(void*)kick_out_page_addr,List_Find_pages_cmp) == LIST_ERROR)
 		{
-			fs_demand_kick_out_page(kick_out_i,intrMask);
+			fs_demand_kick_out_page(get_page_i(vkp_book, fs_GetMemMap(kick_out_page_addr,0)),intrMask);
 			*vkp_book->NbrOfLockedInPages -=1;
 		}
 		else
@@ -468,7 +470,7 @@ void uninstall_patch(BOOK* book,GUI*)
 			{
 				vkp_list_elem* elem = (vkp_list_elem*)List_Get_int(patch_to_remove->patch_data,j);
 				
-				if (elem->isStatic == NOT_STATIC && elem->page_i == kick_out_i)
+				if ((elem->virtAddr&PAGE_ALIGN_MASK) == kick_out_page_addr)
 					memcpy_int((char*)elem->virtAddr,elem->oldData,elem->dataSize);
 			}
 		}
@@ -617,6 +619,7 @@ int vkp_parse(VKPBook * vkp_book,wchar_t* path,wchar_t* name,LIST* patch_data)
 	char* position;
 	char* new_line;
 	int end_static_addr;
+	int end_addr;
 	int count;
 	int line_len=0;
 	int incr=0;
@@ -661,7 +664,7 @@ int vkp_parse(VKPBook * vkp_book,wchar_t* path,wchar_t* name,LIST* patch_data)
 				sscanf(position,"%x:",&elem->virtAddr);
 				elem->virtAddr = elem->virtAddr+incr;
 				
-				if (elem->virtAddr & CXC_BASE_ADDR_MASK == EMP_START_ADDR)
+				if ((elem->virtAddr & CXC_BASE_ADDR_MASK) == EMP_START_ADDR)
 					elem->cxc=CXC_EMP;
 				else
 					elem->cxc=CXC_APP;
@@ -673,6 +676,14 @@ int vkp_parse(VKPBook * vkp_book,wchar_t* path,wchar_t* name,LIST* patch_data)
 					elem->isStatic = STATIC;
 				else
 					elem->isStatic = NOT_STATIC;
+				
+				if (elem->cxc == CXC_EMP) end_addr=vkp_book->emp_end_addr;
+				else end_addr=vkp_book->app_end_addr;
+				
+				if (elem->virtAddr < end_addr)
+					elem->area = MAIN;
+				else
+					elem->area = AFTER_MAIN;
 				
 				position = strchr(position,':')+2;  //skip ": "
 				elem->dataSize = (strchr(position,' ')-position)/2;
@@ -902,24 +913,16 @@ void print_info(VKPBook* vkp_book)
 		{
 			vkp_list_elem* elem = (vkp_list_elem*)List_Get_int(patch->patch_data,j);
 			
-			if (elem->isStatic == STATIC)
-				debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0x%08X, STATIC",elem->virtAddr,fs_GetMemMap(elem->virtAddr,0));
+			int physAddr = fs_GetMemMap(elem->virtAddr,0);
+			
+			if (physAddr == 0)
+				debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0, Page not in cache",elem->virtAddr);
 			else
 			{
-				pageCache* page_p = vkp_book->PageCacheTbl+elem->page_i;
-				int physAddr = fs_GetMemMap(elem->virtAddr,0);
+				wchar_t cur_page_i = get_page_i(vkp_book,physAddr);
+				pageCache* page_p = vkp_book->PageCacheTbl + cur_page_i;
 				
-				if (physAddr == 0)
-					debug_printf("\r\nruntime_vkp: ERROR!!!!! physAddr = 0 for non-static area, virtAddr=0x%08X",elem->virtAddr);
-				else
-				{
-					wchar_t cur_page_i = get_page_i(vkp_book,physAddr);
-					
-					if (elem->page_i != cur_page_i)
-						debug_printf("\r\nruntime_vkp: ERROR!!!!! page_i has changed, virtAddr=0x%08X, old_page_i = 0x%04X, new_page_i = 0x%04X",elem->virtAddr,elem->page_i,cur_page_i);
-					else
-						debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0x%08X, page_i = 0x%04X, prev_i = 0x%04X, next_i = 0x%04X",elem->virtAddr,physAddr,elem->page_i,page_p->prev_i,page_p->next_i);
-				}
+				debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0x%08X, page_i = 0x%04X, prev_i = 0x%04X, next_i = 0x%04X",elem->virtAddr,physAddr,cur_page_i,page_p->prev_i,page_p->next_i);
 			}
 			delay(10);
 		}
