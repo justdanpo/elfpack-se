@@ -1031,7 +1031,7 @@ void StartShortcut_External(char * param)
 			ms[0] = STR( "ZBin" );
 			ms[1] = TextID_Create( param, ENC_LAT1, strlen( param ) );
 			ms[2] = STR( "\n\nnot found.." );
-			MessageBox( EMPTY_TEXTID,TextID_Create(ms,ENC_TEXTID,3),NOIMAGE,1,3000,FindBook(isBookManager));
+			MessageBox( EMPTY_TEXTID,TextID_Create(ms,ENC_TEXTID,3), NOIMAGE, 1, 3000, 0);
 		}
 }
 

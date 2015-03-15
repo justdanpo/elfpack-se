@@ -351,7 +351,7 @@ __swi __arm int AB_GETNBROFITEMS( int get_from, int sub_id );
 __swi __arm int PNUM_len( BCD_TEXT pnum );
 
 #pragma swi_number=0x167
-__swi __arm void PNUM2str( char* str, BCD_TEXT pnum, int len, int max_len );
+__swi __arm void PNUM2str( char* str, BCD_TEXT pnum, int pnum_len_to_convert, int str_buf_size );
 
 #pragma swi_number=0x168
 __swi __arm DISP_OBJ* GUIObject_GetDispObject( GUI* );
@@ -1789,7 +1789,7 @@ __swi __arm void GUIObject_SetZOrder( GUI*, char, GUI* );
 __swi __arm int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
 
 #pragma swi_number=0x3D8
-__swi __arm void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
+__swi __arm void str2PNUM( BCD_TEXT pnum, char* str, int len_to_convert, int pnum_buf_len );
 #pragma swi_number=0x3D9
 __swi __arm void pb_ui_search_bk_create_search_menu( int BookID, int mode );
 

@@ -676,9 +676,9 @@ typedef struct CALLMANAGER_EVENT_DATA_A2
 	char CallType;
 	char CallState;
 	BCD_TEXT PNUM;
+	char CallCause;
 	char unk3;
 	char unk4;
-	char CallCause;
 }CALLMANAGER_EVENT_DATA_A2;
 
 typedef struct REDRAW_RELEASE_MESSAGE
