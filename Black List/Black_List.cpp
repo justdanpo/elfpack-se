@@ -1301,12 +1301,18 @@ int BlackListBook_SI_Page_Enter_Action(void * data,BOOK * book)
 	BlackListBook * BLBook = (BlackListBook*)book;
 	
 	TEXTID editable_strID;
+	int pos;
+	
+	int is_smstext = FALSE;
+	if ( ListMenu_GetSelectedItem(BLBook->choosemodetoedit_list) == 2 ) is_smstext = TRUE;
 	
 	if (BLBook->edit_flag==FALSE)
 		editable_strID = EMPTY_TEXTID;
 	else
 	{
-		filter_list_elem* elem = (filter_list_elem*)List_Get(BLBook->cur_list->block_list, ListMenu_GetSelectedItem(BLBook->editblocklist_list));
+		pos = ListMenu_GetSelectedItem(BLBook->editblocklist_list);
+		if ( is_smstext == FALSE ) pos = pos-2;
+		filter_list_elem* elem = (filter_list_elem*)List_Get(BLBook->cur_list->block_list, pos);
 		editable_strID = TextID_Create(elem->data, ENC_LAT1, TEXTID_ANY_LEN);
 	}
 	
