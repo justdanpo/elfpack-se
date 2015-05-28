@@ -23,7 +23,7 @@ InterruptsAndFastInterrupts_Restore:
 cp15_write_DAC:
 	MRC	p15, 0, R1, c3, c0, 0
 	MCR	p15, 0, R0, c3, c0, 0
-	MOV	R1, R1
+	MOV	R0, R1
 	BX LR
        
 	end
