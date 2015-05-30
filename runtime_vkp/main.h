@@ -36,6 +36,7 @@ typedef enum CXC_TYPE
 {
 	CXC_EMP		= 0,
 	CXC_APP		= 1,
+	RAM				= 2,
 }CXC_TYPE;
 
 
