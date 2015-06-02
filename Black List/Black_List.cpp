@@ -133,7 +133,7 @@ int TerminateElf(void * ,BOOK * BLBook)
 int ShowAuthorInfo(void *mess ,BOOK * BLBook)
 {
 	MSG * msg = (MSG*)mess;
-	MessageBox( EMPTY_TEXTID, STR("Black List, v2.0\n\n(c) IronMaster"), NOIMAGE, 1, 5000, msg->book );
+	MessageBox( EMPTY_TEXTID, STR("Black List, v2.01\n\n(c) IronMaster"), NOIMAGE, 1, 5000, msg->book );
 	return 1;
 }
 
@@ -388,7 +388,7 @@ void WriteLog_SMS(int pdu_in, void* book)
 	
 #define WRITELOG_SMS_BUF_SIZE 30
 	char tp_oa_buf[WRITELOG_SMS_BUF_SIZE];
-	if ( (tp_oa_type & 1) == 1)
+	if ( (tp_oa_type & 0x70) != 0x50)
 	{
 		//digits
 		PNUM2str(tp_oa_buf, tp_oa, tp_oa_size, WRITELOG_SMS_BUF_SIZE);
@@ -572,7 +572,7 @@ void WriteLog_SMS(int pdu_in, void* book)
 		
 #define PNUM_NAME_BUF_SIZE 60
 		wchar_t* pnum_name = new wchar_t[PNUM_NAME_BUF_SIZE];
-		if ( (tp_oa_type & 1) == 1)
+		if ( (tp_oa_type & 0x70) != 0x50)
 		{
 			TEXTID pnum_name_textid = PNUM2Name(tp_oa,0,0);
 			if (pnum_name_textid == EMPTY_TEXTID)
@@ -1050,7 +1050,7 @@ int BlackListBook_FilterSMS(BOOK * book,char* smsc,char* pdu)
 		}
 	}
 	
-	if ( (pdu[2+1] & 1) == 1)
+	if ( (pdu[2+1] & 0x70) != 0x50)
 	//address - digits
 	{
 		int pnum_len = pdu[1+1];
