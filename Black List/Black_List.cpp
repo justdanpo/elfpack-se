@@ -1020,6 +1020,7 @@ int BlackListBook_EditLists(BOOK * book,char * pnum,char mode)
 }
 
 
+//smsc, pdu - first byte is  a size of data (without size-byte)
 int BlackListBook_FilterSMS(BOOK * book,char* smsc,char* pdu)
 {
 #define BLOCK_SMS 0x1
@@ -1032,7 +1033,7 @@ int BlackListBook_FilterSMS(BOOK * book,char* smsc,char* pdu)
 	
 	char num_of_parts = 0;
 	char partID = 0;
-	char* tp_udh = 1 + pdu + 1/*tp-mti*/ + 1/*tp-oa_size*/ + 1/*tp-oa_type*/ + (*(pdu+2)+1)/2/*tp-oa*/ + 1/*tp-pid*/ + 1/*tp_dcs*/ + 7/*tp_scts*/ + 1/*tp-udl*/;
+	char* tp_udh = 1/*size of pdu*/ + pdu + 1/*tp-mti*/ + 1/*tp-oa_size*/ + 1/*tp-oa_type*/ + (*(pdu+2)+1)/2/*tp-oa*/ + 1/*tp-pid*/ + 1/*tp_dcs*/ + 7/*tp_scts*/ + 1/*tp-udl*/;
 	char IEI = *(tp_udh+1/*tp-udhl*/);
 	
 	if ( (*(pdu+1)&0x40) != 0 )			//if tp-udhi
