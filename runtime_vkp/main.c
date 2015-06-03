@@ -52,6 +52,33 @@ PAGE_DESC VKPService_BasePage ={"VKPService_BasePage",0,vkp_basepage_events};
 
 //================== pages end ======================
 
+char* unicode2win1251( char* s, wchar_t* ws, int len )
+{
+	char* d = s;
+	int c;
+	while( ( c = *ws++ ) && len -- > 0 )
+	{
+		if( c == 0x401 )
+			c = 0xA8;
+		if( c == 0x404 )
+			c = 0xAA;
+		if( c == 0x407 )
+			c = 0xAF;
+		if( c == 0x451 )
+			c = 0xB8;
+		if( c == 0x454 )
+			c = 0xBA;
+		if( c == 0x457 )
+			c = 0xBF;
+		if( c >= 0x410 && c < 0x450 )
+			c -= 0x350;
+		*s++ = c;
+	}
+	*s = 0;
+	return d;
+}
+
+
 void* List_Get_int(LIST* list, int index)
 {
 	if (index < list->FirstFree)
@@ -486,7 +513,9 @@ void uninstall_patch(BOOK* book,GUI*)
 		}
 	}
 	
-	debug_printf("\r\nruntime_vkp: %ls uninstalled",patch_to_remove->patch_name);
+	char name1251[100];
+	unicode2win1251(name1251,patch_to_remove->patch_name,100);
+	debug_printf("\r\nruntime_vkp: %s uninstalled",name1251);
 	patch_list_elem_destroy(patch_to_remove);
 	List_Destroy(unique_pages);
 	
@@ -503,7 +532,10 @@ void install_patch(BOOK* book,GUI*)
 	
 	List_InsertLast(patch_list,vkp_book->vkp_in);
 	apply_vkp(vkp_book,vkp_book->vkp_in->patch_data);
-	debug_printf("\r\nruntime_vkp: %ls installed",vkp_book->vkp_in->patch_name);
+	
+	char name1251[100];
+	unicode2win1251(name1251,vkp_book->vkp_in->patch_name,100);
+	debug_printf("\r\nruntime_vkp: %s installed",name1251);
 	vkp_book->vkp_in=0;
 	
 	BookObj_GotoPage(book,&VKPService_Idle_Page);
@@ -557,9 +589,9 @@ int VKPInPage_EnterAction(void* r0,BOOK* bk)
 		if (conflict_res != -1)
 		{
 			patch_list_elem* elem = (patch_list_elem*)List_Get_int(patch_list,conflict_res);
-			char buf[100];
-			sprintf(buf,"Conflict with %ls",elem->patch_name);
-			MessageBox(EMPTY_TEXTID,TextID_Create(buf,ENC_LAT1,TEXTID_ANY_LEN), NOIMAGE, 1, 5000,0);
+			wchar_t buf[100];
+			snwprintf(buf,100,L"Conflict with %ls",elem->patch_name);
+			MessageBox(EMPTY_TEXTID,TextID_Create(buf,ENC_UCS2,TEXTID_ANY_LEN), NOIMAGE, 1, 5000,0);
 		}
 		else
 			MessageBox(EMPTY_TEXTID,STR("Original data missmatch"), NOIMAGE, 1, 5000,0);
@@ -920,6 +952,7 @@ void print_info(VKPBook* vkp_book)
 {
 	int i;
 	int j;
+	char name1251[100];
 	
 	debug_printf("\r\nruntime_vkp: %d patches installed",vkp_book->data_list->FirstFree);
 	
@@ -927,7 +960,8 @@ void print_info(VKPBook* vkp_book)
 	{
 		patch_list_elem* patch = (patch_list_elem*)List_Get_int(vkp_book->data_list,i);
 		
-		debug_printf("\r\n\r\nruntime_vkp: %ls",patch->patch_name);
+		unicode2win1251(name1251,patch->patch_name,100);
+		debug_printf("\r\n\r\nruntime_vkp: %s",name1251);
 		
 		for (j=0; j < patch->patch_data->FirstFree; j++)
 		{
@@ -939,10 +973,17 @@ void print_info(VKPBook* vkp_book)
 				debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0, Page not in cache",elem->virtAddr);
 			else
 			{
-				wchar_t cur_page_i = get_page_i(vkp_book,physAddr);
-				pageCache* page_p = vkp_book->PageCacheTbl + cur_page_i;
-				
-				debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0x%08X, page_i = 0x%04X, prev_i = 0x%04X, next_i = 0x%04X",elem->virtAddr,physAddr,cur_page_i,page_p->prev_i,page_p->next_i);
+				if (elem->isStatic == NOT_STATIC)
+				{
+					wchar_t cur_page_i = get_page_i(vkp_book,physAddr);
+					pageCache* page_p = vkp_book->PageCacheTbl + cur_page_i;
+					
+					debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0x%08X, page_i = 0x%04X, prev_i = 0x%04X, next_i = 0x%04X",elem->virtAddr,physAddr,cur_page_i,page_p->prev_i,page_p->next_i);
+				}
+				else
+				{
+					debug_printf("\r\nruntime_vkp: virtAddr=0x%08X, physAddr = 0x%08X, STATIC",elem->virtAddr,physAddr);
+				}
 			}
 			delay(10);
 		}
@@ -982,11 +1023,15 @@ int main (wchar_t* elfname,wchar_t* vkp_path,wchar_t* vkp_name)
 		load_patches(vkp_book);
 		
 		int i;
+		char name1251[100];
+		
 		for (i=0; i < patch_list->FirstFree; i++)
 		{
 			patch_list_elem* elem = (patch_list_elem*)List_Get_int(patch_list,i);
 			apply_vkp(vkp_book,elem->patch_data);
-			debug_printf("\r\nruntime_vkp: %ls installed",elem->patch_name);
+			
+			unicode2win1251(name1251,elem->patch_name,100);
+			debug_printf("\r\nruntime_vkp: %s installed",name1251);
 		}
 		patch_pcore_after();
 		
