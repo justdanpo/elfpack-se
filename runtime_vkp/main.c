@@ -736,6 +736,11 @@ int vkp_parse(VKPBook * vkp_book,wchar_t* path,wchar_t* name,LIST* patch_data)
 					else
 						elem->area = AFTER_MAIN;
 				}
+				else
+				{
+					elem->isStatic = TYPE_RAM;
+					elem->area = AREA_RAM;
+				}
 				
 				position = strchr(position,':')+2;  //skip ": "
 				elem->dataSize = (strchr(position,' ')-position)/2;

@@ -44,6 +44,7 @@ typedef enum STATIC_TYPE
 {
 	NOT_STATIC	= 0,
 	STATIC			= 1,
+	TYPE_RAM		= 2,
 }STATIC_TYPE;
 
 
@@ -51,6 +52,7 @@ typedef enum AREA_TYPE
 {
 	MAIN						= 0,
 	AFTER_MAIN			= 1,
+	AREA_RAM				= 2,
 }AREA_TYPE;
 
 
