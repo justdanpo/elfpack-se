@@ -296,7 +296,7 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 	{
 		vkp_list_elem* elem = (vkp_list_elem*)List_Get_int(patch_data,i);
 		
-		if (elem->cxc == RAM)
+		if (elem->cxc != RAM)
 		{
 			if (cur_page_addr != (elem->virtAddr&PAGE_ALIGN_MASK))
 			{
@@ -310,9 +310,16 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 						fs_demand_cache_page(elem->virtAddr,2,intrMask);
 					}
 					else
+					{
+						//AFTER_MAIN must be always in cache, so..
 						need_to_check=0;
+					}
 				}
 			}
+		}
+		else
+		{
+			need_to_check=1;
 		}
 		//debug_printf("\r\nruntime_vkp: check if not installed, virtAddr =0x%08X",elem->virtAddr);
 		//delay(20);
@@ -333,7 +340,7 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 		{
 			vkp_list_elem* elem = (vkp_list_elem*)List_Get_int(patch_data,i);
 			
-			if (elem->cxc == RAM)
+			if (elem->cxc != RAM)
 			{
 				if (cur_page_addr != (elem->virtAddr&PAGE_ALIGN_MASK))
 				{
@@ -347,7 +354,7 @@ VKP_CHECK_RESULT check_vkp_state(VKPBook * vkp_book,LIST* patch_data)
 						}
 						else
 						{
-							debug_printf("\r\nruntime_vkp: check if installed error: no physAddr, virtAddr =0x%08X",elem->virtAddr);
+							debug_printf("\r\nruntime_vkp: check if installed error: no physAddr for AFTER_MAIN, virtAddr =0x%08X",elem->virtAddr);
 							res = VKP_CHECK_RESULT_ERROR;
 							break;
 						}
@@ -419,7 +426,7 @@ void apply_vkp(VKPBook * vkp_book,LIST* patch_data)
 					delay(5);
 				}
 				else
-					//memmap exists
+				//memmap exists
 				{
 					if (elem->cxc == CXC_EMP) end_static_addr=vkp_book->emp_static_end_addr;
 					else end_static_addr=vkp_book->app_static_end_addr;
