@@ -15,6 +15,7 @@ int (*fs_GetMemMap)( int virtAddr, int* flags )=(int(*)( int virtAddr, int* flag
 
 #define PAGE_SIZE 0x400
 #define PAGE_ALIGN_MASK 0xFFFFFC00
+#define STATIC_PAGE_SIZE 0x1000
 #define STATIC_PAGE_ALIGN_MASK 0xFFFFF000
 #define POOL_SIZE 0x80
 

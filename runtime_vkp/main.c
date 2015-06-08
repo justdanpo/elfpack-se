@@ -147,7 +147,7 @@ void elf_exit(void)
 int ShowAuthorInfo(void *mess ,BOOK * book)
 {
   MSG * msg = (MSG*)mess;
-  MessageBox(EMPTY_TEXTID,STR("VKP Runtime, v1.21\n\n(c) IronMaster"), NOIMAGE, 1, 5000,msg->book);
+  MessageBox(EMPTY_TEXTID,STR("VKP Runtime, v1.22\n\n(c) IronMaster"), NOIMAGE, 1, 5000,msg->book);
   return(1);
 }
 
@@ -173,7 +173,10 @@ extern "C" int check_static_after_map(int virtAddr,int physAddr)
 {
 	int i;
 	int j;
-	int ret = fs_memmap(virtAddr,physAddr,0x1000,FS_MEMMAP_NONBUFFERED|FS_MEMMAP_NOPERMISSIONS|FS_MEMMAP_CACHED|FS_MEMMAP_READ);
+	
+	int ret = fs_memmap(virtAddr,physAddr,STATIC_PAGE_SIZE,FS_MEMMAP_NONBUFFERED|FS_MEMMAP_NOPERMISSIONS|FS_MEMMAP_CACHED|FS_MEMMAP_READ);
+	
+	int old_dac_mask = cp15_write_DAC(0xFFFFFFFF);
 	
 	for (i=0; i < patch_list->FirstFree; i++)
 	{
@@ -188,6 +191,8 @@ extern "C" int check_static_after_map(int virtAddr,int physAddr)
 		}
 	}
 	
+	cp15_write_DAC(old_dac_mask);
+	
 	return ret;
 }
 
@@ -199,6 +204,8 @@ extern "C" int check_nonstatic_after_map(int virtAddr,int physAddr,char* need_to
 	char lock=0;
 	
 	int ret = fs_memmap(virtAddr,physAddr,0x400,FS_MEMMAP_NONBUFFERED|FS_MEMMAP_NOPERMISSIONS|FS_MEMMAP_CACHED|FS_MEMMAP_READ);
+	
+	int old_dac_mask = cp15_write_DAC(0xFFFFFFFF);
 	
 	for (i=0; i < patch_list->FirstFree; i++)
 	{
@@ -217,6 +224,8 @@ extern "C" int check_nonstatic_after_map(int virtAddr,int physAddr,char* need_to
 	}
 	
 	*need_to_lock |=lock;
+	
+	cp15_write_DAC(old_dac_mask);
 	
 	return ret;
 }
