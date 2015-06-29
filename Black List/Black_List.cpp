@@ -133,7 +133,7 @@ int TerminateElf(void * ,BOOK * BLBook)
 int ShowAuthorInfo(void *mess ,BOOK * BLBook)
 {
 	MSG * msg = (MSG*)mess;
-	MessageBox( EMPTY_TEXTID, STR("Black List, v2.01\n\n(c) IronMaster"), NOIMAGE, 1, 5000, msg->book );
+	MessageBox( EMPTY_TEXTID, STR("Black List, v2.02\n\n(c) IronMaster"), NOIMAGE, 1, 5000, msg->book );
 	return 1;
 }
 
@@ -711,6 +711,7 @@ void ReadBlockList(BLOCK_LIST_STRUCT * list,wchar_t * fname)
 			if (len)
 			{
 				filter_list_elem* elem = new filter_list_elem;
+				elem->len = len;
 				elem->data = new char[len+1];
 				strncpy(elem->data,cur_pos,len);
 				elem->data[len]=0;
@@ -746,7 +747,7 @@ void WriteBlockList(BLOCK_LIST_STRUCT * list,wchar_t * fname)
 	while ( count < list->block_list->FirstFree )
 	{
 		filter_list_elem* elem = (filter_list_elem*)List_Get(list->block_list,count);
-		fwrite( f, elem->data, strlen(elem->data) );
+		fwrite( f, elem->data, elem->len );
 		fwrite( f, end_of_line, 2 );
 		count++;
 	}
@@ -928,18 +929,24 @@ void InitLanguage(BlackListBook * BLBook)
 int List_Find_BlockSMSText_cmp(void *r0,void *r1)
 {
 	filter_list_elem* elem = (filter_list_elem*)r0;
+	char* pnum_str = (char*)r1;
 	
-	if (str_mask_cmp((char*)r1,elem->data)) return(1);
+	if (str_mask_cmp(pnum_str,elem->data)) return(1);
 	return(0);
 }
 
 
 int List_Find_BlockPnum_cmp(void *r0,void *r1)
 {
-	filter_list_elem* elem = (filter_list_elem*)r0;
+	char pnum_subs = 0;
 	
-	if ( elem->type == FILTERLIST_TYPE_PNUM && strcmp(elem->data+NUM_CHR_SUBS,(char*)r1+NUM_CHR_SUBS) ) return(1);
-	if ( elem->type == FILTERLIST_TYPE_MASK && str_mask_cmp((char*)r1,elem->data) ) return(1);
+	filter_list_elem* elem = (filter_list_elem*)r0;
+	char* pnum_str = (char*)r1;
+	
+	if (elem->len > 10) pnum_subs = NUM_CHR_SUBS;
+	
+	if ( elem->type == FILTERLIST_TYPE_PNUM && strcmp(elem->data+pnum_subs,pnum_str+pnum_subs) ) return(1);
+	if ( elem->type == FILTERLIST_TYPE_MASK && str_mask_cmp(pnum_str,elem->data) ) return(1);
 	return(0);
 }
 
@@ -947,8 +954,9 @@ int List_Find_BlockPnum_cmp(void *r0,void *r1)
 int List_Find_AddPnum_cmp(void *r0,void *r1)
 {
 	filter_list_elem* elem = (filter_list_elem*)r0;
+	char* pnum_str = (char*)r1;
 	
-	if (strcmp(elem->data,(char*)r1)) return(1);
+	if (strcmp(elem->data,pnum_str)) return(1);
 	return(0);
 }
 
@@ -1003,7 +1011,8 @@ int BlackListBook_EditLists(BOOK * book,char * pnum,char mode)
 	{
 	case MODE_ADD:
 		elem = new filter_list_elem;
-		elem->data = new char[strlen(buf)+1];
+		elem->len = strlen(buf);
+		elem->data = new char[elem->len+1];
 		strcpy(elem->data, buf);
 		elem->type = FILTERLIST_TYPE_PNUM;
 		List_InsertLast(list->block_list, elem);
@@ -1258,6 +1267,7 @@ void SI_Accept_Action(BOOK * book, wchar_t * numb, int len)
 	if ( ListMenu_GetSelectedItem(BLBook->choosemodetoedit_list) == 2 ) is_smstext = TRUE;
 	
 	filter_list_elem* elem = new filter_list_elem;
+	elem->len = len;
 	elem->data = new char[len+1];
 	
 	wstr2strn(elem->data,numb,len);
@@ -1373,6 +1383,7 @@ int BlackListBook_SearchPB_Page_Accept_Action(void * data,BOOK * book)
 	int len = strlen(pb_data->pnum_str);
 	
 	filter_list_elem* elem = new filter_list_elem;
+	elem->len = len;
 	elem->data = new char[len+1];
 	
 	strncpy(elem->data,pb_data->pnum_str,len);
@@ -1590,7 +1601,7 @@ int onCallback_EditBlockList( GUI_MESSAGE* msg )
 				else
 				{
 					char pnum[50];
-					str2PNUM(pnum,elem->data,50,50);
+					str2PNUM(pnum,elem->data,elem->len,50);
 					item_name = PNUM2Name(pnum,1,0);
 					if (item_name==EMPTY_TEXTID)
 					{

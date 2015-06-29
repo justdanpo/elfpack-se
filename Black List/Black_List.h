@@ -265,6 +265,7 @@ typedef enum
 typedef struct
 {
 	char type;
+	char len;
 	char* data;
 }filter_list_elem;
 
