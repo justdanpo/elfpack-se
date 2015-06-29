@@ -528,8 +528,9 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
 }
   */
 #ifdef DBG
-  elfldr_debug_printf("\n  OS: ElfPack   ElfBegin @%x",(int)base)  ;
-  elfldr_debug_printf("\n  OS: ElfPack   RamUsed : %x",(int)(maxadr-minadr))  ;
+	elfldr_debug_printf("\n  OS: ElfPack   Elf %ls", (int)filename)  ;
+  elfldr_debug_printf("\n  OS: ElfPack   ElfBegin @%X",(int)base)  ;
+  elfldr_debug_printf("\n  OS: ElfPack   RamUsed: %X",(int)(maxadr-minadr))  ;
 #endif
   //-------------------------------------------------------------------------------------------------------
   //  t_zeromem(base,maxadr-minadr);
@@ -707,7 +708,7 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
   if (fwrite(base,maxadr-minadr,1,fin)!=1) return -1001; // vit
 #endif
 #ifdef DBG
-  elfldr_debug_printf("     elfload Result=0x%X",retcode);
+  elfldr_debug_printf("\n  OS: ElfPack   elfload Result=0x%X",retcode);
 #endif
   return retcode;
 }

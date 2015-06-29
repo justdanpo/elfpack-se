@@ -37,9 +37,6 @@ void mfree (void * mem)
 
 wchar_t* GetDir (int DirIndex)
 {
-
-	_printf("GetDir(0x%X)",DirIndex);
-
 	switch (DirIndex>>1)
 	{
 	case  DIR_AUDIO>>1 : return (DirIndex&1)? PATH_AUDIO_INT: PATH_AUDIO_EXT;
@@ -396,7 +393,7 @@ void Init()
 			wstrcat(filename,L"/");
 			wstrcat(filename,fli->fname);
 
-			_printf("     ->...")  ;
+			_printf("     %ls",fli->fname)  ;
 
 			//run if load not from MMI (e.g. Java)
 			MMIPROCExec(mmi_elfload_int,0,filename);
