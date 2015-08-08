@@ -3,6 +3,8 @@
 
 
 extern const int TrafDiv;
+extern const int SplitByDate;
+extern const int SplitCalls;
 extern const int TrafKb;
 extern const int sort_order;
 extern const unsigned int TrafCost;
@@ -18,7 +20,7 @@ extern const unsigned int Hol2;
 extern const unsigned int TrafCostHol;
 
 
-extern const char strMoney[16];
+extern const wchar_t wstrMoney[16];
 
 
 #endif

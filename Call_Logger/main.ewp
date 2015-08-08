@@ -961,7 +961,6 @@
         <option>
           <name>CCDefines</name>
           <state>NDEBUG</state>
-          <state>OLDFUNCTIONS</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -1232,7 +1231,7 @@
         </option>
         <option>
           <name>AList</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>AListHeader</name>
@@ -1499,7 +1498,7 @@
         <option>
           <name>ModuleLocalSym</name>
           <version>0</version>
-          <state>0</state>
+          <state>2</state>
         </option>
         <option>
           <name>CrcBitOrder</name>
@@ -1907,7 +1906,7 @@
           </option>
           <option>
             <name>CCListCFile</name>
-            <state>1</state>
+            <state>0</state>
           </option>
           <option>
             <name>CCListCMnemonics</name>
@@ -1919,7 +1918,7 @@
           </option>
           <option>
             <name>CCListAssFile</name>
-            <state>1</state>
+            <state>0</state>
           </option>
           <option>
             <name>CCListAssSource</name>
@@ -1951,7 +1950,7 @@
           </option>
           <option>
             <name>CCOptSizeSpeed</name>
-            <state>1</state>
+            <state>0</state>
           </option>
           <option>
             <name>CCOptimization</name>
@@ -1961,7 +1960,7 @@
           <option>
             <name>CCAllowList</name>
             <version>1</version>
-            <state>1001111</state>
+            <state>1111111</state>
           </option>
           <option>
             <name>CCObjUseModuleName</name>
@@ -2045,7 +2044,7 @@
           </option>
           <option>
             <name>CCOptSizeSpeedSlave</name>
-            <state>1</state>
+            <state>0</state>
           </option>
           <option>
             <name>CCOptimizationSlave</name>
@@ -2111,6 +2110,9 @@
   </file>
   <file>
     <name>$PROJ_DIR$\main.c</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\main.h</name>
   </file>
 </project>
 

@@ -7,6 +7,14 @@ __root const CFG_HDR cfghdr0={CFG_CHECKBOX,"Divide Traf",0,0};
 __root const int TrafDiv=1;
 
 
+__root const CFG_HDR cfghdr13={CFG_CHECKBOX,"Split by date",0,0};
+__root const int SplitByDate=1;
+
+
+__root const CFG_HDR cfghdr14={CFG_CHECKBOX,"Split by type",0,0};
+__root const int SplitCalls=1;
+
+
 __root const CFG_HDR cfghdr1={CFG_CBOX,"Measure Unit",0,2};
 __root const int TrafKb=0;
 __root const CFG_CBOX_ITEM cfgcbox1[2]={"Bytes","Kbytes"};
@@ -53,6 +61,6 @@ __root const CFG_HDR cfghdr10={CFG_UINT,"Holiday Traf Cost",0,1000000};
 __root const unsigned int TrafCostHol=0;
 
 
-__root const CFG_HDR cfghdr11={CFG_STR_WIN1251,"Money Unit",0,15};
-__root const char strMoney[16]="rub";
+__root const CFG_HDR cfghdr11={CFG_UTF16_STRING,"Money Unit",0,15};
+__root const wchar_t wstrMoney[16]=L"rub";
 
