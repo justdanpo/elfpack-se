@@ -11,7 +11,8 @@ wchar_t * SET_CONTROL_TXT;
 wchar_t * SET_BLOCK_TYPE_TXT;
 wchar_t * SET_BLOCK_MODE_TXT;
 wchar_t * SET_LOG_TXT;
-wchar_t * SET_NOTIFICATION_TXT;
+wchar_t * SET_NOTIFIC_ICON_TXT;
+wchar_t * SET_NOTIFIC_MSG_TXT;
 wchar_t * SET_LANGUAGE_TXT;
 wchar_t * STATE_ON_TXT;
 wchar_t * STATE_OFF_TXT;
@@ -133,7 +134,7 @@ int TerminateElf(void * ,BOOK * BLBook)
 int ShowAuthorInfo(void *mess ,BOOK * BLBook)
 {
 	MSG * msg = (MSG*)mess;
-	MessageBox( EMPTY_TEXTID, STR("Black List, v2.02\n\n(c) IronMaster"), NOIMAGE, 1, 5000, msg->book );
+	MessageBox( EMPTY_TEXTID, STR("Black List, v2.1\n\n(c) IronMaster"), NOIMAGE, 1, 5000, msg->book );
 	return 1;
 }
 
@@ -264,6 +265,31 @@ int str_mask_cmp(char* str,char* mask)
 	if (*mask == 0 || (*mask == '*' && *(mask+1) == 0)) return 0;
 	
 	return -1;
+}
+
+
+void SetDivertedIcon(int mode,void* type1)
+{
+	int type = (int)type1;
+	int imgID;
+	
+	if (type == NOTIFIC_TYPE_CALL || type == -1)
+	{
+		iconidname2id( CALL_DIVERTED_ICN, TEXTID_ANY_LEN, &imgID );
+		SetTrayIcon(imgID,mode);
+	}
+	
+	if (type == NOTIFIC_TYPE_SMS || type == -1)
+	{
+		iconidname2id( SMS_DIVERTED_ICN, TEXTID_ANY_LEN, &imgID );
+		SetTrayIcon(imgID,mode);
+	}
+	
+	if (type == NOTIFIC_TYPE_SMS_TEXT || type == -1)
+	{
+		iconidname2id( SMS_TEXT_DIVERTED_ICN, TEXTID_ANY_LEN, &imgID );
+		SetTrayIcon(imgID,mode);
+	}
 }
 
 
@@ -401,10 +427,10 @@ void WriteLog_SMS(int pdu_in, void* book)
 		total_buf_size = total_buf_size + gsm7_to_ascii((unsigned char*)tp_oa, (unsigned char*)tp_oa_buf, tp_oa_size_text);
 	}
 	
-	total_buf_size = total_buf_size + 11/*from:	()\r\n*/ + 29/*when....*/ + 4;
+	total_buf_size = total_buf_size + 11/*from:	()\r\n*/ + 36/*when....*/ + 29/*rcvd....*/ + 4;
 	
 	//reverse half bytes
-	for (i=0; i < 6; i++)
+	for (i=0; i < 7; i++)
 	{
 		tp_scts[i] = (tp_scts[i]>>4 | tp_scts[i]<<4) & 0xFF;
 	}
@@ -612,7 +638,12 @@ void WriteLog_SMS(int pdu_in, void* book)
 			used_len = used_len + 1;
 		}
 		
-		snwprintf(buf_to_write+used_len, total_buf_size-used_len, SMS_LOG_MASK, pnum_name, tp_oa_buf, tp_scts[0], tp_scts[1], tp_scts[2], tp_scts[3], tp_scts[4], tp_scts[5], text_buf);
+		int gmt = ( ( ( (tp_scts[6]&0x7F) >> 4) * 10) + (tp_scts[6] & 0xF) ) >> 2;
+		
+		if (tp_scts[6]>>7 == 0)
+			snwprintf(buf_to_write+used_len, total_buf_size-used_len, SMS_LOG_MASK_POS, pnum_name, tp_oa_buf, tp_scts[0], tp_scts[1], tp_scts[2], tp_scts[3], tp_scts[4], tp_scts[5], gmt, datetime.date.year, datetime.date.mon, datetime.date.day, datetime.time.hour, datetime.time.min, datetime.time.sec, text_buf);
+		else
+			snwprintf(buf_to_write+used_len, total_buf_size-used_len, SMS_LOG_MASK_NEG, pnum_name, tp_oa_buf, tp_scts[0], tp_scts[1], tp_scts[2], tp_scts[3], tp_scts[4], tp_scts[5], gmt, datetime.date.year, datetime.date.mon, datetime.date.day, datetime.time.hour, datetime.time.min, datetime.time.sec, text_buf);
 		
 		int fd = _fopen(fpath, LOG_SMS_FNAME, FSX_O_CREAT|FSX_O_APPEND, FSX_S_IREAD|FSX_S_IWRITE, 0);
 		fwrite(fd, buf_to_write, wstrlen(buf_to_write)*2);
@@ -854,7 +885,8 @@ void InitLanguage(BlackListBook * BLBook)
 		SET_BLOCK_TYPE_TXT=EN_SET_BLOCK_TYPE_TXT;
 		SET_BLOCK_MODE_TXT=EN_SET_BLOCK_MODE_TXT;
 		SET_LOG_TXT=EN_SET_LOG_TXT;
-		SET_NOTIFICATION_TXT=EN_SET_NOTIFICATION_TXT;
+		SET_NOTIFIC_ICON_TXT=EN_SET_NOTIFIC_ICON_TXT;
+		SET_NOTIFIC_MSG_TXT=EN_SET_NOTIFIC_MSG_TXT;
 		SET_LANGUAGE_TXT=EN_SET_LANGUAGE_TXT;
 		STATE_ON_TXT=EN_STATE_ON_TXT;
 		STATE_OFF_TXT=EN_STATE_OFF_TXT;
@@ -892,7 +924,8 @@ void InitLanguage(BlackListBook * BLBook)
 		SET_BLOCK_TYPE_TXT=RU_SET_BLOCK_TYPE_TXT;
 		SET_BLOCK_MODE_TXT=RU_SET_BLOCK_MODE_TXT;
 		SET_LOG_TXT=RU_SET_LOG_TXT;
-		SET_NOTIFICATION_TXT=RU_SET_NOTIFICATION_TXT;
+		SET_NOTIFIC_ICON_TXT=RU_SET_NOTIFIC_ICON_TXT;
+		SET_NOTIFIC_MSG_TXT=RU_SET_NOTIFIC_MSG_TXT;
 		SET_LANGUAGE_TXT=RU_SET_LANGUAGE_TXT;
 		STATE_ON_TXT=RU_STATE_ON_TXT;
 		STATE_OFF_TXT=RU_STATE_OFF_TXT;
@@ -1103,12 +1136,20 @@ int BlackListBook_FilterSMS(BOOK * book,char* smsc,char* pdu)
 		
 		if (need_to_block==TRUE)
 		{
-			int num_len = strlen(number);
-			
-			if (BLBook->settings_sms_dig.sms_dig_notification == STATE_NOTIFIC_ON)
+			if (BLBook->settings_sms_dig.sms_dig_notific_icon == STATE_NOTIFIC_ON)
 			{
 				if (partID == num_of_parts)
 				{
+					MMIPROC( SetDivertedIcon, TRUE, (void*)NOTIFIC_TYPE_SMS);
+				}
+			}
+			
+			if (BLBook->settings_sms_dig.sms_dig_notific_msg == STATE_NOTIFIC_ON)
+			{
+				if (partID == num_of_parts)
+				{
+					int num_len = strlen(number);
+					
 					char * number_not=new char[num_len+1];
 					memcpy(number_not, number, num_len+1);
 					MMIPROC( ShowMsgBox, (int) number_not, (void*)NOTIFIC_TYPE_SMS );
@@ -1154,7 +1195,15 @@ int BlackListBook_FilterSMS(BOOK * book,char* smsc,char* pdu)
 		
 		if (need_to_block==TRUE)
 		{
-			if (BLBook->settings_sms_text.sms_text_notification == STATE_NOTIFIC_ON)
+			if (BLBook->settings_sms_text.sms_text_notific_icon == STATE_NOTIFIC_ON)
+			{
+				if (partID == num_of_parts)
+				{
+					MMIPROC( SetDivertedIcon, TRUE, (void*)NOTIFIC_TYPE_SMS_TEXT);
+				}
+			}
+			
+			if (BLBook->settings_sms_text.sms_text_notific_msg == STATE_NOTIFIC_ON)
 			{
 				if (partID == num_of_parts)
 				{
@@ -1221,12 +1270,18 @@ int BlackListBook_FilterCall(BOOK * book,MYFUNCTIONS * func_array, void * pICBCa
 	
 	if (need_to_block==TRUE)
 	{
-		if (BLBook->settings_calls.calls_notification==STATE_NOTIFIC_ON)
+		if (BLBook->settings_calls.calls_notific_icon == STATE_NOTIFIC_ON)
+		{
+			MMIPROC( SetDivertedIcon, TRUE, (void*)NOTIFIC_TYPE_CALL);
+		}
+		
+		if (BLBook->settings_calls.calls_notific_msg == STATE_NOTIFIC_ON)
 		{
 			char * number=new char[0x51];
 			memcpy(number, Cli->Number.Digits, 0x51);
 			MMIPROC( ShowMsgBox, (int) number, (void*)NOTIFIC_TYPE_CALL );
 		}
+		
 		if (BLBook->settings_calls.calls_log==STATE_LOG_ON)
 		{
 			char * number=new char[0x51];
@@ -1973,7 +2028,7 @@ void OOMList_Select_Action(BOOK * book, GUI * gui)
 	
 	switch ( ListMenu_GetSelectedItem(BLBook->settings_list) )
 	{
-	case 0:
+	case SETTINGS_TYPE_CALL:
 		switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 		{
 		case 0:
@@ -1989,11 +2044,14 @@ void OOMList_Select_Action(BOOK * book, GUI * gui)
 			BLBook->settings_calls.calls_log=selected;
 			break;
 		case 4:
-			BLBook->settings_calls.calls_notification=selected;
+			BLBook->settings_calls.calls_notific_icon=selected;
+			break;
+		case 5:
+			BLBook->settings_calls.calls_notific_msg=selected;
 			break;
 		}
 		break;
-	case 1:
+	case SETTINGS_TYPE_SMS:
 		switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 		{
 		case 0:
@@ -2006,11 +2064,14 @@ void OOMList_Select_Action(BOOK * book, GUI * gui)
 			BLBook->settings_sms_dig.sms_dig_log=selected;
 			break;
 		case 3:
-			BLBook->settings_sms_dig.sms_dig_notification=selected;
+			BLBook->settings_sms_dig.sms_dig_notific_icon=selected;
+			break;
+		case 4:
+			BLBook->settings_sms_dig.sms_dig_notific_msg=selected;
 			break;
 		}
 		break;
-	case 2:
+	case SETTINGS_TYPE_SMS_TEXT:
 		switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 		{
 		case 0:
@@ -2023,11 +2084,14 @@ void OOMList_Select_Action(BOOK * book, GUI * gui)
 			BLBook->settings_sms_text.sms_text_log=selected;
 			break;
 		case 3:
-			BLBook->settings_sms_text.sms_text_notification=selected;
+			BLBook->settings_sms_text.sms_text_notific_icon=selected;
+			break;
+		case 4:
+			BLBook->settings_sms_text.sms_text_notific_msg=selected;
 			break;
 		}
 		break;
-	case 3:
+	case SETTINGS_TYPE_LANG:
 		BLBook->settings_common.language=selected;
 		InitLanguage(BLBook);
 		break;
@@ -2049,7 +2113,7 @@ int onCallback_OOMList( GUI_MESSAGE* msg )
 	case LISTMSG_GetItem:
 		switch ( ListMenu_GetSelectedItem(BLBook->settings_list) )
 		{
-		case 0:
+		case SETTINGS_TYPE_CALL:
 			switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 			{
 			case 0:
@@ -2100,6 +2164,7 @@ int onCallback_OOMList( GUI_MESSAGE* msg )
 				}
 				break;
 			case 4:
+			case 5:
 				switch ( created_index )
 				{
 				case STATE_NOTIFIC_ON:
@@ -2112,7 +2177,7 @@ int onCallback_OOMList( GUI_MESSAGE* msg )
 				break;
 			}
 			break;
-		case 1:
+		case SETTINGS_TYPE_SMS:
 			switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 			{
 			case 0:
@@ -2152,6 +2217,7 @@ int onCallback_OOMList( GUI_MESSAGE* msg )
 				}
 				break;
 			case 3:
+			case 4:
 				switch ( created_index )
 				{
 				case STATE_NOTIFIC_ON:
@@ -2164,7 +2230,7 @@ int onCallback_OOMList( GUI_MESSAGE* msg )
 				break;
 			}
 			break;
-		case 2:
+		case SETTINGS_TYPE_SMS_TEXT:
 			switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 			{
 			case 0:
@@ -2204,6 +2270,7 @@ int onCallback_OOMList( GUI_MESSAGE* msg )
 				}
 				break;
 			case 3:
+			case 4:
 				switch ( created_index )
 				{
 				case STATE_NOTIFIC_ON:
@@ -2216,7 +2283,7 @@ int onCallback_OOMList( GUI_MESSAGE* msg )
 				break;
 			}
 			break;
-		case 3:
+		case SETTINGS_TYPE_LANG:
 			switch ( created_index )
 			{
 			case LANGUAGE_EN:
@@ -2245,7 +2312,7 @@ int BlackListBook_SettingsOOM_Page_Enter_Action(void * ,BOOK * book)
 	
 	switch ( ListMenu_GetSelectedItem(BLBook->settings_list) )
 	{
-	case 0:
+	case SETTINGS_TYPE_CALL:
 		switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 		{
 		case 0:
@@ -2269,13 +2336,18 @@ int BlackListBook_SettingsOOM_Page_Enter_Action(void * ,BOOK * book)
 			checked = BLBook->settings_calls.calls_log;
 			break;
 		case 4:
-			title = TextID_Create(SET_NOTIFICATION_TXT,ENC_UCS2,TEXTID_ANY_LEN);
+			title = TextID_Create(SET_NOTIFIC_ICON_TXT,ENC_UCS2,TEXTID_ANY_LEN);
 			num_of_item = 2;
-			checked = BLBook->settings_calls.calls_notification;
+			checked = BLBook->settings_calls.calls_notific_icon;
+			break;
+		case 5:
+			title = TextID_Create(SET_NOTIFIC_MSG_TXT,ENC_UCS2,TEXTID_ANY_LEN);
+			num_of_item = 2;
+			checked = BLBook->settings_calls.calls_notific_msg;
 			break;
 		}
 		break;
-	case 1:
+	case SETTINGS_TYPE_SMS:
 		switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 		{
 		case 0:
@@ -2294,13 +2366,18 @@ int BlackListBook_SettingsOOM_Page_Enter_Action(void * ,BOOK * book)
 			checked = BLBook->settings_sms_dig.sms_dig_log;
 			break;
 		case 3:
-			title = TextID_Create(SET_NOTIFICATION_TXT,ENC_UCS2,TEXTID_ANY_LEN);
+			title = TextID_Create(SET_NOTIFIC_ICON_TXT,ENC_UCS2,TEXTID_ANY_LEN);
 			num_of_item = 2;
-			checked = BLBook->settings_sms_dig.sms_dig_notification;
+			checked = BLBook->settings_sms_dig.sms_dig_notific_icon;
+			break;
+		case 4:
+			title = TextID_Create(SET_NOTIFIC_MSG_TXT,ENC_UCS2,TEXTID_ANY_LEN);
+			num_of_item = 2;
+			checked = BLBook->settings_sms_dig.sms_dig_notific_msg;
 			break;
 		}
 		break;
-	case 2:
+	case SETTINGS_TYPE_SMS_TEXT:
 		switch ( ListMenu_GetSelectedItem(BLBook->settings_calls_sms_list) )
 		{
 		case 0:
@@ -2319,13 +2396,18 @@ int BlackListBook_SettingsOOM_Page_Enter_Action(void * ,BOOK * book)
 			checked = BLBook->settings_sms_text.sms_text_log;
 			break;
 		case 3:
-			title = TextID_Create(SET_NOTIFICATION_TXT,ENC_UCS2,TEXTID_ANY_LEN);
+			title = TextID_Create(SET_NOTIFIC_ICON_TXT,ENC_UCS2,TEXTID_ANY_LEN);
 			num_of_item = 2;
-			checked = BLBook->settings_sms_text.sms_text_notification;
+			checked = BLBook->settings_sms_text.sms_text_notific_icon;
+			break;
+		case 4:
+			title = TextID_Create(SET_NOTIFIC_MSG_TXT,ENC_UCS2,TEXTID_ANY_LEN);
+			num_of_item = 2;
+			checked = BLBook->settings_sms_text.sms_text_notific_msg;
 			break;
 		}
 		break;
-	case 3:
+	case SETTINGS_TYPE_LANG:
 		title = TextID_Create(SET_LANGUAGE_TXT,ENC_UCS2,TEXTID_ANY_LEN);
 		num_of_item = 2;
 		checked = BLBook->settings_common.language;
@@ -2453,8 +2535,20 @@ int onCallback_SettingsCallsSMSList( GUI_MESSAGE* msg )
 				}
 				break;
 			case 4:
-				item_name=SET_NOTIFICATION_TXT;
-				switch ( BLBook->settings_calls.calls_notification )
+				item_name=SET_NOTIFIC_ICON_TXT;
+				switch ( BLBook->settings_calls.calls_notific_icon )
+				{
+				case STATE_NOTIFIC_ON:
+					item_name_2=STATE_ON_TXT;
+					break;
+				case STATE_NOTIFIC_OFF:
+					item_name_2=STATE_OFF_TXT;
+					break;
+				}
+				break;
+			case 5:
+				item_name=SET_NOTIFIC_MSG_TXT;
+				switch ( BLBook->settings_calls.calls_notific_msg )
 				{
 				case STATE_NOTIFIC_ON:
 					item_name_2=STATE_ON_TXT;
@@ -2509,8 +2603,20 @@ int onCallback_SettingsCallsSMSList( GUI_MESSAGE* msg )
 				}
 				break;
 			case 3:
-				item_name=SET_NOTIFICATION_TXT;
-				switch ( BLBook->settings_sms_dig.sms_dig_notification )
+				item_name=SET_NOTIFIC_ICON_TXT;
+				switch ( BLBook->settings_sms_dig.sms_dig_notific_icon )
+				{
+				case STATE_NOTIFIC_ON:
+					item_name_2=STATE_ON_TXT;
+					break;
+				case STATE_NOTIFIC_OFF:
+					item_name_2=STATE_OFF_TXT;
+					break;
+				}
+				break;
+			case 4:
+				item_name=SET_NOTIFIC_MSG_TXT;
+				switch ( BLBook->settings_sms_dig.sms_dig_notific_msg )
 				{
 				case STATE_NOTIFIC_ON:
 					item_name_2=STATE_ON_TXT;
@@ -2565,8 +2671,20 @@ int onCallback_SettingsCallsSMSList( GUI_MESSAGE* msg )
 				}
 				break;
 			case 3:
-				item_name=SET_NOTIFICATION_TXT;
-				switch ( BLBook->settings_sms_text.sms_text_notification )
+				item_name=SET_NOTIFIC_ICON_TXT;
+				switch ( BLBook->settings_sms_text.sms_text_notific_icon )
+				{
+				case STATE_NOTIFIC_ON:
+					item_name_2=STATE_ON_TXT;
+					break;
+				case STATE_NOTIFIC_OFF:
+					item_name_2=STATE_OFF_TXT;
+					break;
+				}
+				break;
+			case 4:
+				item_name=SET_NOTIFIC_MSG_TXT;
+				switch ( BLBook->settings_sms_text.sms_text_notific_msg )
 				{
 				case STATE_NOTIFIC_ON:
 					item_name_2=STATE_ON_TXT;
@@ -2887,6 +3005,14 @@ int BlackListBook_Idle_Page_EnterAction(void * ,BOOK * book)
 
 //====================================================================
 
+int CallList_Enter_Action(void * ,BOOK * book)
+{
+	SetDivertedIcon(FALSE, (void*)-1);
+	return 0;
+}
+
+//====================================================================
+
 void Create_BL_GUI(BOOK * book)
 {
 	BlackListBook * BLBook = (BlackListBook*)book;
@@ -2959,19 +3085,22 @@ BlackListBook* CreateBlackListBook()
 		BLBook->settings_calls.calls_block_type=TYPE_BUSY;
 		BLBook->settings_calls.calls_block_mode=MODE_ALL;
 		BLBook->settings_calls.calls_log=STATE_LOG_OFF;
-		BLBook->settings_calls.calls_notification=STATE_NOTIFIC_OFF;
+		BLBook->settings_calls.calls_notific_icon=STATE_NOTIFIC_OFF;
+		BLBook->settings_calls.calls_notific_msg=STATE_NOTIFIC_OFF;
 	}
 	{
 		BLBook->settings_sms_dig.sms_dig_control_state=CONTROL_STATE_OFF;
 		BLBook->settings_sms_dig.sms_dig_block_mode=MODE_ALL;
 		BLBook->settings_sms_dig.sms_dig_log=STATE_LOG_OFF;
-		BLBook->settings_sms_dig.sms_dig_notification=STATE_NOTIFIC_OFF;
+		BLBook->settings_sms_dig.sms_dig_notific_icon=STATE_NOTIFIC_OFF;
+		BLBook->settings_sms_dig.sms_dig_notific_msg=STATE_NOTIFIC_OFF;
 	}
 	{
 		BLBook->settings_sms_text.sms_text_control_state=CONTROL_STATE_OFF;
 		BLBook->settings_sms_text.sms_text_block_mode=MODE_ALL;
 		BLBook->settings_sms_text.sms_text_log=STATE_LOG_OFF;
-		BLBook->settings_sms_text.sms_text_notification=STATE_NOTIFIC_OFF;
+		BLBook->settings_sms_text.sms_text_notific_icon=STATE_NOTIFIC_OFF;
+		BLBook->settings_sms_text.sms_text_notific_msg=STATE_NOTIFIC_OFF;
 	}
 	BLBook->edit_flag=FALSE;
 	BLBook->main_list=0;

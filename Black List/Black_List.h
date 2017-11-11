@@ -3,10 +3,15 @@
 
 #define NUM_CHR_SUBS 1
 #define BOOK_NAME "Black List"
-#define SMS_LOG_MASK L"From: %ls (%s)\r\nWhen: 20%02x-%02x-%02x, %02x:%02x:%02x\r\n%ls\r\n\r\n"
+#define SMS_LOG_MASK_POS L"From: %ls (%s)\r\nSent: 20%02x-%02x-%02x, %02x:%02x:%02x GMT+%d\r\nRcvd: %04d-%02d-%02d, %02d:%02d:%02d\r\n%ls\r\n\r\n"
+#define SMS_LOG_MASK_NEG L"From: %ls (%s)\r\nSent: 20%02x-%02x-%02x, %02x:%02x:%02x GMT-%d\r\nRcvd: %04d-%02d-%02d, %02d:%02d:%02d\r\n%ls\r\n\r\n"
 
 #define CHECKBOX_EMPTY_ICON L"CHECKBOX_ICN"
 #define CHECKBOX_MARK_ICON L"CHECKMARK_IN_BOX_ICN"
+
+#define CALL_DIVERTED_ICN L"DIVERTED_ICN"
+#define SMS_DIVERTED_ICN L"VIDEO_CALL_DIVERTED_ICN"
+#define SMS_TEXT_DIVERTED_ICN L"FAX_ICN"
 
 #define MAIN_FPATH L"/BlackList"
 #define SETTINGS_COMMON_FNAME L"settings_common.bin"
@@ -29,7 +34,8 @@
 #define EN_SET_BLOCK_TYPE_TXT L"Block Type"
 #define EN_SET_BLOCK_MODE_TXT L"Block Mode"
 #define EN_SET_LOG_TXT L"Log"
-#define EN_SET_NOTIFICATION_TXT L"Notification"
+#define EN_SET_NOTIFIC_ICON_TXT L"Notification (icon)"
+#define EN_SET_NOTIFIC_MSG_TXT L"Notification (msg)"
 #define EN_SET_LANGUAGE_TXT L"Language"
 #define EN_STATE_ON_TXT L"On"
 #define EN_STATE_OFF_TXT L"Off"
@@ -67,7 +73,8 @@
 #define RU_SET_BLOCK_TYPE_TXT L"Режим отклонения"
 #define RU_SET_BLOCK_MODE_TXT L"Режим блокировки"
 #define RU_SET_LOG_TXT L"Логирование"
-#define RU_SET_NOTIFICATION_TXT L"Оповещение"
+#define RU_SET_NOTIFIC_ICON_TXT L"Оповещение (иконка)"
+#define RU_SET_NOTIFIC_MSG_TXT L"Оповещение (сбщ)"
 #define RU_SET_LANGUAGE_TXT L"Язык"
 #define RU_STATE_ON_TXT L"Включено"
 #define RU_STATE_OFF_TXT L"Выключено"
@@ -195,7 +202,8 @@ typedef struct
 	char calls_block_type;
 	char calls_block_mode;
 	char calls_log;
-	char calls_notification;
+	char calls_notific_icon;
+	char calls_notific_msg;
 }SETTINGS_CALLS;
 
 
@@ -210,7 +218,8 @@ typedef struct
 	char sms_dig_control_state;
 	char sms_dig_block_mode;
 	char sms_dig_log;
-	char sms_dig_notification;
+	char sms_dig_notific_icon;
+	char sms_dig_notific_msg;
 }SETTINGS_SMS_DIG;
 
 
@@ -219,7 +228,8 @@ typedef struct
 	char sms_text_control_state;
 	char sms_text_block_mode;
 	char sms_text_log;
-	char sms_text_notification;
+	char sms_text_notific_icon;
+	char sms_text_notific_msg;
 }SETTINGS_SMS_TEXT;
 
 
@@ -229,6 +239,15 @@ typedef enum
 	NOTIFIC_TYPE_SMS,
 	NOTIFIC_TYPE_SMS_TEXT
 }NOTIFIC_TYPE;
+
+
+typedef enum
+{
+	SETTINGS_TYPE_CALL,
+	SETTINGS_TYPE_SMS,
+	SETTINGS_TYPE_SMS_TEXT,
+	SETTINGS_TYPE_LANG
+}SETTINGS_TYPE;
 
 
 typedef struct

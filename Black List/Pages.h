@@ -1,6 +1,7 @@
 #ifndef _PAGES_H_
 #define _PAGES_H_
 
+int CallList_Enter_Action(void * ,BOOK * book);
 int TerminateElf(void * ,BOOK * BlackListBook);
 int ShowAuthorInfo(void *mess ,BOOK * BlackListBook);
 int BlackListBook_Idle_Page_EnterAction(void * ,BOOK * book);
@@ -34,6 +35,7 @@ int BlackListBook_SI_Page_Exit_Action(void * ,BOOK * book);
 
 const PAGE_MSG bk_base_msglst[] @ "DYN_PAGE" =
 {
+	PB_UI_CALLLIST_CREATE_EVENT_TAG, CallList_Enter_Action,
 	ELF_TERMINATE_EVENT, TerminateElf,
 	ELF_SHOW_INFO_EVENT, ShowAuthorInfo,
 	NIL_EVENT_TAG, 0
