@@ -680,6 +680,7 @@ extern const int ACTION_CLIPBOARD_COPYALL ;
 extern const int ACTION_CLIPBOARD_PASTE ;
 extern const int ACTION_CLIPBOARD_MARKANDCOPY ;
 extern const int ACTION_DB_MANAGEFILE ;
+extern const int PB_UI_CALLLIST_CREATE_EVENT ;
 
 
 #endif
