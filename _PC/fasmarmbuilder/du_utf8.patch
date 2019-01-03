@@ -1,0 +1,46 @@
+Index: fasm/SOURCE/ASSEMBLE.INC
+===================================================================
+--- fasm/SOURCE/ASSEMBLE.INC	(revision 85)
++++ fasm/SOURCE/ASSEMBLE.INC	(working copy)
+@@ -1450,9 +1450,17 @@
+ 	ja	out_of_memory
+ 	xor	ah,ah
+       copy_word_string:
+-	lods	byte [esi]
+-	stos	word [edi]
+-	loop	copy_word_string
++
++	push ecx;int cchWideChar
++	push edi;LPWSTR lpWideCharStr,
++	push ecx;int cbMultiByte,
++	push esi;lpMultiByteStr
++	add esi,ecx
++	push 0;flags
++	push 65001;CP_UTF8;	0;CP_ACP
++	call [MultiByteToWideChar]
++	lea edi,[edi+eax*2]
++
+       word_string_ok:
+ 	inc	esi
+ 	ret
+Index: fasmarm/SOURCE/WIN32/FASMARM.ASM
+===================================================================
+--- fasmarm/SOURCE/WIN32/FASMARM.ASM	(revision 87)
++++ fasmarm/SOURCE/WIN32/FASMARM.ASM	(working copy)
+@@ -379,6 +379,7 @@
+     GetCommandLine dd rva _GetCommandLineA
+     GetEnvironmentVariable dd rva _GetEnvironmentVariable
+     GetStdHandle dd rva _GetStdHandle
++    MultiByteToWideChar dd rva _MultiByteToWideChar
+     VirtualAlloc dd rva _VirtualAlloc
+     VirtualFree dd rva _VirtualFree
+     GetTickCount dd rva _GetTickCount
+@@ -406,6 +407,8 @@
+     db 'GetEnvironmentVariableA',0
+   _GetStdHandle dw 0
+     db 'GetStdHandle',0
++  _MultiByteToWideChar dw 0
++    db 'MultiByteToWideChar',0
+   _VirtualAlloc dw 0
+     db 'VirtualAlloc',0
+   _VirtualFree dw 0

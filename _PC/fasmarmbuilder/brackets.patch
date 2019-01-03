@@ -1,0 +1,94 @@
+Index: fasmarm/SOURCE/ARMv8.INC
+===================================================================
+--- fasmarm/SOURCE/ARMv8.INC	(revision 89)
++++ fasmarm/SOURCE/ARMv8.INC	(working copy)
+@@ -13536,7 +13536,7 @@
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_shift_op,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\	;10=rd,[rn,+-rm,shift imm]!
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_rrx_op,TMPL_bracket_right>,\					;11=rd,[rn,+-rm,rrx]
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_rrx_op,TMPL_bracket_right,TMPL_modifier_exclaim>,\			;12=rd,[rn,+-rm,rrx]!
+-	<TMPL_base_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\									;13=rd,[imm]	PC relative
++	<TMPL_base_reg,TMPL_address>,\														;13=rd,imm	PC relative
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\									;14=rd,[exp]	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>						;15=rd,[exp]!	implicit reg from structure
+ 	test	[cpu_capability_flags],1 shl CPU32_CAPABILITY_V1
+@@ -14020,7 +14020,7 @@
+ 	<TMPL_cpro_sel,TMPL_cpro_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_bracket_right,TMPL_option>,\				;2=copro,crd,[rn],{imm}
+ 	<TMPL_cpro_sel,TMPL_cpro_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right>,\				;3=copro,crd,[rn,imm]
+ 	<TMPL_cpro_sel,TMPL_cpro_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\	;4=copro,crd,[rn,imm]!
+-	<TMPL_cpro_sel,TMPL_cpro_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\					;5=copro,crd,[imm]	PC relative
++	<TMPL_cpro_sel,TMPL_cpro_reg,TMPL_address>,\										;5=copro,crd,imm	PC relative
+ 	<TMPL_cpro_sel,TMPL_cpro_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\					;6=copro,crd,[exp]	implicit reg from structure
+ 	<TMPL_cpro_sel,TMPL_cpro_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>		;7=copro,crd,[exp]!	implicit reg from structure
+ 	test	[code_type],CPU_ACTIVITY_ARM
+@@ -14666,7 +14666,7 @@
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\				; 4=rd,[rn,imm]!
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right>,\						; 5=rd,[rn,+-rm]
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right,TMPL_modifier_exclaim>,\			; 6=rd,[rn,+-rm]!
+-	<TMPL_base_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\								; 7=rd,[imm]	PC relative
++	<TMPL_base_reg,TMPL_address>,\													; 7=rd,imm	PC relative
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\								; 8=rd,[exp]	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>,\					; 9=rd,[exp]!	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_bracket_right>,\						;10=rd,rd2,[rn]
+@@ -14676,7 +14676,7 @@
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\		;14=rd,rd2,[rn,imm]!
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right>,\				;15=rd,rd2,[rn,+-rm]
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right,TMPL_modifier_exclaim>,\	;16=rd,rd2,[rn,+-rm]!
+-	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\						;17=rd,rd2,[imm]	PC relative
++	<TMPL_base_reg,TMPL_base_reg,TMPL_address>,\											;17=rd,rd2,imm	PC relative
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\						;18=rd,rd2,[exp]	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>			;19=rd,rd2,[exp]!	implicit reg from structure
+ 	cmp	al,10
+@@ -14712,7 +14712,7 @@
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\		;4=rd,[rn,imm]!
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right>,\				;5=rd,[rn,+-rm]
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right,TMPL_modifier_exclaim>,\	;6=rd,[rn,+-rm]!
+-	<TMPL_base_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\						;7=rd,[imm]	PC relative
++	<TMPL_base_reg,TMPL_address>,\											;7=rd,imm	PC relative
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\						;8=rd,[exp]	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>			;9=rd,[exp]!	implicit reg from structure
+ 	test	[cpu_capability_flags],1 shl CPU32_CAPABILITY_V4
+@@ -16822,7 +16822,7 @@
+ 	<TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right>,\				;2=[rn,+-rm]
+ 	<TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_shift_op,TMPL_imm,TMPL_bracket_right>,\	;3=[rn,+-rm,shift imm]
+ 	<TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_rrx_op,TMPL_bracket_right>,\		;4=[rn,+-rm,rrx]
+-	<TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\						;5=[imm]	PC relative
++	<TMPL_address>,\										;5=imm	PC relative
+ 	<TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>						;6=[exp]	implicit reg from structure
+ 	test	ebp,1 shl 24				;PLI=1?
+ 	jnz	.check_v7
+@@ -16870,7 +16870,7 @@
+ 	<TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right>,\					;1(2)=[rn,imm]
+ 	<TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right>,\				;2(4)=[rn,rm]
+ 	<TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_shift_op,TMPL_imm2,TMPL_bracket_right>,\	;3(5)=[rn,rm,shift imm]
+-	<TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\						;4(6)=[imm]	PC relative
++	<TMPL_address>,\										;4(6)=imm	PC relative
+ 	<TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>						;5(7)=[exp]	implicit reg from structure
+ 	mov	ecx,[operand_registers]
+ 	shl	ecx,8
+@@ -18418,7 +18418,7 @@
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\		;3=rd,[rn,imm]!	PUSH {reg}
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_bracket_right>,\				;4=rd,[rn,rm]
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_add_sub_reg,TMPL_shift_op,TMPL_imm2,TMPL_bracket_right>,\	;5=rd,[rn,rm,shift imm]
+-	<TMPL_base_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\						;6=rd,[imm]	PC relative
++	<TMPL_base_reg,TMPL_address>,\											;6=rd,imm	PC relative
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\						;7=rd,[exp]	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>			;8=rd,[exp]!	implicit reg from structure
+ 	;	T2 encoding, *???(??) = available in T1, ??? = bits 11..9, ????? = bits 15..11, ^=modified behaviour in T2EE mode
+@@ -18950,7 +18950,7 @@
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_bracket_right,TMPL_imm>,\						; 1=rd,[rn],imm
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right>,\						; 2=rd,[rn,imm]
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\			; 3=rd,[rn,imm]!
+-	<TMPL_base_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\							; 4=rd,[imm]	PC relative
++	<TMPL_base_reg,TMPL_address>,\												; 4=rd,imm	PC relative
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\							; 5=rd,[exp]	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>,\				; 6=rd,[exp]!	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_bracket_right>,\					; 7=rd,rd2,[rn]
+@@ -18957,7 +18957,7 @@
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_bracket_right,TMPL_imm>,\				; 8=rd,rd2,[rn],imm
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right>,\				; 9=rd,rd2,[rn,imm]
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_base_reg,TMPL_imm,TMPL_bracket_right,TMPL_modifier_exclaim>,\	;10=rd,rd2,[rn,imm]!
+-	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_address,TMPL_bracket_right>,\					;11=rd,rd2,[imm]	PC relative
++	<TMPL_base_reg,TMPL_base_reg,TMPL_address>,\										;11=rd,rd2,imm	PC relative
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right>,\					;12=rd,rd2,[exp]	implicit reg from structure
+ 	<TMPL_base_reg,TMPL_base_reg,TMPL_bracket_left,TMPL_expression,TMPL_bracket_right,TMPL_modifier_exclaim>		;13=rd,rd2,[exp]!	implicit reg from structure
+ 	test	[cpu_capability_flags],1 shl CPU32_CAPABILITY_7M
