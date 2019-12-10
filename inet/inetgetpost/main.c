@@ -19,13 +19,15 @@ public:
 	int QueryInterface(UUID* id, void** ret)
 	{
 		*ret = NULL;
-		if( !memcmp(id,&IID_ICBGetPostRequest,sizeof(UUID)) )
+
+		if (!memcmp(id, &IID_ICBGetPostRequest, sizeof(UUID)))
 		{
 			AddRef();
 			*ret = this;
 			return S_OK;
 		}
-		return ICBGetPostRequest::QueryInterface(id,ret);
+
+		return ICBGetPostRequest::QueryInterface(id, ret);
 	}
 
 
@@ -38,37 +40,50 @@ public:
 	{
 		char* temp;
 
-		if(HeaderLength)
+		if (HeaderLength)
 		{
-			temp = new char[HeaderLength+1];
-			memset(temp,0,HeaderLength+1);
-			int i3=0,i4=0;
-			if(preq->ReadHeader(HeaderLength, temp, &i3, &i4)>=0)
+			temp = new char[HeaderLength + 1];
+			memset(temp, 0, HeaderLength + 1);
+			int i3 = 0, i4 = 0;
+
+			if (preq->ReadHeader(HeaderLength, temp, &i3, &i4) >= 0)
 			{
-				debug_printf("\n!!!!!! =) header i3/i4 %x %x s %s\n",i3,i4,temp);delay(300);
+				debug_printf("\n!!!!!! =) header i3/i4 %x %x s %s\n", i3, i4, temp);
+				delay(300);
 			}
+
 			delete temp;
 		}
-		if(DataLength)
+
+		if (DataLength)
 		{
-			temp = new char[DataLength+1];
-			memset(temp,0,DataLength+1);
-			int i3=0,i4=0;
-			if(preq->ReadData(DataLength, temp, &i3, &i4)>=0)
+			temp = new char[DataLength + 1];
+			memset(temp, 0, DataLength + 1);
+			int i3 = 0, i4 = 0;
+
+			if (preq->ReadData(DataLength, temp, &i3, &i4) >= 0)
 			{
-				debug_printf("\n!!!!!! =) data i3/i4 %x %x s %s\n",i3,i4,temp);delay(300);
+				debug_printf("\n!!!!!! =) data i3/i4 %x %x s %s\n", i3, i4, temp);
+				delay(300);
 			}
+
 			delete temp;
 		}
 	}
 
 	virtual void OnProgress(int CurrPos, int TotSize, int, int status)
 	{
-		debug_printf("\n!!!!!!!!!! %s\n",__FUNCTION__);
+		debug_printf("\n!!!!!!!!!! %s\n", __FUNCTION__);
 	}
 
-	virtual void OnSupplyPassword(){debug_printf("\n!!!!!!!!!! %s\n",__FUNCTION__);}
-	virtual void OnSendDataReady(){debug_printf("\n!!!!!!!!!! %s\n",__FUNCTION__);}
+	virtual void OnSupplyPassword()
+	{
+		debug_printf("\n!!!!!!!!!! %s\n", __FUNCTION__);
+	}
+	virtual void OnSendDataReady()
+	{
+		debug_printf("\n!!!!!!!!!! %s\n", __FUNCTION__);
+	}
 
 };
 
@@ -77,57 +92,63 @@ public:
 //OSE_GetShell_t OSE_GetShell=(OSE_GetShell_t)0x10E80331;
 
 wchar_t log[16384];
-int logpos=0;
+int logpos = 0;
 
-int main (void)
+int main(void)
 {
 
-	log[0]=0;
+	log[0] = 0;
 
-	IShell* pshell=0;
+	IShell* pshell = 0;
 
-	OSE_GetShell( PPINTERFACE(&pshell));
-	if(pshell)
+	OSE_GetShell(PPINTERFACE(&pshell));
+
+	if (pshell)
 	{
 
-		IGetPostManager* pgetpostmanager=0;
-		CoCreateInstance(&CID_IGetPostManager,&IID_IGetPostManager,PPINTERFACE(&pgetpostmanager));
-		if(pgetpostmanager)
+		IGetPostManager* pgetpostmanager = 0;
+		CoCreateInstance(&CID_IGetPostManager, &IID_IGetPostManager, PPINTERFACE(&pgetpostmanager));
+
+		if (pgetpostmanager)
 		{
-			IGetPostUtility* pgetpostutility=0;
-			pgetpostmanager->CreateUtility(pshell,&pgetpostutility);
-			if(pgetpostutility)
+			IGetPostUtility* pgetpostutility = 0;
+			pgetpostmanager->CreateUtility(pshell, &pgetpostutility);
+
+			if (pgetpostutility)
 			{
-				logpos+=snwprintf(&log[logpos],256,_T("pgetpostutility %x\n"),*(long*)pgetpostutility );
+				logpos += snwprintf(&log[logpos], 256, _T("pgetpostutility %x\n"), *(long*)pgetpostutility);
 
 				pgetpostutility->Release();
 			}
 
-			IGetPostSession* pgetpostsession=0;
-			pgetpostmanager->CreateSession(pshell,&pgetpostsession);
-			if(pgetpostsession)
+			IGetPostSession* pgetpostsession = 0;
+			pgetpostmanager->CreateSession(pshell, &pgetpostsession);
+
+			if (pgetpostsession)
 			{
-				logpos+=snwprintf(&log[logpos],256,_T("pgetpostsession %x\n"),*(long*)pgetpostsession);
+				logpos += snwprintf(&log[logpos], 256, _T("pgetpostsession %x\n"), *(long*)pgetpostsession);
 
-				MyCB* cb=NULL;
-				cb=new MyCB();
+				MyCB* cb = NULL;
+				cb = new MyCB();
 
-				IGetPostRequest* preq=NULL;
-				pgetpostsession->CreateRequest(cb,NULL,NULL,&preq);
-				if(preq)
+				IGetPostRequest* preq = NULL;
+				pgetpostsession->CreateRequest(cb, NULL, NULL, &preq);
+
+				if (preq)
 				{
 					preq->AddRef();
-					cb->preq=preq;
+					cb->preq = preq;
 
-					logpos+=snwprintf(&log[logpos],256,_T("preq %x\n"),*(long*)preq);
+					logpos += snwprintf(&log[logpos], 256, _T("preq %x\n"), *(long*)preq);
 
-					if(preq->Get("http://justdanpo.ru", "Accept: text/html")>=0)
+					if (preq->Get("http://justdanpo.dyndns.org", "Accept: text/html") >= 0)
 					{
-						logpos+=snwprintf(&log[logpos],256,_T("get ok\n"));
+						logpos += snwprintf(&log[logpos], 256, _T("get ok\n"));
 					}
 
 					//preq->Release();
 				}
+
 				//if(cb)cb->Release();
 
 				//pgetpostsession->Release();
@@ -138,15 +159,18 @@ int main (void)
 		}
 
 		pshell->Release();
-	}else
-		logpos+=snwprintf(&log[logpos],256,_T("pshell == NULL"));
+	}
+	else
+	{
+		logpos += snwprintf(&log[logpos], 256, _T("pshell == NULL"));
+	}
 
-	MessageBox(0x6FFFFFFF, Str2ID(log,0,logpos), 0xFFFF, 1, 0, 0);
+	MessageBox(0x6FFFFFFF, Str2ID(log, 0, logpos), 0xFFFF, 1, 0, 0);
 
 
 
 
 
 	//    SUBPROC(elf_exit);
-	return(0);
+	return (0);
 }

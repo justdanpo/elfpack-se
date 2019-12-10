@@ -616,7 +616,7 @@
         </option>
         <option>
           <name>XclFile</name>
-          <state>$PROJ_DIR$\..\..\include\1.xcl</state>
+          <state>$PROJ_DIR$\..\include\1.xcl</state>
         </option>
         <option>
           <name>XclFileSlave</name>

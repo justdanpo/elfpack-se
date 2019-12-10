@@ -1,3 +1,9 @@
+проблема с OnResult
+
+
+
+
+
 
 GetIntParameter/GetWideStringParameter
 

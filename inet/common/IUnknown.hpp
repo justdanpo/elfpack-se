@@ -7,7 +7,7 @@
 #include "pctypes.h"
 #endif
 
-static UUID IID_IRoot={0x53, 0x54, 0x7A, 0x20, 0x01, 0x14, 0x47, 0x32, 0x82, 0xB7, 0xD2, 0xC3, 0x46, 0x49, 0xE4, 0x66};
+static UUID IID_IRoot = {0x53, 0x54, 0x7A, 0x20, 0x01, 0x14, 0x47, 0x32, 0x82, 0xB7, 0xD2, 0xC3, 0x46, 0x49, 0xE4, 0x66};
 
 
 #define E_NOTIMPL                       0x80004001/*microsoft*/
@@ -24,18 +24,18 @@ static UUID IID_IRoot={0x53, 0x54, 0x7A, 0x20, 0x01, 0x14, 0x47, 0x32, 0x82, 0xB
 class IUnknownVirtual
 {
 protected:
-	virtual ~IUnknownVirtual(){}
+	virtual ~IUnknownVirtual() {}
 public:
-	virtual int QueryInterface(UUID* id, void** ret)=NULL;
-	virtual int AddRef()=NULL;
-	virtual int Release()=NULL;
+	virtual int QueryInterface(UUID* id, void** ret) = NULL;
+	virtual int AddRef() = NULL;
+	virtual int Release() = NULL;
 };
 
 
-class IUnknown:public IUnknownVirtual
+class IUnknown: public IUnknownVirtual
 {
 protected:
-	~IUnknown(){}
+	~IUnknown() {}
 private:
 	int count;
 public:
@@ -43,12 +43,14 @@ public:
 	virtual int QueryInterface(UUID* id, void** ret)
 	{
 		*ret = NULL;
-		if( !memcmp(id,&IID_IRoot,sizeof(UUID)) )
+
+		if (!memcmp(id, &IID_IRoot, sizeof(UUID)))
 		{
 			AddRef();
 			*ret = this;
 			return S_OK;
 		}
+
 		return E_NOINTERFACE;
 	}
 	virtual int AddRef()
@@ -57,8 +59,13 @@ public:
 	}
 	virtual int Release()
 	{
-		int tmp=--count;
-		if(!tmp) delete this;
+		int tmp = --count;
+
+		if (!tmp)
+		{
+			delete this;
+		}
+
 		return tmp;
 	}
 };

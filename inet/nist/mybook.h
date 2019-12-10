@@ -5,19 +5,19 @@
 #include "..\..\classlib\cl.h"
 #include "..\..\include\cfg_items.h"
 
-class CMyBook:public CBook
+class CMyBook: public CBook
 {
 	DECLARE_PAGE_DESC_MEMBER(base_page);
 protected:
 	~CMyBook();
-	static int FindBookExCallback(BOOK* book ,int * param);
+	static int FindBookExCallback(BOOK* book , int* param);
 public:
 	CMyBook();
 
 	static int TerminateElf(CBook** pbookmanbook, CBook* book);
 	static int ShowAuthorInfo(CBook** pbookmanbook, CBook* book);
 	static int _OnInternetConnected(void*, CBook* book);
-	static int ReconfigElf( RECONFIG_EVENT_DATA* mess, CMyBook* book );
+	static int ReconfigElf(RECONFIG_EVENT_DATA* mess, CMyBook* book);
 
 	static CMyBook* GetExisting();
 };

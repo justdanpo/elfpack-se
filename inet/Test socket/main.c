@@ -15,42 +15,42 @@ void elf_exit(void)
 }
 
 
-int TerminateElf(void * ,BOOK * book)
+int TerminateElf(void*, BOOK* book)
 {
 	FreeBook(book);
-	return(1);
+	return (1);
 }
 
 
-int ShowAuthorInfo(void *mess ,BOOK * book)
+int ShowAuthorInfo(void* mess , BOOK* book)
 {
-	MSG * msg = (MSG*)mess;
-	MessageBox(EMPTY_TEXTID,STR("Test Socket\n\n(c) IronMaster"), NOIMAGE, 1, 5000,msg->book);
-	return(1);
+	MSG* msg = (MSG*)mess;
+	MessageBox(EMPTY_TEXTID, STR("Test Socket\n\n(c) IronMaster"), NOIMAGE, 1, 5000, msg->book);
+	return (1);
 }
 
 
 
-int TestSocketBook_MainPage_Enter(void * r0,BOOK * book)
+int TestSocketBook_MainPage_Enter(void* r0, BOOK* book)
 {
-	TestSocketBook * TSBook = (TestSocketBook*)book;
-	
-	CreateCallbacks(&TSBook->pICBTestConnManager,&TSBook->pICBTestSocket);
-	
-	IConnManagerManager * pConnManagerManager=0;
-	IConnManagerParameters * pConnManagerParameters=0;
-	IUnknown * pConnManagerBaseParameters=0;
-	
-	CoCreateInstance(&CID_CConnManagerManager,&IID_IConnManagerManager,PPINTERFACE(&pConnManagerManager));
-	pConnManagerManager->CreateConnManagerParameters(0x101,&pConnManagerParameters);
+	TestSocketBook* TSBook = (TestSocketBook*)book;
+
+	CreateCallbacks(&TSBook->pICBTestConnManager, &TSBook->pICBTestSocket);
+
+	IConnManagerManager* pConnManagerManager = 0;
+	IConnManagerParameters* pConnManagerParameters = 0;
+	IUnknown* pConnManagerBaseParameters = 0;
+
+	CoCreateInstance(&CID_CConnManagerManager, &IID_IConnManagerManager, PPINTERFACE(&pConnManagerManager));
+	pConnManagerManager->CreateConnManagerParameters(0x101, &pConnManagerParameters);
 	pConnManagerParameters->SetConnectionNotify(5);
-	pConnManagerParameters->QueryInterface(&IID_IConnManagerBaseParameters,PPINTERFACE(&pConnManagerBaseParameters));
-	pConnManagerManager->OpenConnection(TSBook->pICBTestConnManager,0x0,TSBook,pConnManagerBaseParameters,&TSBook->pIConnManager);
-	
+	pConnManagerParameters->QueryInterface(&IID_IConnManagerBaseParameters, PPINTERFACE(&pConnManagerBaseParameters));
+	pConnManagerManager->OpenConnection(TSBook->pICBTestConnManager, 0x0, TSBook, pConnManagerBaseParameters, &TSBook->pIConnManager);
+
 	pConnManagerBaseParameters->Release();
 	pConnManagerParameters->Release();
 	pConnManagerManager->Release();
-	
+
 	return 0;
 }
 
@@ -75,44 +75,60 @@ const PAGE_MSG bk_base_msglst[] @ "DYN_PAGE" =
 const PAGE_DESC TestSocketBook_Base_Page = { "TestSocketBook_Base_Page", 0, bk_base_msglst };
 
 
-void TSBook_Destroy( BOOK * book )
+void TSBook_Destroy(BOOK* book)
 {
-	TestSocketBook * TSBook = (TestSocketBook*)book;
-	
+	TestSocketBook* TSBook = (TestSocketBook*)book;
+
 	if (TSBook->pIConnManager)
 	{
 		TSBook->pIConnManager->CloseConnection();
 		TSBook->pIConnManager->Release();
 	}
-	if (TSBook->pICBTestConnManager) TSBook->pICBTestConnManager->Release();
-	if (TSBook->pICBTestSocket) TSBook->pICBTestSocket->Release();
-	if (TSBook->pISocket) TSBook->pISocket->Release();
-	
+
+	if (TSBook->pICBTestConnManager)
+	{
+		TSBook->pICBTestConnManager->Release();
+	}
+
+	if (TSBook->pICBTestSocket)
+	{
+		TSBook->pICBTestSocket->Release();
+	}
+
+	if (TSBook->pISocket)
+	{
+		TSBook->pISocket->Release();
+	}
+
 	//  SUBPROC(elf_exit);
 }
 
 
 void CreateTestSocketBook()
 {
-	TestSocketBook * TSBook = (TestSocketBook*)malloc(sizeof(TestSocketBook));
-	CreateBook(TSBook,TSBook_Destroy,&TestSocketBook_Base_Page,"Test Socket",-1,0);
-	TSBook->pICBTestConnManager=0;
-	TSBook->pIConnManager=0;
-	TSBook->pICBTestSocket=0;
-	TSBook->pISocket=0;
-	
-	BookObj_GotoPage(TSBook,&TestSocketBook_Main_Page);
+	TestSocketBook* TSBook = (TestSocketBook*)malloc(sizeof(TestSocketBook));
+	CreateBook(TSBook, TSBook_Destroy, &TestSocketBook_Base_Page, "Test Socket", -1, 0);
+	TSBook->pICBTestConnManager = 0;
+	TSBook->pIConnManager = 0;
+	TSBook->pICBTestSocket = 0;
+	TSBook->pISocket = 0;
+
+	BookObj_GotoPage(TSBook, &TestSocketBook_Main_Page);
 }
 
 
 int isTestSocketBook(BOOK* book)
 {
-	if(!strcmp(book->xbook->name,"Test Socket")) return(1);
-	return(0);
+	if (!strcmp(book->xbook->name, "Test Socket"))
+	{
+		return (1);
+	}
+
+	return (0);
 }
 
 
-int main (void)
+int main(void)
 {
 	if (FindBook(isTestSocketBook))
 	{
@@ -123,5 +139,6 @@ int main (void)
 	{
 		CreateTestSocketBook();
 	}
+
 	return 0;
 }

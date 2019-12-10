@@ -1650,9 +1650,6 @@
     </settings>
   </configuration>
   <file>
-    <name>$PROJ_DIR$\..\..\C++\_cpp2.cpp</name>
-  </file>
-  <file>
     <name>$PROJ_DIR$\..\..\classlib\cl.cpp</name>
   </file>
   <file>
@@ -1681,6 +1678,9 @@
   </file>
   <file>
     <name>$PROJ_DIR$\inetpc.cpp</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\..\..\deleaker\mem2.cpp</name>
   </file>
   <file>
     <name>$PROJ_DIR$\mybook.cpp</name>

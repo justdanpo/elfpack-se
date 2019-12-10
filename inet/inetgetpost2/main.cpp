@@ -13,28 +13,33 @@ class MyGetPost: public CGetPostBase
 
 		char* temp;
 
-		if(HeaderLength)
+		if (HeaderLength)
 		{
-			temp = new char[HeaderLength+1];
-			memset(temp,0,HeaderLength+1);
-			int i3=0,i4=0;
-			if(preq->ReadHeader(HeaderLength, temp, &i3, &i4)>=0)
+			temp = new char[HeaderLength + 1];
+			memset(temp, 0, HeaderLength + 1);
+			int i3 = 0, i4 = 0;
+
+			if (preq->ReadHeader(HeaderLength, temp, &i3, &i4) >= 0)
 			{
-				debug_printf("\n!!!!!! =) header i3/i4 %x %x s %s\n",i3,i4,temp);
+				debug_printf("\n!!!!!! =) header i3/i4 %x %x s %s\n", i3, i4, temp);
 			}
+
 			delete temp;
 		}
-		if(DataLength)
-		{
-			temp = new char[DataLength+1];
-			memset(temp,0,DataLength+1);
-			int i3=0,i4=0;
-			if(preq->ReadData(DataLength, temp, &i3, &i4)>=0)
-			{
-				debug_printf("\n!!!!!! =) data i3/i4 %x %x s %s\n",i3,i4,temp);
 
-				MessageBox(EMPTY_TEXTID,TextID_Create(temp, ENC_GSM, DataLength),NOIMAGE,1,0,0);
+		if (DataLength)
+		{
+			temp = new char[DataLength + 1];
+			memset(temp, 0, DataLength + 1);
+			int i3 = 0, i4 = 0;
+
+			if (preq->ReadData(DataLength, temp, &i3, &i4) >= 0)
+			{
+				debug_printf("\n!!!!!! =) data i3/i4 %x %x s %s\n", i3, i4, temp);
+
+				MessageBox(EMPTY_TEXTID, Str2ID(temp, ENC_LAT1, DataLength), NOIMAGE, 1, 0, 0);
 			}
+
 			delete temp;
 
 			//убьём себя после приёма данных. эльф тоже умрёт.
@@ -42,7 +47,7 @@ class MyGetPost: public CGetPostBase
 		}
 
 		//нет больше данных - убиваемся
-		if(!MoreData)
+		if (!MoreData)
 		{
 			Release();
 		}
@@ -50,21 +55,22 @@ class MyGetPost: public CGetPostBase
 
 	void OnProgress(int CurrPos, int TotSize, int, int status)
 	{
-		debug_printf("\n!!!!!!!!!! %s\n",__FUNCTION__);
+		debug_printf("\n!!!!!!!!!! %s\n", __FUNCTION__);
 	}
 };
 
 
-int main (void)
+int main(void)
 {
 	MyGetPost* mygp = new MyGetPost(); //тестовый объект убьёт себя сам после приёма данных
 
-	if( NULL != mygp && 0 <= mygp->Get( "http://justdanpo.ru", "Accept: text/html" ) )
+	if (NULL != mygp && 0 <= mygp->Get("http://justdanpo.dyndns.org", "Accept: text/html"))
 	{
-		debug_printf("\n!!!!!!!!!! %s: get ok\n",__FUNCTION__);
-	}else
+		debug_printf("\n!!!!!!!!!! %s: get ok\n", __FUNCTION__);
+	}
+	else
 	{
-		debug_printf("\n!!!!!!!!!! %s: get error\n",__FUNCTION__);
+		debug_printf("\n!!!!!!!!!! %s: get error\n", __FUNCTION__);
 		mygp->Release();
 	}
 

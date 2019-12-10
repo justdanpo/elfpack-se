@@ -86,28 +86,28 @@
         <option>
           <name>GRuntimeLibSelect</name>
           <version>0</version>
-          <state>1</state>
+          <state>2</state>
         </option>
         <option>
           <name>GRuntimeLibSelectSlave</name>
           <version>0</version>
-          <state>1</state>
+          <state>2</state>
         </option>
         <option>
           <name>RTDescription</name>
-          <state>Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod.</state>
+          <state>Use the full configuration of the C/C++ runtime library. Full locale interface, C locale, file descriptor support, multibytes in printf and scanf, and hex floats in strtod.</state>
         </option>
         <option>
           <name>RTConfigPath</name>
-          <state>$TOOLKIT_DIR$\LIB\dl5tpainl8n.h</state>
+          <state>$TOOLKIT_DIR$\LIB\dl5tpainl8f.h</state>
         </option>
         <option>
           <name>RTLibraryPath</name>
-          <state>$TOOLKIT_DIR$\LIB\dl5tpainl8n.r79</state>
+          <state>$TOOLKIT_DIR$\LIB\dl5tpainl8f.r79</state>
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>4.41A</state>
+          <state>4.42A</state>
         </option>
         <option>
           <name>GeneralMisraRules</name>
@@ -124,7 +124,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>LPC2106        Philips LPC2106</state>
+          <state>default	None</state>
         </option>
       </data>
     </settings>
@@ -546,11 +546,11 @@
         <debug>1</debug>
         <option>
           <name>XOutOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OutputFile</name>
-          <state>main.elf</state>
+          <state>inetconnect.elf</state>
         </option>
         <option>
           <name>OutputFormat</name>
@@ -684,7 +684,7 @@
         </option>
         <option>
           <name>XExtraOptionsCheck</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>XExtraOptions</name>
@@ -704,7 +704,7 @@
         </option>
         <option>
           <name>xcProgramEntryLabel</name>
-          <state>__program_start</state>
+          <state>main</state>
         </option>
         <option>
           <name>DebugInformation</name>
@@ -750,7 +750,7 @@
         </option>
         <option>
           <name>xcOverrideProgramEntryLabel</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>xcProgramEntryLabelSelect</name>

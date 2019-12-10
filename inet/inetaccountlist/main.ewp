@@ -107,7 +107,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>4.41A</state>
+          <state>4.42A</state>
         </option>
         <option>
           <name>GeneralMisraRules</name>
@@ -124,7 +124,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>LPC2106        Philips LPC2106</state>
+          <state>default	None</state>
         </option>
       </data>
     </settings>
@@ -546,11 +546,11 @@
         <debug>1</debug>
         <option>
           <name>XOutOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OutputFile</name>
-          <state>main.elf</state>
+          <state>inetaccountlist.elf</state>
         </option>
         <option>
           <name>OutputFormat</name>
@@ -684,7 +684,7 @@
         </option>
         <option>
           <name>XExtraOptionsCheck</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>XExtraOptions</name>
@@ -704,7 +704,7 @@
         </option>
         <option>
           <name>xcProgramEntryLabel</name>
-          <state>__program_start</state>
+          <state>main</state>
         </option>
         <option>
           <name>DebugInformation</name>
@@ -750,7 +750,7 @@
         </option>
         <option>
           <name>xcOverrideProgramEntryLabel</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>xcProgramEntryLabelSelect</name>
