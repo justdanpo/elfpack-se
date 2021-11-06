@@ -1,0 +1,11 @@
+.vscode/
+Exe/
+List/
+Obj/
+settings/
+temp/
+Debug/
+Release/
+include.tmp
+*.dep
+*.ewd
