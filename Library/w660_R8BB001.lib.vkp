@@ -1,5 +1,5 @@
 ;w660_r8bb001
-;Библиотека функций
+;пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 ;v
 ;(c) Hussein , IronMaster
 ;
@@ -266,15 +266,15 @@
 0850: 00000000 AD64F144 ; 214: TEXTID AB_NUM_ITEM2TextID( AB_NUM_ITEM* ab_num_item );
 0854: 00000000 0B68B844 ; 215: int GetABRecNum( AB_GET_STRUCT* ); //nullsub(void)
 0858: 00000000 7CAFAC45 ;8216: AB_ITEM_DESC* get_AB_ITEMS_DESC( void );
-085C: 00000000 614BB944 ; 217: GUI* SBY_GetMainInput( BOOK* StandBy ); // !!!!! не настоящий !!!!!!
-0860: 00000000 5D4BB944 ; 218: GUI* SBY_GetStatusIndication( BOOK* StandBy ); // !!!!! не настоящий !!!!!!
+085C: 00000000 614BB944 ; 217: GUI* SBY_GetMainInput( BOOK* StandBy ); // !!!!! пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!!!!!
+0860: 00000000 5D4BB944 ; 218: GUI* SBY_GetStatusIndication( BOOK* StandBy ); // !!!!! пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!!!!!
 0864: 00000000 BD04E944 ; 219: int REQUEST_PHONEBOOK_ACCESSSTATUS_TOTAL_GET( const int* sync, int* );
 0868: 00000000 68410820 ;821A: PROCESS* PID_MMI( void );
 ;086C: xxxxxxxx yyyyyyyy ; 21B:
 0870: 00000000 89154845 ; 21C: GUI* DispObject_GetGUI( DISP_OBJ* );
 0874: 00000000 D9144845 ; 21D: DISP_OBJ* Display_GetFocusedDispObject( int display );
 0878: 00000000 8D1A4845 ; 21E: char DispObject_GetVisible( DISP_OBJ* );
-087C: 00000000 4990A144 ; 21F: DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); // !!!!! не настоящий !!!!!!
+087C: 00000000 4990A144 ; 21F: DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); // !!!!! пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ !!!!!!
 0880: 00000000 E5D54745 ; 220: void DISP_DESC_SetName( DISP_DESC*, const char* name );
 0884: 00000000 952B4845 ; 221: char* DispObject_GetName( DISP_OBJ* );
 0888: 00000000 E9D54745 ; 222: void DISP_DESC_SetSize( DISP_DESC*, u16 size );
@@ -721,6 +721,14 @@
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
 ;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
+;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
+;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
+;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
+;0F8C: xxxxxxxx yyyyyyyy ; 3E3: void fs_demand_remove_from_queue( pageCache* page_p_to_remove, wchar_t page_i_to_insert );
+;0F90: xxxxxxxx yyyyyyyy ; 3E4: int fs_demand_kick_out_page( wchar_t page_i, int intrMask );
+;0F94: xxxxxxxx yyyyyyyy ;83E5: char* getSWAP_DATA_BASE( void );
 
 
 
