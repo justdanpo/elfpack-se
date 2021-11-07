@@ -51,7 +51,6 @@ DECLARE_PAGE_DESC_BEGIN(CMyBook::base_page, "HW_BasePage")
 	DECLARE_PAGE_DESC_MSG( ON_CALLMANAGER_EVENT_TAG, CMyBook::OnCallManagerEvent )
 DECLARE_PAGE_DESC_END
 
-//бука создаЄтс€
 CMyBook::CMyBook()  :CBook(MAINBOOKNAME, &base_page)
 {
 	callestablished = false;
@@ -83,7 +82,6 @@ CMyBook::CMyBook()  :CBook(MAINBOOKNAME, &base_page)
 	CheckEvents();
 }
 
-//бука убиваетс€
 CMyBook::~CMyBook()
 {
 	if(timer)
@@ -98,7 +96,7 @@ void CMyBook::onTimer (u16 unk , CMyBook* book)
 	char* me=MissedEvents();
 	if( book->eventmask & *me )
 	{
-		PlaySystemSound(8);//reminder.3gp; добавл€ть в константы?
+		PlaySystemSound(8);//reminder.3gp; should we add that to dyn_const?
 	}
 	
 	book->timer = 0;

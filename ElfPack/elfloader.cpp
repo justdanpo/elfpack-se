@@ -1,6 +1,6 @@
-//#define wintel		//компелим под винду
+//#define wintel		//uncommend when build for Windows
 
-#define MAX_PHNUM	10	//максимальное количество програмных сегментов
+#define MAX_PHNUM	10	//Maximum program segments count
 
 #ifdef wintel
 #include "stdlib.h"
@@ -373,21 +373,21 @@ __arm int PatchDynConst (int * p)
 //  if (elfldr_FStat(elfldr_GetDir(DIR_ELFS_CONFIG | MEM_INTERNAL),(u16*)L"DYN_CONST.bin",&fstat)==0)
   if (fstat( GetDir(DIR_ELFS_CONFIG | MEM_INTERNAL), L"DYN_CONST.bin", &_fstat)==0)
   {
-    if ((file=_elfldr_fopen( GetDir(DIR_ELFS_CONFIG | MEM_INTERNAL), L"DYN_CONST.bin", FSX_O_RDONLY, FSX_S_IREAD, &iError))<0) return (-101);	//не открывается DYN_CONST.
+    if ((file=_elfldr_fopen( GetDir(DIR_ELFS_CONFIG | MEM_INTERNAL), L"DYN_CONST.bin", FSX_O_RDONLY, FSX_S_IREAD, &iError))<0) return (-101);	//Cannot open DYN_CONST.
 
     DynConst=elfldr_malloc(_fstat.fsize);
     if (elfldr_fread(file, DynConst, _fstat.fsize, &iError) != _fstat.fsize)
     {
       elfldr_mfree(DynConst);
       elfldr_fclose(file, &iError);
-      return(-103);                     //не читается DYN_CONST
+      return(-103);                     //cannot read DYN_CONST
     }
     maxi=_fstat.fsize/sizeof(int);
     elfldr_fclose(file, &iError);
   }
   else
   {
-    return (-102);	//не определяется размер файл с DYN_CONST.
+    return (-102);	//cannot retrieve DYN_CONST file size.
   }
   int cnt;
   p--;
@@ -423,9 +423,9 @@ __arm int PatchDynConst (int * p)
 long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
 
 
-  Elf32_Ehdr ehdr;				                        //заголовок ельфа
-  Elf32_Phdr phdrs[MAX_PHNUM];	                                        //заголовки програм
-  Elf32_Word dyn[DT_BIND_NOW+1];	                                        //тэги динамической секции
+  Elf32_Ehdr ehdr;                 //ELF header
+  Elf32_Phdr phdrs[MAX_PHNUM];     //program headers
+  Elf32_Word dyn[DT_BIND_NOW+1];   //dynamic section tags
   char *reloc, *base;
   unsigned long minadr=(unsigned long)-1, maxadr=0;//, maxadrsize;
   int n,m;
@@ -437,21 +437,21 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
   //WINTEL
 #ifdef wintel
   FILE *fin=NULL;
-  if ((fin=elfldr_fopen(filename,"rb"))==NULL) return -1;			//не открывается ельф
-  if (elfldr_fread(&ehdr,sizeof(Elf32_Ehdr),1,fin)!=1) return -2;	        //не читается ельф
+  if ((fin=elfldr_fopen(filename,"rb"))==NULL) return -1;         //cannot open ELF
+  if (elfldr_fread(&ehdr,sizeof(Elf32_Ehdr),1,fin)!=1) return -2; //cannot read ELF
 #endif
 
   //ARM
 #ifndef wintel
   int fin;
   unsigned int iError, iError2;
-  if ((fin=elfldr_fopen(filename, FSX_O_RDONLY, FSX_S_IREAD, &iError))<0) return -1;	//не открывается ельф
-  if (elfldr_fread(fin, &ehdr, sizeof(Elf32_Ehdr), &iError)!=sizeof(Elf32_Ehdr))	//не читается ельф
+  if ((fin=elfldr_fopen(filename, FSX_O_RDONLY, FSX_S_IREAD, &iError))<0) return -1; //cannot open ELF
+  if (elfldr_fread(fin, &ehdr, sizeof(Elf32_Ehdr), &iError)!=sizeof(Elf32_Ehdr))     //cannot read ELF
   {elfldr_fclose(fin, &iError); return -2;}
 #endif
   /////////////////////////////////////////
 
-  if (*((long *)ehdr.e_ident)!=0x464C457F){                               //да и не ельф это вовсе
+  if (*((long *)ehdr.e_ident)!=0x464C457F){                                          //no ELF signature
 #ifndef wintel
     elfldr_fclose(fin, &iError);
 #endif
@@ -464,22 +464,22 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
   cout << "ehdr.e_phoff:"<<ehdr.e_phoff<<endl;
 #endif
 
-  //прочитаем все програмные сегменты и вычислим необходимую область в раме
-  if (ehdr.e_phnum>MAX_PHNUM) return -9;					//слишком много програмных сегментов
+  //read all program segments and calculate required RAM size
+  if (ehdr.e_phnum>MAX_PHNUM) return -9;                                             //too many program segments
   for(n=0;n<ehdr.e_phnum;n++){
     ////////////////////////////////////////////////////
     //WINTEL
 #ifdef wintel
-    if (fseek(fin,ehdr.e_phoff+n*ehdr.e_phentsize,SEEK_SET)!=0) return -4;	//не сикается програмный заголовок
-    if (elfldr_fread(&(phdrs[n]),sizeof(Elf32_Phdr),1,fin)!=1) return -5;		//не читается програмный заголовок
+    if (fseek(fin,ehdr.e_phoff+n*ehdr.e_phentsize,SEEK_SET)!=0) return -4;           //cannot seek to program header
+    if (elfldr_fread(&(phdrs[n]),sizeof(Elf32_Phdr),1,fin)!=1) return -5;            //cannot read program header
 #endif
 
     //ARM
 #ifndef wintel
     if (elfldr_lseek(fin, ehdr.e_phoff+n*ehdr.e_phentsize, SEEK_SET, &iError, &iError2)!=ehdr.e_phoff+n*ehdr.e_phentsize)
-    {elfldr_fclose(fin, &iError); return -4;}				//не сикается програмный заголовок
+    {elfldr_fclose(fin, &iError); return -4;}                                        //cannot seek to program header
     if (elfldr_fread(fin, &phdrs[n], sizeof(Elf32_Phdr), &iError)!=sizeof(Elf32_Phdr))
-    {elfldr_fclose(fin, &iError); return -5;}				//не читается програмный заголовок
+    {elfldr_fclose(fin, &iError); return -5;}                                        //cannot read program header
 #endif
     /////////////////////////////////////////////////////
     if (phdrs[n].p_type==PT_LOAD) {
@@ -502,8 +502,8 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
 #endif
   }
 
-  //выделим эту область и очистим ее
-  if ((base=(char *)elfldr_malloc(maxadr-minadr))==0){		//не выделяеться память под ельф
+  //allocate and clear
+  if ((base=(char *)elfldr_malloc(maxadr-minadr))==0){		//cannot alocate memory for loading ELF
 #ifndef wintel
     elfldr_fclose(fin, &iError);
 #endif
@@ -535,40 +535,40 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
   //-------------------------------------------------------------------------------------------------------
   //  t_zeromem(base,maxadr-minadr);
   zeromem_a(base,maxadr-minadr);
-  for(n=0;n<ehdr.e_phnum;n++){ //  обход всех сегментов
+  for(n=0;n<ehdr.e_phnum;n++){ //  enumerate segments
     ////////////////////////////////////////////////////////////////////
     //WINTEL
 #ifdef wintel
-    if (fseek(fin,phdrs[n].p_offset,SEEK_SET)!=0) return -6;	//не сикается динамический сегмент
+    if (fseek(fin,phdrs[n].p_offset,SEEK_SET)!=0) return -6; //cannot seek to dynamic segment
 #endif
 
     //ARM
 #ifndef wintel
     if (elfldr_lseek(fin, phdrs[n].p_offset, SEEK_SET, &iError, &iError)!=phdrs[n].p_offset)
-    {elfldr_fclose(fin, &iError); elfldr_mfree(base); return -6;}		//не сикается динамический сегмент
+    {elfldr_fclose(fin, &iError); elfldr_mfree(base); return -6;} //cannot seek to dynamic segment
 #endif
     /////////////////////////////////////////////////////////////////////
     switch (phdrs[n].p_type){
     case PT_LOAD:
-      //загрузим програмные сегменты с размером больше 0
+      //load program segments which size is larger than 0
       if (phdrs[n].p_filesz!=0) {
 	/////////////////////////////////////////////////////////////////////
 	//WINTEL
 #ifdef wintel
-	if (elfldr_fread((void *)&base[phdrs[n].p_vaddr-minadr],phdrs[n].p_filesz,1,fin)!=1) return -11;	//не читается програмный сегмент
+	if (elfldr_fread((void *)&base[phdrs[n].p_vaddr-minadr],phdrs[n].p_filesz,1,fin)!=1) return -11; //cannot read program segment
 #endif
 
 	//ARM
 #ifndef wintel
 	if (elfldr_fread(fin, &base[phdrs[n].p_vaddr-minadr], phdrs[n].p_filesz, &iError)!= phdrs[n].p_filesz)
-	{elfldr_fclose(fin, &iError); elfldr_mfree(base); return -11;}//не читается програмный сегмент
+	{elfldr_fclose(fin, &iError); elfldr_mfree(base); return -11;}//cannot read program segment
 #endif
 	///////////////////////////////////////////////////////////////////////
       }
       break;
     case PT_DYNAMIC:
-      //прочтем динамическую секцию
-      if ((reloc=(char *)elfldr_malloc(phdrs[n].p_filesz))==0) {//не выделяется рама под динамический сегмент
+      //read dynamic section
+      if ((reloc=(char *)elfldr_malloc(phdrs[n].p_filesz))==0) {//cannot alocate memory for loading dynamic section
 #ifndef wintel
 	elfldr_fclose(fin, &iError);
 #endif
@@ -579,17 +579,17 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
       //WINTEL
 #ifdef wintel
       cout << "dyn seg: off="<<hex<<phdrs[n].p_offset<<", sz="<<phdrs[n].p_filesz<<endl;
-      if (elfldr_fread(reloc,phdrs[n].p_filesz,1,fin)!=1) {elfldr_mfree(reloc); return -8;} //не читается динамический сегмент
+      if (elfldr_fread(reloc,phdrs[n].p_filesz,1,fin)!=1) {elfldr_mfree(reloc); return -8;} //cannot read dynamic segment
 #endif
 
       //ARM
 #ifndef wintel
       if (elfldr_fread(fin, reloc, phdrs[n].p_filesz, &iError)!=phdrs[n].p_filesz)
-      {elfldr_fclose(fin, &iError); elfldr_mfree(reloc); elfldr_mfree (base); return -8;}	//не читается динамический сегмент
+      {elfldr_fclose(fin, &iError); elfldr_mfree(reloc); elfldr_mfree (base); return -8;}   //cannot read dynamic segment
 #endif
       ////////////////////////////////////////////////////////////////////////
       //				memset(dyn,0, sizeof(dyn));
-      //вытащим все тэги из динамической секции
+      //get all dynamic section tags
       m=0;
       while (((Elf32_Dyn *)reloc)[m].d_tag!=DT_NULL){
 	if (((Elf32_Dyn *)reloc)[m].d_tag<=DT_BIND_NOW) {
@@ -611,7 +611,7 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
 #endif
 
       m=0;
-      //выполним релокацию REL
+      //relocate REL
       if (dyn[DT_RELSZ]!=0) {
 	while (m*sizeof(Elf32_Rel)<dyn[DT_RELSZ]){
 #ifdef wintel
@@ -629,7 +629,7 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
             else
               switch(ri){
 
-              case R_ARM_NONE: break; // пустой релокейшен
+              case R_ARM_NONE: break; // empty relocation item
 
               case R_ARM_ABS32:
 #ifdef wintel
@@ -639,7 +639,7 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
                 *((long*)(base+((Elf32_Rel *)(reloc+dyn[DT_REL]-phdrs[n].p_vaddr))[m].r_offset-minadr))+=(long)base;
                 break;
 
-              case R_ARM_RELATIVE: // вообще говоря не minadr а начало сегмента содержащего символ
+              case R_ARM_RELATIVE: // start of segment containing symbol
                 *((long*)(base+((Elf32_Rel *)(reloc+dyn[DT_REL]-phdrs[n].p_vaddr))[m].r_offset-minadr))+=(long)base-minadr;
                 break; // ignore
 
@@ -648,7 +648,7 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
                 //            break;
 
                 //              case R_ARM_RBASE: break;
-              default: 	//неизвестный тип релокации
+              default: 	//unknown relocation type
 #ifdef wintel
                 cout << "Invalid reloc type: " <<dec<<(unsigned)ELF32_R_TYPE(((Elf32_Rel *)(reloc+dyn[DT_REL]-phdrs[n].p_vaddr))[m].r_info) << endl;
 #else
@@ -670,7 +670,7 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
 #endif
       elfldr_mfree(reloc);
       break;
-    default:	//неизвестный тип програмного сегмента
+    default:	//unknown program segment type
 #ifndef wintel
       elfldr_fclose(fin, &iError);
 #endif
@@ -687,7 +687,7 @@ long elfload_int(FILENAME filename, void *param1, void *param2, void *param3){
   }
 
   wchar_t* wsext;
-  // если DLLка, то не запускаем, а возвращаем entrypoint
+  // if it's DLL don't run it, return entrypoint instead
   if ( wsext = elfldr_getFileExtention( filename ) )
   {
     if (!elfldr_wstrcmpi(wsext, L"dll"))

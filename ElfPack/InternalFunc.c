@@ -332,15 +332,11 @@ void Init()
 
 	_printf("     Entered Init...")  ;
 
-	// запустили хелпера
-
 	_printf("     StartHelper....")  ;
 
 	StartHelper();
 
 	_printf("     StartHelper OK. PID=%x",elfpackdata->HPID)  ;
-
-	// инитим DLL библиотеку
 
 	_printf("     Load LibraryDLL....")  ;
 
@@ -351,8 +347,6 @@ void Init()
 		elfpackdata->LibraryDLL = 0;
 	}
 	else _printf("     Load LibraryDLL OK")  ;
-
-	// правим кэш либы
 
 	if (elfpackdata->LibraryDLL)
 	{
@@ -372,8 +366,6 @@ void Init()
 
 		_printf("     Patching LibraryCache OK")  ;
 	}
-
-	// запустили демонов
 
 	_printf("     StartDaemons....")  ;
 	_printf("     ------Begin List-------")  ;

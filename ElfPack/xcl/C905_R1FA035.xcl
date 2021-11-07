@@ -17,12 +17,12 @@
 -Z(CODE)PATCH_KEYHANDLER3_CHANGE1=142BADA0
 -Z(CODE)PATCH_KEYHANDLER3_CHANGE2=142BADDA
 
-// инициализация списков
-// инициализация KbdHookList, Helper, Daemons
+// lists initialization
+// initialization of KbdHookList, Helper, Daemons
 -Z(CODE)PATCH_AUTO_RUN=15CBD87C
 -Z(CODE)PATCH_AUTO_RUN1=15CBD880
 
-// ассоциация elf
+// elf file association
 -Z(CODE)PATCH_DB1=14262BF0
 -Z(CODE)PATCH_DB2=1407A55C
 -Z(CODE)PATCH_DB3=1407B184

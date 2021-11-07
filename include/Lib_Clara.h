@@ -712,9 +712,9 @@ __swi __arm AB_ITEM_DESC* get_AB_ITEMS_DESC( void );
 
 
 #pragma swi_number=0x217
-__swi __arm GUI* SBY_GetMainInput( BOOK* StandBy ); // !!!!! не настоящий !!!!!!
+__swi __arm GUI* SBY_GetMainInput( BOOK* StandBy ); // there is no real function; we use any which does what we need
 #pragma swi_number=0x218
-__swi __arm GUI* SBY_GetStatusIndication( BOOK* StandBy ); // !!!!! не настоящий !!!!!!
+__swi __arm GUI* SBY_GetStatusIndication( BOOK* StandBy ); // there is no real function; we use any which does what we need
 
 #pragma swi_number=0x219
 __swi __arm int REQUEST_PHONEBOOK_ACCESSSTATUS_TOTAL_GET( const int* sync, int* );
@@ -731,7 +731,7 @@ __swi __arm DISP_OBJ* Display_GetFocusedDispObject( int display );
 __swi __arm char DispObject_GetVisible( DISP_OBJ* );
 
 #pragma swi_number=0x21F
-__swi __arm DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); // !!!!! не настоящий !!!!!!
+__swi __arm DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); // there is no real function; we use any which does what we need
 
 #pragma swi_number=0x220
 __swi __arm void DISP_DESC_SetName( DISP_DESC*, const char* name );

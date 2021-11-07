@@ -28,26 +28,26 @@ _HUNK1
 	LDR	R2,=elfpackdata
 	LDR	R2,[R2]
 	CMP	R2,#0
-	LDRNE	R1,[R2,#44]		; Указатель на таблицу адресов
+	LDRNE	R1,[R2,#44]		; Pointer to the address table
 	CMPNE	R1,#0
 	LDREQ	R1,=Library
 	SUB	R1,R1,#0x400
-	ADR	R2,arm_jumper		; Берем адрес джампера
+	ADR	R2,arm_jumper		; Get jumper address
 	BIC	R3,R0,#0x8000
 	CMP	R3,#4096
 	BHI	exit
-	TST	R0,#0x8000		; А не адрес нам надо получить?
-	STMEQFD	SP!,{LR}		; Копируем адрес возврата из LR_svc только если вызов функции
-	LDMEQFD	SP!,{LR}^		; в LR_usr, он будет использован вызываемой функцией
-	LDR	R12,[R1,R3,LSL#2]	; Берем адрес функции
-	STRNE	R12,[SP,#0x14]		; пишем адрес в R0(стек)
+	TST	R0,#0x8000		; Should we call a function or get its address?
+	STMEQFD	SP!,{LR}		; Call: Copy return address from LR_svc to LR_usr only on function call;
+	LDMEQFD	SP!,{LR}^		;       it wll be used to return from a calling function
+	LDR	R12,[R1,R3,LSL#2]	; Get: get function address
+	STRNE	R12,[SP,#0x14]		;      write it over R0 stored in stack
 	BNE	exit
 
 //	CMP	R12,#0xFFFFFFFF
 //	LDREQ	R2,=FUNC_ABORT
 //	STREQ	R0,[SP,#0x14]
 
-	STR	R2,[SP,#0x18]		; Пишем адрес джампера для возврата в стеке (PC)
+	STR	R2,[SP,#0x18]		; Write returning address to stack (PC)
 exit:
 	LDMFD	SP!,{R1-R3}
 exit1:
@@ -67,13 +67,13 @@ _RETURN
 	LDR	PC,=SWI_RET
 
 IMB:
-	MRS	R1,CPSR		; Запрещаем прерывания
+	MRS	R1,CPSR		; Disable interrupts
 	ORR	R1,R1,#0xC0
 	MSR	CPSR_c,R1
 	NOP
 	NOP
 	NOP
-;Выполняем необходимую требуху с кешем
+;Do required caching stuff
 #ifndef K600_R2BB001
 clean_loop:
 	MRC 	p15, 0, r15, c7, c10, 3 ; clean entire dcache using test and clean
@@ -93,7 +93,7 @@ clean_loop:
 	NOP
 	NOP
 	NOP
-;Выходим
+;exit
         B       exit1
 
 

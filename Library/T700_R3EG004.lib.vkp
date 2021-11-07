@@ -1,5 +1,5 @@
 ;T700 SW-R3EG004
-;Библиотека функций
+;Function library
 ;ver. 20100810
 ;(c) Hussein , IronMaster
 ;(p) HotRabbit
@@ -266,15 +266,15 @@
 0850: 00000000 E53EB410 ; 214: TEXTID AB_NUM_ITEM2TextID( AB_NUM_ITEM* ab_num_item );
 0854: 00000000 693FB410 ; 215: int GetABRecNum( AB_GET_STRUCT* ); //nullsub(void)
 0858: 00000000 D8FEB311 ;8216: AB_ITEM_DESC* get_AB_ITEMS_DESC( void );
-085C: 00000000 65478810 ; 217: GUI* SBY_GetMainInput( BOOK* StandBy ); // !!!!! не настоящий !!!!!!
-0860: 00000000 11A17410 ; 218: GUI* SBY_GetStatusIndication( BOOK* StandBy ); // !!!!! не настоящий !!!!!!
+085C: 00000000 65478810 ; 217: GUI* SBY_GetMainInput( BOOK* StandBy ); //not real; don't port from here
+0860: 00000000 11A17410 ; 218: GUI* SBY_GetStatusIndication( BOOK* StandBy ); //not real; don't port from here
 0864: 00000000 5194A210 ; 219: int REQUEST_PHONEBOOK_ACCESSSTATUS_TOTAL_GET( const int* sync, int* );
 0868: 00000000 E483BA4B ;821A: PROCESS* PID_MMI( void );
 ;086C: xxxxxxxx yyyyyyyy ; 21B:
 0870: 00000000 71119A10 ; 21C: GUI* DispObject_GetGUI( DISP_OBJ* );
 0874: 00000000 BD109A10 ; 21D: DISP_OBJ* Display_GetFocusedDispObject( int display );
 0878: 00000000 31179A10 ; 21E: char DispObject_GetVisible( DISP_OBJ* );
-087C: 00000000 9D4E0110 ; 21F: DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); // !!!!! не настоящий !!!!!!
+087C: 00000000 9D4E0110 ; 21F: DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); //not real; don't port from here
 0880: 00000000 3DE39910 ; 220: void DISP_DESC_SetName( DISP_DESC*, const char* name );
 0884: 00000000 592A9A10 ; 221: char* DispObject_GetName( DISP_OBJ* );
 0888: 00000000 41E39910 ; 222: void DISP_DESC_SetSize( DISP_DESC*, u16 size );

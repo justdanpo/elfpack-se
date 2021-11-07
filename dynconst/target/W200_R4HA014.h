@@ -163,9 +163,9 @@
 #define FONT_D_18B 0x2D
 //#define FONT_D_24B UNDEFINED
 #define FONT_D_29B 0x30
-#define FONT_D_7R 0x0 //есть ещё A_10B 0x5
+#define FONT_D_7R 0x0 //there is also A_10B 0x5
 //#define FONT_E_100R UNDEFINED
-#define FONT_E_12B 0xC //есть ещё E_12I 0xD, E_12BI 0xE
+#define FONT_E_12B 0xC //there is also E_12I 0xD, E_12BI 0xE
 #define FONT_E_12R 0xB
 #define FONT_E_14B 0x11
 #define FONT_E_14BI 0x13

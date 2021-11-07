@@ -518,7 +518,7 @@ typedef struct DIR_HANDLE
 	u16 unk_4;
 	u16 unk_6;
 	int unk_8;
-	char unk_C; // на 2010 флажки отличаютс€...
+	char unk_C; // db2010 uses other flags set
 	char unk_D;
 	char ena_hidden;
 }DIR_HANDLE; //FSX_DIR?
@@ -870,10 +870,10 @@ typedef struct GPRS_SESSION_INFO
 
 typedef struct RAT_CI_DESC
 {
-	char unk1; // на 2010 этого нету, но пока rat никому не нужен, пусть будет так
+	char unk1; // db2010 doesn't containing that, keep it while noone uses RAT
 	char RAT;
 	int CI;
-	char dummy[0x10]; // дл€ 3150 достаточно 0x4, дл€ 2020 надо 0x10, дл€ 2010 вообще не надо
+	char dummy[0x10]; // it's enought 4 bytes for db3150, 0x10 for db2020, 0 for db2010
 }RAT_CI_DESC;
 
 typedef struct PLMN_LAC_DESC
@@ -1154,7 +1154,7 @@ typedef struct EP_DATA
 	DB_EXT* (*CreateDbExt)(void);
 	IMAGEID IconSmall;
 	IMAGEID IconBig;
-	void** LibraryCache; // Ќе перемещать!!!!!
+	void** LibraryCache; // don't reorder!!!!!
 	void* LibraryDLL;
 	wchar_t LastKey;
 	LIST* UIPageHook_After;

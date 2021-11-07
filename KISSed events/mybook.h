@@ -7,7 +7,7 @@
 class CMyBook:public CBook
 {
 	BOOL callestablished;
-	u16 timer; // ID таймера
+	u16 timer; // timer ID
 
 	int eventmask;
 

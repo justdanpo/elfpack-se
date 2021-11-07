@@ -250,8 +250,8 @@
 #define KEY_ESC 0x3
 #define KEY_FLIP_CLOSE 0x32
 #define KEY_FLIP_OPEN 0x31
-#define KEY_GAME_A 0x2D //? над экраном
-#define KEY_GAME_B 0x2E //? над экраном
+#define KEY_GAME_A 0x2D //? above the display
+#define KEY_GAME_B 0x2E //? above the display
 //#define KEY_JACKKNIFE_CLOSE UNDEFINED
 //#define KEY_JACKKNIFE_OPEN UNDEFINED
 #define KEY_LEFT 0xC
