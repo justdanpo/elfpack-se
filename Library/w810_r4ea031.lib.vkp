@@ -2,7 +2,6 @@
 ;Function library
 ;(c) Hussein , IronMaster
 ;(p) zoyd, InvisibleW, TahaSPAWN, MNS81
-
 +456BFC00
 0448: FFFFFFFF 6143E244 ; 112: void* memset( void* mem, char chr, int size );
 044C: FFFFFFFF 78E81844 ; 113: int memcpy( void* dest, const void* source, int cnt );
