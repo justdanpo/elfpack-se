@@ -1,6 +1,6 @@
 ;W200 SW-R4HA014
 ;Function library
-;v
+;v13_11_2021
 ;(c) Hussein , IronMaster
 ;(p) farid, Mike006, ZEN
 +456BFC00
@@ -715,7 +715,7 @@
 0F58: FFFFFFFF 21360045 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
 0F5C: FFFFFFFF 61D8FD44 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
 0F60: FFFFFFFF 51682745 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
-0F64: xxxxxxxx AD560945 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
+0F64: FFFFFFFF AD560945 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
 0F68: FFFFFFFF 71D63A45 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
