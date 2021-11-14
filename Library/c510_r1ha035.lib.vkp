@@ -4,7 +4,6 @@
 ;(c) Hussein , IronMaster
 ;(p) E1kolyan, timos_06
 ;pAtChFiLe=/boot/phone_app.cxc
-
 +15D8FC00
 0448: 00000000 801CB314 ; 112: void* memset( void* mem, char chr, int size );
 044C: 00000000 94AD2814 ; 113: int memcpy( void* dest, const void* source, int cnt );
