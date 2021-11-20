@@ -9,13 +9,12 @@ a       EQU     b
         ENDM
 
         RSEG  CODE
-        defadr   MESS_HOOK_RET,0x107626E2+1
+        defadr MESS_HOOK_RET,0x107626E2+1
 
         defadr memalloc,0x1009ED08
         defadr memfree,0x1009ED30
 	   
-	    defadr LastExtDB,0x11A364D8
-
+LastExtDB EQU 0x11A364D8
 
 
 // --- Patch Keyhandler ---
