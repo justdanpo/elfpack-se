@@ -108,7 +108,7 @@
 05D8: 00000000 A1779510 ; 176: int lseek( int file, int offset, int mode );
 05DC: 00000000 00000000 ;8177: int get_VBUFFER( void );
 05E0: 00000000 CB570010 ; 178: void SetLampLevel( int level ); //nullsub(ret 0)
-05E4: 00000000 F938AD11 ; 179: void* List_RemoveAt( LIST* lst, int index );
+05E4: 00000000 0938AD11 ; 179: void* List_RemoveAt( LIST* lst, int index );
 05E8: 00000000 F95C0010 ; 17A: PROCESS GetCurrentPID( void );
 05EC: 00000000 3D38AD11 ; 17B: int List_IndexOf( LIST* lst, void* item );
 05F0: 00000000 7C371710 ; 17C: union SIGNAL* alloc( OSBUFSIZE size, SIGSELECT signo );
@@ -383,6 +383,7 @@
 ;0A24: xxxxxxxx yyyyyyyy ; 289:
 0A28: 00000000 25FBFA10 ; 28A: int IsFmRadioBook( BOOK* bk );
 0A2C: 00000000 0956C810 ; 28B: int IsAudioPlayerBook( BOOK* bk);
+0A30: 00000000 894FC810 ; 28C: void PlayerControl( BOOK* AudioPlayerBook, int );
 0A34: 00000000 9DD9FA10 ; 28D: void SwitchRadioStationFromList( BOOK* FmRadioBook, int );
 0A38: 00000000 09BFDD10 ; 28E: void Shortcut_Run( wchar_t* shortcut_name );
 0A3C: 00000000 FD309510 ; 28F: int mkdir( const wchar_t* path );
