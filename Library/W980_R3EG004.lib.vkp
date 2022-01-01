@@ -497,7 +497,7 @@
 0BEC: 00000000 5D402A11 ; 2FB: int w_fread( int f, void* buf, int size );
 0BF0: 00000000 95F6A511 ; 2FC: int w_lseek( int f, int offs, int mode );
 0BF4: 00000000 8D402A11 ; 2FD: int w_fclose( int f );
-0BF8: 00000000 6503A611 ; 2FE: int w_mkdir( const wchar_t* path, int mode );
+0BF8: 00000000 D1DB3A11 ; 2FE: int w_mkdir( const wchar_t* path, int mode );
 0BFC: 00000000 713D9510 ; 2FF: int DirHandle_SetFilterStr( DIR_HANDLE*, const wchar_t* filter );
 0C00: 00000000 75B69C10 ; 300: int Disp_GetTextIDWidth( TEXTID, int len );
 0C04: 00000000 D11BA5ED ; 301: int MetaData_Desc_GetCoverInfo( void* MetaData_Desc, char* cover_type, int* size, int* cover_offset );
