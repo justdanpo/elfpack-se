@@ -1,7 +1,8 @@
 ;Z530 SW-R6DA001
 ;Function library
+;v2022
 ;(c) Hussein , IronMaster
-;(p) LenKor, W. Junior, juLi0Naru, MEHRDAD
+;(p) LenKor, W. Junior, juLi0Naru, farid
 +456BFC00
 0448: FFFFFFFF 1910D744 ; 112: void* memset( void* mem, char chr, int size );
 044C: FFFFFFFF 2C711844 ; 113: int memcpy( void* dest, const void* source, int cnt );
@@ -122,14 +123,14 @@
 0618: FFFFFFFF B0621844 ; 186: OSBOOLEAN hunt( const char* name, OSUSER user, PROCESS* name_, union SIGNAL** hunt_sig );
 061C: FFFFFFFF D0621844 ; 187: void kill_proc( PROCESS pid );
 ;0620: xxxxxxxx yyyyyyyy ; 188:
-;0624: xxxxxxxx yyyyyyyy ; 189: union SIGNAL* receive_w_tmo( OSTIME timeout, SIGSELECT* sel );
+0624: FFFFFFFF 24611844 ; 189: union SIGNAL* receive_w_tmo( OSTIME timeout, SIGSELECT* sel );
 ;0628: xxxxxxxx yyyyyyyy ; 18A:
-;062C: xxxxxxxx yyyyyyyy ; 18B: void stop( PROCESS pid );
+062C: FFFFFFFF C4631844 ; 18B: void stop( PROCESS pid );
 0630: FFFFFFFF 541E1944 ; 18C: OSBOOLEAN get_mem( PROCESS pid, OSADDRESS from, void* to, OSADDRESS size );
 0634: FFFFFFFF 439E1444 ; 18D: OSADDRESS get_envp( PROCESS pid, char* name );
 0638: FFFFFFFF 579E1444 ; 18E: OSBOOLEAN set_envp( PROCESS pid, char* name, OSADDRESS value );
 063C: FFFFFFFF E8611844 ; 18F: PROCESS get_bid( PROCESS pid );
-;0640: xxxxxxxx yyyyyyyy ; 190: int datetime2unixtime( DATETIME* dt );
+0640: FFFFFFFF C1CB1A45 ; 190: int datetime2unixtime( DATETIME* dt );
 ;0644: xxxxxxxx yyyyyyyy ; 191:
 ;0648: xxxxxxxx yyyyyyyy ; 192:
 ;064C: xxxxxxxx yyyyyyyy ; 193:
@@ -166,7 +167,7 @@
 06C8: FFFFFFFF B58C0845 ; 1B2: int PlayFile( const wchar_t* path, const wchar_t* fname );
 ;06CC: xxxxxxxx yyyyyyyy ; 1B3:
 06D0: FFFFFFFF F5FB5545 ; 1B4: int REQUEST_PROFILE_GETACTIVEPROFILE( const int* sync, int* level );
-06D4: FFFFFFFF 95543D45 ; 1B5: int Profile_SetActive( int NUMprof, int set_in_gdfs_flag );
+06D4: FFFFFFFF 7D2A1E45 ; 1B5: int Profile_SetActive( int NUMprof, int set_in_gdfs_flag );
 ;06D8: xxxxxxxx yyyyyyyy ; 1B6:
 06DC: FFFFFFFF 5DD00845 ; 1B7: int isKeylocked( void );
 06E0: FFFFFFFF E1B43645 ; 1B8: int IsMediaPlayerVideoBook( BOOK* bk );
@@ -269,7 +270,7 @@
 0864: FFFFFFFF EDF14A45 ; 219: int REQUEST_PHONEBOOK_ACCESSSTATUS_TOTAL_GET( const int* sync, int* );
 0868: FFFFFFFF 8C360A4C ;821A: PROCESS* PID_MMI( void );
 ;086C: xxxxxxxx yyyyyyyy ; 21B:
-;0870: xxxxxxxx yyyyyyyy ; 21C: GUI* DispObject_GetGUI( DISP_OBJ* );
+0870: FFFFFFFF 0D242345 ; 21C: GUI* DispObject_GetGUI( DISP_OBJ* );
 0874: FFFFFFFF 35232345 ; 21D: DISP_OBJ* Display_GetFocusedDispObject( int display );
 0878: FFFFFFFF 55282345 ; 21E: char DispObject_GetVisible( DISP_OBJ* );
 087C: FFFFFFFF F9E52445 ; 21F: DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); //not real; don't port from here
@@ -312,7 +313,7 @@
 0910: FFFFFFFF B55F0A45 ; 244: void GUIonMessage_SetNumberOfSubItems( GUI_MESSAGE* msg, int unk, int num_sub_items );
 0914: FFFFFFFF 41600A45 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: FFFFFFFF 01600A45 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
-091C: FFFFFFFF F1FC3245 ; 247: void GoMusic( void );
+;091C: xxxxxxxx yyyyyyyy ; 247: void GoMusic( void );
 ;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
 ;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: FFFFFFFF C58C0845 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
@@ -338,7 +339,7 @@
 0978: FFFFFFFF F1850845 ; 25E: void TabMenuBar_SetFocusedTab( GUI_TABMENUBAR*, int tab_num );
 097C: FFFFFFFF 0D6E0C45 ; 25F: int GC_GetPenColor( GC* gc );
 0980: FFFFFFFF CD6D0C45 ; 260: void GC_SetPenColor( GC* gc, int pen_color );
-0984: FFFFFFFF 4B6A0C45 ; 261: void GC_SetPixel( GC* gc, int x1, int y1, int color );
+0984: FFFFFFFF 496A0C45 ; 261: void GC_SetPixel( GC* gc, int x1, int y1, int color );
 0988: FFFFFFFF 15780C45 ; 262: void GC_DrawLine( GC* gc, int x1, int y1, int x2, int y2 );
 098C: FFFFFFFF 017A0C45 ; 263: void GC_DrawFRect( GC* gc, int color, int x1, int y1, int x2, int y2 );
 0990: FFFFFFFF C96A0C45 ; 264: int GC_WritePixels( GC* gc, int x1, int y1, int x2, int y2, int* bmp );
@@ -408,7 +409,7 @@
 0A90: FFFFFFFF C94C4645 ; 2A4: int ThemeImage_SetImage( int theme_image_type, int _zero, int __zero, const wchar_t* path, const wchar_t* fname, int wallp_scaling);
 0A94: FFFFFFFF 2DB70C45 ; 2A5: GUI* CreateYesNoQuestionVA( int zero, ... );
 0A98: FFFFFFFF 0D580A45 ; 2A6: void ListMenu_SetItemSecondLineText( GUI_LIST*, int elem_num, TEXTID );
-0A9C: FFFFFFFF 0D184D45 ; 2A7: void _REQUEST_OAF_START_APPLICATION( const int* sync, int __zero, MIDP_DESC*, int ___zero );
+0A9C: FFFFFFFF 6953F644 ; 2A7: void _REQUEST_OAF_START_APPLICATION( const int* sync, int __zero, MIDP_DESC*, int ___zero );
 0AA0: FFFFFFFF F5D64C45 ; 2A8: wchar_t* FSX_GetInvalidChar( wchar_t* name );
 0AA4: FFFFFFFF 65AE1845 ; 2A9: void DataBrowserDesc_SetFoldersNumber( void* DataBrowserDesc, int state );
 0AA8: FFFFFFFF 41AE1845 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
@@ -469,8 +470,8 @@
 0B84: FFFFFFFF E5355545 ; 2E1: TEXTID Shortcut_Get_MenuItemName( void* );
 0B88: FFFFFFFF F5E54545 ; 2E2: IMAGEID Shortcut_Get_MenuItemIconID( void* );
 0B8C: FFFFFFFF 39434545 ; 2E3: BOOK* FindBookEx( int (*cmp_proc)( BOOK* book_from_list, int* param ), int* param );
-0B90: FFFFFFFF 4D1C1945 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
-;0B94: xxxxxxxx yyyyyyyy ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
+0B90: FFFFFFFF D5D24D45 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
+0B94: FFFFFFFF 6DD03445 ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
 0B98: FFFFFFFF 45061D45 ; 2E6: int BookObj_GetSessionID( BOOK* book );
 0B9C: FFFFFFFF FD434545 ; 2E7: void UI_Event_toSID( int event, int sess_id );
 0BA0: FFFFFFFF 95339044 ; 2E8: char* GetIMSI( void );
@@ -483,7 +484,7 @@
 0BBC: FFFFFFFF CDD54445 ; 2EF: void* MetaData_Desc_Create( wchar_t* path, wchar_t* name );
 0BC0: FFFFFFFF B1D64445 ; 2F0: void MetaData_Desc_Destroy( void* MetaData_Desc );
 0BC4: FFFFFFFF 25D64445 ; 2F1: wchar_t* MetaData_Desc_GetTags( void* MetaData_Desc, int tagID );
-0BC8: FFFFFFFF A125A844 ; 2F2: int MetaData_Desc_GetTrackNum( void* MetaData_Desc, int __NULL );
+0BC8: FFFFFFFF A1D64445 ; 2F2: int MetaData_Desc_GetTrackNum( void* MetaData_Desc, int __NULL );
 0BCC: FFFFFFFF D5472345 ; 2F3: int DispObject_GetWindowWidth( DISP_OBJ* );
 0BD0: FFFFFFFF FD472345 ; 2F4: int DispObject_GetWindowHeight( DISP_OBJ* );
 0BD4: FFFFFFFF 01832345 ; 2F5: int get_system_langID( void );
@@ -533,14 +534,14 @@
 0C84: FFFFFFFF DD541E45 ; 321: void SetTheme( wchar_t* path, wchar_t* name, int bookid, int unk_1 );
 0C88: FFFFFFFF 91522445 ; 322: void SoftKeys_GetLabel( DISP_OBJ* softkeys, SKLABEL* lbl, int id );
 0C8C: FFFFFFFF 454E2445 ; 323: void SoftKeys_Update( DISP_OBJ* softkeys );
-;0C90: xxxxxxxx yyyyyyyy ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
+0C90: FFFFFFFF 490D4745 ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
 0C94: FFFFFFFF 49741445 ; 325: void* IncommingCall_Reject( BOOK* book );
 0C98: FFFFFFFF 95871445 ; 326: void* IncommingCall_Mute( BOOK* book );
 0C9C: FFFFFFFF F5B9B144 ; 327: int GetRadioState( char* level, char* flag );
 0CA0: FFFFFFFF ED664B45 ; 328: int Bluetooth_GetState( void );
 0CA4: FFFFFFFF C9664B45 ; 329: int Bluetooth_GetPhoneVisibility( void );
 0CA8: FFFFFFFF 71674B45 ; 32A: int Bluetooth_isBusy( void );
-0CAC: FFFFFFFF 0D184D45 ; 32B: int USB_isConnected( void );
+0CAC: FFFFFFFF 090F4745 ; 32B: int USB_isConnected( void );
 0CB0: FFFFFFFF 49CA4F45 ; 32C: void* w_diropen( const wchar_t* dir );
 0CB4: FFFFFFFF 79120445 ; 32D: wchar_t* w_dirread( void* );
 0CB8: FFFFFFFF C5CC4F45 ; 32E: int w_dirclose( void* );
@@ -548,32 +549,32 @@
 0CC0: FFFFFFFF 31120445 ; 330: int w_remove( const wchar_t* dir );
 0CC4: FFFFFFFF A55A0445 ; 331: int ConnectionManager_Connection_GetState( void );
 0CC8: FFFFFFFF 05BAB144 ; 332: int GetSignalQuality( char* rssi, char* ber );
-0CCC: FFFFFFFF EDDE4445 ; 333: int IsCameraBook( BOOK* bk );
-0CD0: FFFFFFFF D50E3645 ; 334: int IsSoundRecorderBook( BOOK* bk );
+0CCC: FFFFFFFF AD603845 ; 333: int IsCameraBook( BOOK* bk );
+0CD0: FFFFFFFF 5DF0FA44 ; 334: int IsSoundRecorderBook( BOOK* bk );
 0CD4: FFFFFFFF 51B10945 ; 335: void StringInput_MenuItem_SetPriority( GUI* strinp, int prio, int actionID );
 0CD8: FFFFFFFF B9CC3645 ; 336: void VideoPlayerControl( BOOK* VideoPlayerBook, int );
 0CDC: FFFFFFFF B1C73645 ; 337: void Video_ActionBack( BOOK* VideoPlayerBook, void* );
 0CE0: FFFFFFFF 01DC3645 ; 338: void Video_ExtractFrame( BOOK* VideoPlayerBook, void* );
-0CE4: FFFFFFFF C903F044 ; 339: void Video_ZoomOn( BOOK* VideoPlayerBook, void* );
-0CE8: FFFFFFFF DD232B45 ; 33A: void RightNow_SetActive( int flag );
-0CEC: FFFFFFFF 8599E844 ; 33B: void VideoResize_AutomateMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
-0CF0: FFFFFFFF 1967E544 ; 33C: void VideoResize_AllScreenMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
-0CF4: FFFFFFFF DDA9E844 ; 33D: int Video_GetCurrentSkinID( BOOK* VideoPlayerBook );
-0CF8: FFFFFFFF 597DE844 ; 33E: void Video_SetSkin( GUI* VideoPlayerGUI, int skinID );
+;0CE4: xxxxxxxx yyyyyyyy ; 339: void Video_ZoomOn( BOOK* VideoPlayerBook, void* );
+;0CE8: xxxxxxxx yyyyyyyy ; 33A: void RightNow_SetActive( int flag );
+;0CEC: xxxxxxxx yyyyyyyy ; 33B: void VideoResize_AutomateMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
+;0CF0: xxxxxxxx yyyyyyyy ; 33C: void VideoResize_AllScreenMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
+;0CF4: xxxxxxxx yyyyyyyy ; 33D: int Video_GetCurrentSkinID( BOOK* VideoPlayerBook );
+;0CF8: xxxxxxxx yyyyyyyy ; 33E: void Video_SetSkin( GUI* VideoPlayerGUI, int skinID );
 0CFC: FFFFFFFF C5C93645 ; 33F: int Video_SetPermit( BOOK* VideoPlayerBook, u16 NewWidth, u16 NewHeight );
 0D00: FFFFFFFF FDC53645 ; 340: int Video_Refresh( BOOK* VideoPlayerBook, GUI* VideoPlayerGUI );
 0D04: FFFFFFFF FDC73645 ; 341: void Video_Play( BOOK* VideoPlayerBook, void* );
-0D08: FFFFFFFF 1514E044 ; 342: void Video_Pause( BOOK* VideoPlayerBook, void* );
+0D08: FFFFFFFF 2DC93645 ; 342: void Video_Pause( BOOK* VideoPlayerBook, void* );
 0D0C: FFFFFFFF 01C93645 ; 343: void Video_Stop( BOOK* VideoPlayerBook, void* );
-0D10: FFFFFFFF D5EDE644 ; 344: void Audio_Pause( BOOK* );
-0D14: FFFFFFFF D5EAE644 ; 345: void Audio_Play( BOOK* );
-;0D18: xxxxxxxx yyyyyyyy ; 346: GUI* CreatePercentInputVA( int zero, ... );
-;0D1C: xxxxxxxx yyyyyyyy ; 347: int PercentInput_GetPercent( GUI* PercentInput );
-;0D20: xxxxxxxx yyyyyyyy ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
+0D10: FFFFFFFF 05863545 ; 344: void Audio_Pause( BOOK* );
+0D14: FFFFFFFF B1833545 ; 345: void Audio_Play( BOOK* );
+0D18: FFFFFFFF FD9F0C45 ; 346: GUI* CreatePercentInputVA( int zero, ... );
+0D1C: FFFFFFFF 79A10C45 ; 347: int PercentInput_GetPercent( GUI* PercentInput );
+0D20: FFFFFFFF D95F0A45 ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
 0D24: FFFFFFFF 8D9D4545 ; 349: int PHF_GetState( void );
 0D28: FFFFFFFF 999D4545 ; 34A: int CHF_GetState( void );
-0D2C: FFFFFFFF B5090D45 ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* );
-0D30: FFFFFFFF E9842A45 ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* );
+;0D2C: xxxxxxxx yyyyyyyy ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* );
+;0D30: xxxxxxxx yyyyyyyy ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* );
 0D34: FFFFFFFF 79EB1D45 ; 34D: void SetTrayIcon( IMAGEID, char mode );
 0D38: FFFFFFFF 05F35545 ; 34E: int REQUEST_SETTING_RINGVOLUME_SET( const int* sync, int unk, int null, int vol );
 0D3C: FFFFFFFF 55F25545 ; 34F: int REQUEST_SETTING_VIBRATOR_SET( const int* sync, int unk, int mode );
@@ -583,7 +584,7 @@
 0D4C: FFFFFFFF DDF45545 ; 353: int REQUEST_SETTING_ALLOWEDCALLERS_SET( const int* sync, int unk, int mode );
 0D50: FFFFFFFF 913EF544 ; 354: int JavaAppDesc_GetJavaAppFullpath( void* JavaDesc, JavaAppFullpath* );
 0D54: FFFFFFFF B9023745 ; 355: void* SoundRecorderDesc_Create( void );
-0D58: FFFFFFFF D9023745 ; 356: void SoundRecorderDesc_Destroy( void* desc );
+0D58: FFFFFFFF E5023745 ; 356: void SoundRecorderDesc_Destroy( void* desc );
 0D5C: FFFFFFFF F5023745 ; 357: int SoundRecorderDesc_SetBookID( void* desc, int BookID );
 0D60: FFFFFFFF 01033745 ; 358: int SoundRecorderDesc_SetType( void* desc, const int type );
 0D64: FFFFFFFF 15033745 ; 359: int SoundRecorderDesc_SetFolder( void* desc, const wchar_t* fpath );
@@ -603,10 +604,10 @@
 0D9C: FFFFFFFF 7DF45545 ; 367: void REQUEST_SETTING_ALLOWEDCALLERS_GET( const int* sync, int ProfileNum, char* state );
 0DA0: FFFFFFFF FD721445 ; 368: void* IncommingCall_Accept( BOOK* book );
 0DA4: FFFFFFFF D1DEFA44 ; 369: void MediaPlayer_SoftKeys_SetText( GUI* player_gui, int actionID, TEXTID );
-0DA8: FFFFFFFF F5EB1445 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
-0DAC: FFFFFFFF 09DFFA44 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
+0DA8: FFFFFFFF 9DDEFA44 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
+;0DAC: xxxxxxxx yyyyyyyy ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
 0DB0: FFFFFFFF 41DFFA44 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
-0DB4: FFFFFFFF F9E95145 ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
+0DB4: FFFFFFFF 49801945 ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
 0DB8: FFFFFFFF 41272345 ; 36E: void DispObject_Show( DISP_OBJ*, int mode );
 0DBC: FFFFFFFF 0DD6B944 ; 36F: int Request_EventChannel_Subscribe( const int* sync, int mode, int event );
 ;0DC0: xxxxxxxx yyyyyyyy ; 370: void GUIObject_SoftKeys_ExecuteAction( GUI*, u16 actionID );
@@ -618,16 +619,16 @@
 0DD8: FFFFFFFF F15E0A45 ; 376: GUI* GUIonMessage_GetGui( GUI_MESSAGE* msg );
 0DDC: FFFFFFFF F95E0A45 ; 377: int GUIonMessage_GetSelectedItem( GUI_MESSAGE* msg );
 0DE0: FFFFFFFF 095F0A45 ; 378: int GUIonMessage_GetPrevSelectedItem( GUI_MESSAGE* msg );
-;0DE4: xxxxxxxx yyyyyyyy ; 379: void ObexSendFile( SEND_OBEX_STRUCT* );
+0DE4: FFFFFFFF 51BFF044 ; 379: void ObexSendFile( SEND_OBEX_STRUCT* );
 0DE8: FFFFFFFF B4DF2345 ; 37A: void Feedback_SetManualScrollingText( DISP_OBJ* feedback_disp_obj, int state );
 0DEC: FFFFFFFF 89383845 ; 37B: int EqualizerGain_Set( int AudioSessionID, int Band, int Level );
-0DF0: FFFFFFFF 5DF19D44 ; 37C: int CANVAS_Get_GviGC( PCANVAS pcanvas, GVI_GC* dest );
+0DF0: FFFFFFFF 75BE9544 ; 37C: int CANVAS_Get_GviGC( PCANVAS pcanvas, GVI_GC* dest );
 0DF4: FFFFFFFF E9AAA444 ; 37D: void GVI_BitBlt( GVI_GC destgc, int destx, int desty, int destxsize, int destysize, GVI_GC srcgc, int srcx, int srcy, int _204, int _0, int _0_2, int _0_3 );
 0DF8: FFFFFFFF 59ACA444 ; 37E: void GVI_StretchBlt( GVI_GC destgc, int destx, int desty, int destxsize, int destysize, GVI_GC srcgc, int srcx, int srcy, int srcxsize, int srcysize, int _204, int _0, int _0_2, int _0_3 );
 0DFC: FFFFFFFF 05ADA444 ; 37F: void GVI_TransformBlt( GVI_GC destgc, int destx, int desty, GVI_GC srcgc, int srcx, int srcy, int srcxsize, int srcysize, int orientation, int _0 );
 0E00: FFFFFFFF 49A1A444 ; 380: GVI_PEN GVI_CreatePen( char thikness, int color );
 0E04: FFFFFFFF 85A1A444 ; 381: GVI_PEN GVI_CreateDashedPen( char thikness, int color, int bitmask, int step, int offset );
-0E08: FFFFFFFF 65A0A444 ; 382: GVI_BRUSH GVI_CreateSolidBrush( int color );
+0E08: FFFFFFFF D5A0A444 ; 382: GVI_BRUSH GVI_CreateSolidBrush( int color );
 0E0C: FFFFFFFF 319BA444 ; 383: BOOL GVI_Delete_GVI_Object( GVI_OBJ* );
 0E10: FFFFFFFF 19A6A444 ; 384: void GVI_DrawEllipse( GVI_GC gc, int x, int y, int w, int h, GVI_PEN pen );
 0E14: FFFFFFFF A1B1A444 ; 385: void GVI_DrawLine( GVI_GC gc, int x1, int y1, int x2, int y2, GVI_PEN pen );
@@ -695,32 +696,32 @@
 0F0C: FFFFFFFF 355A0A45 ; 3C3: void ListMenu_EnableSearchHeader( GUI_LIST*, BOOL );
 0F10: FFFFFFFF 45610A45 ; 3C4: wchar_t* GUIonMessage_GetSearchString( GUI_MESSAGE* msg );
 0F14: FFFFFFFF 65610A45 ; 3C5: int GUIonMessage_GetSearchStringLength( GUI_MESSAGE* msg );
-;0F18: xxxxxxxx yyyyyyyy ; 3C6: int EqualizerGain_Get( int AudioSessionID, int Band, int* Level );
-;0F1C: xxxxxxxx yyyyyyyy ; 3C7: int Theme_DestroyMenuIcons( void );
-;0F20: xxxxxxxx yyyyyyyy ; 3C8: void CoCreateInstance( PUUID cid, PUUID iid, void** pInterface );
-;0F24: xxxxxxxx yyyyyyyy ; 3C9: void GUIObject_SetSecondRowTitleText( GUI*, TEXTID );
-;0F28: xxxxxxxx yyyyyyyy ; 3CA: int ListMenu_GetItemCount( GUI_LIST* );
-;0F2C: xxxxxxxx yyyyyyyy ; 3CB: void OSE_GetShell( void** pInterface );
-;0F30: xxxxxxxx yyyyyyyy ; 3CC: int swscanf( const wchar_t* buffer, const wchar_t* format, ... );
-;0F34: xxxxxxxx yyyyyyyy ; 3CD: int sscanf( const char* buffer, const char* format, ... );
-;0F38: xxxxxxxx yyyyyyyy ; 3CE: void BookObj_WindowSetWantsFocus( BOOK* book, int display, BOOL WantsFocus );
-;0F3C: xxxxxxxx yyyyyyyy ; 3CF: void BookObj_StayOnTop( BOOK* book, int mode );
-;0F40: xxxxxxxx yyyyyyyy ; 3D0: void DispObject_WindowSetPosition( DISP_OBJ*, int x, int y );
-;0F44: xxxxxxxx yyyyyyyy ; 3D1: void DispObject_WindowSetSize( DISP_OBJ*, int w, int h );
-;0F48: xxxxxxxx yyyyyyyy ; 3D2: TEXTID Feedback_DispObject_GetText( DISP_OBJ* );
-;0F4C: xxxxxxxx yyyyyyyy ; 3D3: void DispObject_SoftKeys_ExecuteAction( DISP_OBJ*, u16 actionID );
-;0F50: xxxxxxxx yyyyyyyy ; 3D4: LIST* DataBrowserBook_GetCurrentFoldersList( BOOK* DataBrowserBook );
-;0F54: xxxxxxxx yyyyyyyy ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
-;0F58: xxxxxxxx yyyyyyyy ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
-;0F5C: xxxxxxxx yyyyyyyy ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
-;0F60: xxxxxxxx yyyyyyyy ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
-;0F64: xxxxxxxx yyyyyyyy ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
-;0F68: xxxxxxxx yyyyyyyy ; 3DA: int ThemeImage_Delete( int theme_image_type );
+0F18: FFFFFFFF 69383845 ; 3C6: int EqualizerGain_Get( int AudioSessionID, int Band, int* Level );
+0F1C: FFFFFFFF B1992245 ; 3C7: int Theme_DestroyMenuIcons( void );
+0F20: FFFFFFFF 6D580D45 ; 3C8: void CoCreateInstance( PUUID cid, PUUID iid, void** pInterface );
+0F24: FFFFFFFF ED8A0C45 ; 3C9: void GUIObject_SetSecondRowTitleText( GUI*, TEXTID );
+0F28: FFFFFFFF 25540A45 ; 3CA: int ListMenu_GetItemCount( GUI_LIST* );
+0F2C: FFFFFFFF AD14FD44 ; 3CB: void OSE_GetShell( void** pInterface );
+0F30: FFFFFFFF 7522D744 ; 3CC: int swscanf( const wchar_t* buffer, const wchar_t* format, ... );
+0F34: FFFFFFFF E97C1444 ; 3CD: int sscanf( const char* buffer, const char* format, ... );
+0F38: FFFFFFFF F5031D45 ; 3CE: void BookObj_WindowSetWantsFocus( BOOK* book, int display, BOOL WantsFocus );
+0F3C: FFFFFFFF 49071D45 ; 3CF: void BookObj_StayOnTop( BOOK* book, int mode );
+0F40: FFFFFFFF 95472345 ; 3D0: void DispObject_WindowSetPosition( DISP_OBJ*, int x, int y );
+0F44: FFFFFFFF 59472345 ; 3D1: void DispObject_WindowSetSize( DISP_OBJ*, int w, int h );
+0F48: FFFFFFFF 9DE62345 ; 3D2: TEXTID Feedback_DispObject_GetText( DISP_OBJ* );
+0F4C: FFFFFFFF CDDB0C45 ; 3D3: void DispObject_SoftKeys_ExecuteAction( DISP_OBJ*, u16 actionID );
+0F50: FFFFFFFF 95A31845 ; 3D4: LIST* DataBrowserBook_GetCurrentFoldersList( BOOK* DataBrowserBook );
+0F54: FFFFFFFF 21612345 ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
+0F58: FFFFFFFF 498B0C45 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
+0F5C: FFFFFFFF 71B00945 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
+0F60: FFFFFFFF E9A13245 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
+0F64: FFFFFFFF 61171645 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
+0F68: FFFFFFFF 314F4645 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
 ;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
 ;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
 ;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
