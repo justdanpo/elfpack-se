@@ -9,13 +9,13 @@ a       EQU     b
         ENDM
 
         RSEG  CODE
-        defadr   DB_PATCH_RET,0x117EB8BC+1 
-        defadr   DB_EXT_RET,0x117EB6C4+1 
-        defadr   DB_PATCH3_RET,0x117EB56C+1 
-        defadr   DB_PATCH4_RET,0x117EBF3A+1 
-        defadr   DB_PATCH5_RET,0x117EB710+1 
-        defadr   DB_PATCH6_RET,0x117EB744+1 
-        defadr   MESS_HOOK_RET,0x11214F44+1
+        defadr  DB_PATCH_RET,0x117EB8BC+1 
+        defadr  DB_EXT_RET,0x117EB6C4+1 
+        defadr  DB_PATCH3_RET,0x117EB56C+1 
+        defadr  DB_PATCH4_RET,0x117EBF3A+1 
+        defadr  DB_PATCH5_RET,0x117EB710+1 
+        defadr  DB_PATCH6_RET,0x117EB744+1 
+        defadr  MESS_HOOK_RET,0x11214F44+1
 
         defadr  memalloc,0x4BB00584
         defadr  memfree,0x4BB005AC
@@ -245,12 +245,12 @@ DB_PATCH5:
         RSEG   CODE
         CODE16
 DB_PATCH6:
-        BLX GetExtTable
-        LSL R1, R5, #2
+        BLX     GetExtTable
+        LSL     R1, R5, #2
         LDR	R1, [R0,R1]
         LSL	R0, R6, #2
-        LDR R2, =DB_PATCH6_RET
-        BX  R2
+        LDR     R2, =DB_PATCH6_RET
+        BX      R2
 
 
 
