@@ -528,7 +528,7 @@
 0C68: 00000000 51A3E810 ; 31A: void BookObj_SetDisplayOrientation( BOOK* book, int orientation );
 0C6C: 00000000 9196E810 ; 31B: BOOK* Display_GetTopBook( int display );
 0C70: 00000000 D11BA5ED ; 31C: void Display_SetBrightness( int display, int brightness );
-0C74: 00000000 BDAAE510 ; 31D: int Display_GetBrightness( int display );
+0C74: 00000000 45AAE510 ; 31D: int Display_GetBrightness( int display );
 0C78: 00000000 41658811 ; 31E: void DataBrowserDesc_Menu_AddFSFunctions( void* DataBrowserDesc, int );
 0C7C: 00000000 9D658811 ; 31F: void DataBrowserDesc_Menu_AddNewFolder( void* DataBrowserDesc, int );
 0C80: 00000000 A5658811 ; 320: void DataBrowserDesc_Menu_AddMarkFiles( void* DataBrowserDesc, int );
