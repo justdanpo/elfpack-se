@@ -1,5 +1,6 @@
-//K660_R1FA037_Hutchison
+//K630_R1FA032
 #include "target.h"
+
         RSEG   CODE
         CODE32
 
@@ -9,18 +10,12 @@ a       EQU     b
         ENDM
 
         RSEG  CODE
-        defadr   DB_PATCH_RET,0x1100E134+1
-        defadr   DB_EXT_RET,0x1100DF40+1
-        defadr   DB_PATCH3_RET,0x1100DE00+1
-        defadr   DB_PATCH4_RET,0x1100E910+1
-        defadr   DB_PATCH5_RET,0x1100DF8C+1
-        defadr   DB_PATCH6_RET,0x1100DFC0+1
-        defadr   MESS_HOOK_RET,0x107626E4+1
+        defadr MESS_HOOK_RET,0x106F67B0+1
 
-        defadr  memalloc,0x28B001C4
-        defadr  memfree,0x28B001D4
+        defadr memalloc,0x10098358
+        defadr memfree,0x10098380
 
-LastExtDB EQU 0x11A385E8
+LastExtDB EQU 0x119CD1B8
 
 // --- Patch Keyhandler ---
 	EXTERN Keyhandler_Hook
@@ -41,7 +36,6 @@ NEW_KEYHANDLER1:
 	MOV	R12, R2
 	POP	{R2,R3}
 	BX	R12
-
 
 	RSEG  PATCH_KEYHANDLER1
         CODE16
@@ -74,13 +68,13 @@ NEW_KEYHANDLER1:
 	RSEG  PATCH_KEYHANDLER1_CHANGE3(1)
         CODE16
 	MOV	R3, SP
-	LDRH	R2, [R3,#0x8]
+	LDRH	R2, [R3,#0xC]
 
 
 	RSEG  PATCH_KEYHANDLER1_CHANGE4(1)
         CODE16
 	MOV	R3, SP
-	LDRH	R0, [R3,#0x8]
+	LDRH	R0, [R3,#0xC]
 
 
 	RSEG  PATCH_KEYHANDLER2
@@ -131,20 +125,19 @@ NEW_KEYHANDLER3:
 
 // --- ParseHelperMessage ---
         EXTERN  ParseHelperMessage
-        RSEG   CODE
+        RSEG    CODE
         CODE16
 MESS_HOOK:
-	LDR     R6, [R6, #0]
+        LDR     R6, [R6, #0]
         BLX     ParseHelperMessage
-	LDR     R2, =0x2A23D534
+	LDR     R2, =0x2A23DAE4
         LDR     R3, =MESS_HOOK_RET
         BX      R3
 
         RSEG   PATCH_MMI_MESSAGE_HOOK
         CODE16
-        LDR     R7,=MESS_HOOK
-        BX      R7
-
+        LDR     R3,=MESS_HOOK
+        BX      R3
 
 // --- PageAction1 ---
         EXTERN  PageAction_Hook2
@@ -187,97 +180,110 @@ PG_ACTION2:
         BX      R2
 
 // --- Data Browser ---
+
         EXTERN  GetExtTable
-        RSEG   CODE
+
+	RSEG    PATCH_DB1
+        RSEG    CODE
         CODE16
-DB_PATCH:
+DB_PATCH1:
         BLX     GetExtTable
-        LSL     R1, R6, #2
-        LDR     R0, [R0,R1]
-        LDR     R1, =LastExtDB
-        LDR     R3, =DB_PATCH_RET
+	LSL     R1, R5, #2
+	LDR     R0, [R0,R1]
+	LDR     R1, =LastExtDB
+        LDR     R3, =SFE(PATCH_DB1)+1
         BX      R3
 
-        RSEG   CODE
+	RSEG    PATCH_DB2
+        RSEG    CODE
         CODE16
-DBEXT:
-        BLX     GetExtTable
-	LSL	R1, R5, #2
-	LDR	R0, [R0,R1]
-	LDR	R1, =LastExtDB
-	STR	R0, [SP,#0]
-        LDR     R3, =DB_EXT_RET
-        BX      R3
 
-        RSEG   CODE
-        CODE16
-DB_PATCH3:
+DB_PATCH2:
         BLX     GetExtTable
-	LSL	R1, R5, #2
-	LDR	R0, [R0,R1]
-	LDR	R1, =LastExtDB
-	STR	R0, [SP,#0]
-        LDR     R3, =DB_PATCH3_RET
-        BX      R3
-
-        RSEG   CODE
-        CODE16
-DB_PATCH4:
-        BLX     GetExtTable
-	LSL	R1, R6, #2
-	LDR	R7, [R0,R1]
-	LDR	R0, =LastExtDB
-        LDR     R1, =DB_PATCH4_RET
-        BX      R1
-
-        RSEG   CODE
-        CODE16
-DB_PATCH5:
-        BLX     GetExtTable
-	LSL	R1, R5, #2
-	LDR	R1, [R0,R1]
-	LSL	R0, R6, #2
-        LDR     R7, =DB_PATCH5_RET
+        LSL     R1, R5, #2
+	LDR     R1, [R0,R1]
+	LSL     R0, R6, #2
+        LDR     R7, =SFE(PATCH_DB2)+1
         BX      R7
 
-        RSEG   CODE
+	RSEG    PATCH_DB3
+        RSEG    CODE
         CODE16
-DB_PATCH6:
+
+DB_PATCH3:
         BLX     GetExtTable
-	LSL	R1, R5, #2
-	LDR	R1, [R0,R1]
-	LSL	R0, R6, #2
-        LDR     R2, =DB_PATCH6_RET
+        LSL     R1, R5, #2
+	LDR     R1, [R0,R1]
+	LSL     R0, R6, #2
+        LDR     R2, =SFE(PATCH_DB3)+1
         BX      R2
+
+	RSEG    PATCH_DB4
+        RSEG    CODE
+        CODE16
+
+DB_PATCH4:
+        BLX     GetExtTable
+        LSL     R1, R6, #2
+	LDR     R0, [R0,R1]
+	LDR     R1, =LastExtDB
+        LDR     R3, =SFE(PATCH_DB4)+1
+        BX      R3
+
+	RSEG    PATCH_DB5
+        RSEG    CODE
+        CODE16
+
+DB_PATCH5:
+	BLX     GetExtTable
+	LSL     R1, R5, #2
+	LDR     R0, [R0,R1]
+	STR     R0, [SP,#0]
+	LDR     R1, =LastExtDB
+	LDR     R7, =SFE(PATCH_DB5)+1
+        BX      R7
+
+	RSEG    PATCH_DB6
+        RSEG    CODE
+        CODE16
+
+DB_PATCH6:
+	BLX     GetExtTable
+	LSL     R1, R6, #2
+	LDR     R7, [R0,R1]
+	LDR     R0, =LastExtDB
+	LDR     R3, =SFE(PATCH_DB6)+1
+        BX      R3
+
 
         RSEG   PATCH_DB1(2)
         CODE16
-        LDR    R3, =DB_PATCH
+        LDR    R3, =DB_PATCH1
         BX     R3
 
         RSEG   PATCH_DB2(2)
         CODE16
-        LDR    R3, =DBEXT
-        BX     R3
+        LDR    R7, =DB_PATCH2
+        BX     R7
 
         RSEG   PATCH_DB3(2)
         CODE16
-        LDR    R3, =DB_PATCH3
-        BX     R3
+        LDR    R2, =DB_PATCH3
+        BX     R2
 
         RSEG   PATCH_DB4(2)
         CODE16
         LDR    R3, =DB_PATCH4
         BX     R3
 
-        RSEG   PATCH_DB5(2)
+	RSEG   PATCH_DB5(2)
         CODE16
-        LDR    R2, =DB_PATCH5
-        BX     R2
+        LDR    R7, =DB_PATCH5
+        BX     R7
 
-        RSEG   PATCH_DB6(2)
+	RSEG   PATCH_DB6(2)
         CODE16
-        LDR    R2, =DB_PATCH6
-        BX     R2
+        LDR    R3, =DB_PATCH6
+        BX     R3
 
         END
