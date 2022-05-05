@@ -1,6 +1,6 @@
 ;W580 SW-R8BE001
 ;Function library
-;v221207
+;v2022
 ;(c) Hussein , IronMaster
 ;(p) -=Tanusha_Se=-, UltraShot
 +45C3FC00
@@ -714,12 +714,12 @@
 0F54: 00000000 75CF3545 ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
 0F58: 00000000 654F3645 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
 0F5C: 00000000 216E2F45 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
-;0F60: xxxxxxxx yyyyyyyy ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
-;0F64: xxxxxxxx yyyyyyyy ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
-;0F68: xxxxxxxx yyyyyyyy ; 3DA: int ThemeImage_Delete( int theme_image_type );
+0F60: 00000000 51412345 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
+0F64: 00000000 215DDF44 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
+0F68: 00000000 0D3B3545 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
-;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+0F74: 00000000 A1183845 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
 ;0F78: xxxxxxxx yyyyyyyy ; 3DE:
 ;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );

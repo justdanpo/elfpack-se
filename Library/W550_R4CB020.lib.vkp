@@ -711,15 +711,15 @@
 0F48: FFFFFFFF 9D542345 ; 3D2: TEXTID Feedback_DispObject_GetText( DISP_OBJ* ); 
 0F4C: FFFFFFFF F9530C45 ; 3D3: void DispObject_SoftKeys_ExecuteAction( DISP_OBJ*, u16 actionID );
 0F50: FFFFFFFF 79241745 ; 3D4: LIST* DataBrowserBook_GetCurrentFoldersList( BOOK* DataBrowserBook );
-;0F54: xxxxxxxx yyyyyyyy ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
-;0F58: xxxxxxxx yyyyyyyy ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
-;0F5C: xxxxxxxx yyyyyyyy ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
-;0F60: xxxxxxxx yyyyyyyy ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
-;0F64: xxxxxxxx yyyyyyyy ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
-;0F68: xxxxxxxx yyyyyyyy ; 3DA: int ThemeImage_Delete( int theme_image_type );
+0F54: FFFFFFFF DDD72245 ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
+0F58: FFFFFFFF 29060C45 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
+0F5C: FFFFFFFF 952C0945 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
+0F60: FFFFFFFF 15973245 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
+0F64: FFFFFFFF B9DB3345 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
+0F68: FFFFFFFF 654D4645 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
-;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+0F74: FFFFFFFF B17E0C45 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
 ;0F78: xxxxxxxx yyyyyyyy ; 3DE:
 ;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );

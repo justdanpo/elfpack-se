@@ -315,8 +315,8 @@
 0914: 00000000 959FA511 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: 00000000 899FA511 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: 00000000 CDE5DF10 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: 00000000 659FA511 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: 00000000 FD9FA511 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: 00000000 F9B59B11 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: 00000000 E19A9B11 ; 24B: int GetSilent( void );
 0930: 00000000 CD589B11 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );
@@ -472,13 +472,13 @@
 0B88: 00000000 B93DDB10 ; 2E2: IMAGEID Shortcut_Get_MenuItemIconID( void* );
 0B8C: 00000000 E960DC10 ; 2E3: BOOK* FindBookEx( int (*cmp_proc)( BOOK* book_from_list, int* param ), int* param );
 0B90: 00000000 6D847D11 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
-;0B94: xxxxxxxx yyyyyyyy ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
+0B94: 00000000 0D6D7810 ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
 0B98: 00000000 4584DC10 ; 2E6: int BookObj_GetSessionID( BOOK* book );
 0B9C: 00000000 156CDC10 ; 2E7: void UI_Event_toSID( int event, int sess_id );
 0BA0: 00000000 D11BA5ED ; 2E8: char* GetIMSI( void );
 0BA4: 00000000 5932A311 ; 2E9: void UI_CONTROLLED_SHUTDOWN_RESPONSE( int book_id );
 0BA8: 00000000 D11BA5ED ; 2EA: int MainInput_getCurPos( GUI* );
-;0BAC: xxxxxxxx yyyyyyyy ; 2EB: void MainInput_Hide( GUI* );
+0BAC: 00000000 F54CD610 ; 2EB: void MainInput_Hide( GUI* );
 0BB0: 00000000 619B7E10 ; 2EC: void DispObject_SoftKeys_RestoreDefaultAction( DISP_OBJ*, int action );
 0BB4: 00000000 61CDB210 ; 2ED: TEXTID PNUM2Name( BCD_TEXT pnum, int isIconNeeded, int only_full_number_flag );
 0BB8: 00000000 9142B510 ; 2EE: int SpeedDial_GetPNUM( int _zero, char charter0__9, BCD_TEXT PNUM );
@@ -535,7 +535,7 @@
 0C84: 00000000 3149DE10 ; 321: void SetTheme( wchar_t* path, wchar_t* name, int bookid, int unk_1 );
 0C88: 00000000 5DD37E10 ; 322: void SoftKeys_GetLabel( DISP_OBJ* softkeys, SKLABEL* lbl, int id );
 0C8C: 00000000 15CF7E10 ; 323: void SoftKeys_Update( DISP_OBJ* softkeys );
-;0C90: xxxxxxxx yyyyyyyy ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
+0C90: 00000000 3D608C10 ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
 0C94: 00000000 E51DDE10 ; 325: void* IncommingCall_Reject( BOOK* book );
 0C98: 00000000 2531DE10 ; 326: void* IncommingCall_Mute( BOOK* book );
 0C9C: 00000000 D11BA5ED ; 327: int GetRadioState( char* level, char* flag );
@@ -713,14 +713,14 @@
 0F4C: 00000000 959D7E10 ; 3D3: void DispObject_SoftKeys_ExecuteAction( DISP_OBJ*, u16 actionID );
 0F50: 00000000 89B17C11 ; 3D4: LIST* DataBrowserBook_GetCurrentFoldersList( BOOK* DataBrowserBook );
 0F54: 00000000 3D3B9A10 ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
-;0F58: xxxxxxxx yyyyyyyy ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
-;0F5C: xxxxxxxx yyyyyyyy ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
+0F58: 00000000 3DB19A10 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
+0F5C: 00000000 yyyyyyyy ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
 0F60: 00000000 B9319110 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
 0F64: 00000000 79F3B410 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
-;0F68: xxxxxxxx yyyyyyyy ; 3DA: int ThemeImage_Delete( int theme_image_type );
+0F68: 00000000 3D56E310 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
-;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+0F74: 00000000 D5DB7E10 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
 ;0F78: xxxxxxxx yyyyyyyy ; 3DE:
 ;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );

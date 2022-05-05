@@ -1,6 +1,6 @@
 ;K610_R8BE001
 ;Function library
-;25-02-2022
+;v2022
 ;(c) Hussein , IronMaster
 ;(p) farid
 +45D1FC00
@@ -592,6 +592,7 @@
 0D6C: 00000000 99890445 ; 35B: int SoundRecorderDesc_SetRecordSize( void* desc, const int size );
 0D70: 00000000 D1890445 ; 35C: int SoundRecorder_Create( void* desc );
 0D74: 00000000 A12AEA44 ; 35D: int SoundRecorder_RecordCall( BOOK* OngoingCallBook );
+0D78: 00000000 FDD8F044 ; 35E: int Browser_OpenURI( BOOK* book, char* URI, int mode );
 0D7C: 00000000 452C3145 ; 35F: char* GetURIScheme( int schemeID );
 0D80: 00000000 DD303145 ; 360: char* CreateURI( wchar_t* fpath, wchar_t* fname, char* URIScheme );
 0D84: 00000000 89A7FB44 ; 361: void DataBrowserDesc_SetViewModeAndSortOrder( void* DataBrowserDesc, int view_sort_ID );

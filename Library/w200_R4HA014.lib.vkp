@@ -1,6 +1,6 @@
 ;W200 SW-R4HA014
 ;Function library
-;v13_11_2021
+;v2022
 ;(c) Hussein , IronMaster
 ;(p) farid, Mike006, ZEN
 +456BFC00
@@ -344,8 +344,8 @@
 098C: FFFFFFFF C1240045 ; 263: void GC_DrawFRect( GC* gc, int color, int x1, int y1, int x2, int y2 );
 0990: FFFFFFFF D5150045 ; 264: int GC_WritePixels( GC* gc, int x1, int y1, int x2, int y2, int* bmp );
 0994: FFFFFFFF E512D144 ; 265: png_structp png_create_read_struct_2( png_const_charp user_png_ver, png_voidp error_ptr, png_error_ptr error_fn, png_error_ptr warn_fn, png_voidp mem_ptr, png_malloc_ptr malloc_fn, png_free_ptr free_fn );
-0998: FFFFFFFF 2B13D144 ; 266: void png_destroy_read_struct( png_structpp png_ptr_ptr, png_infopp info_ptr_ptr, png_infopp end_info_ptr_ptr );
-099C: FFFFFFFF 6700D144 ; 267: png_infop png_create_info_struct( png_structp png_ptr );
+0998: FFFFFFFF 0514D144 ; 266: void png_destroy_read_struct( png_structpp png_ptr_ptr, png_infopp info_ptr_ptr, png_infopp end_info_ptr_ptr );
+099C: FFFFFFFF 6500D144 ; 267: png_infop png_create_info_struct( png_structp png_ptr );
 09A0: FFFFFFFF 9100D144 ; 268: void png_destroy_info_struct( png_structp png_ptr, png_infopp info_ptr_ptr );
 09A4: FFFFFFFF C512D144 ; 269: void png_set_progressive_read_fn( png_structp png_ptr, png_voidp progressive_ptr, png_progressive_info_ptr info_fn, png_progressive_row_ptr row_fn, png_progressive_end_ptr end_fn );
 09A8: FFFFFFFF E906D144 ; 26A: void png_process_data( png_structp png_ptr, png_infop info_ptr, png_bytep buffer, png_size_t buffer_size );
@@ -354,13 +354,13 @@
 09B4: FFFFFFFF 7104D144 ; 26D: png_uint_32 png_get_IHDR( png_structp png_ptr, png_infop info_ptr, png_uint_32* width, png_uint_32* height, int* bit_depth, int* color_type, int* interlace_method, int* compression_method, int* filter_method );
 09B8: FFFFFFFF 6915D144 ; 26E: void png_set_strip_16( png_structp png_ptr );
 09BC: FFFFFFFF 7D15D144 ; 26F: void png_set_gray_1_2_4_to_8( png_structp png_ptr );
-09C0: FFFFFFFF 8315D144 ; 270: void png_set_gray_to_rgb( png_structp png_ptr );
+09C0: FFFFFFFF 8515D144 ; 270: void png_set_gray_to_rgb( png_structp png_ptr );
 09C4: FFFFFFFF 4D04D144 ; 271: png_uint_32 png_get_valid( png_structp png_ptr, png_infop info_ptr, png_uint_32 flag );
-09C8: FFFFFFFF 7F15D144 ; 272: void png_set_tRNS_to_alpha( png_structp png_ptr );
+09C8: FFFFFFFF 8115D144 ; 272: void png_set_tRNS_to_alpha( png_structp png_ptr );
 09CC: FFFFFFFF 453BD144 ; 273: void png_set_filler( png_structp png_ptr, png_uint_32 filler, int flags );
 09D0: FFFFFFFF 7115D144 ; 274: void png_set_palette_to_rgb( png_structp png_ptr );
-09D4: FFFFFFFF 5F02D144 ; 275: png_uint_32 png_get_rowbytes( png_structp png_ptr, png_infop info_ptr );
-09D8: FFFFFFFF AB12D144 ; 276: void png_progressive_combine_row( png_structp png_ptr, png_bytep old_row, png_bytep new_row );
+09D4: FFFFFFFF 6104D144 ; 275: png_uint_32 png_get_rowbytes( png_structp png_ptr, png_infop info_ptr );
+09D8: FFFFFFFF A912D144 ; 276: void png_progressive_combine_row( png_structp png_ptr, png_bytep old_row, png_bytep new_row );
 09DC: FFFFFFFF 89FFD044 ; 277: int png_sig_cmp( png_bytep sig, png_size_t start, png_size_t num_to_check );
 09E0: FFFFFFFF 30931844 ; 278: int setjmp( jmp_buf jmpbuf );
 09E4: FFFFFFFF 54931844 ; 279: void longjmp( jmp_buf, int );
@@ -605,7 +605,7 @@
 0DA0: FFFFFFFF 99B10745 ; 368: void* IncommingCall_Accept( BOOK* book );
 0DA4: FFFFFFFF 154FEF44 ; 369: void MediaPlayer_SoftKeys_SetText( GUI* player_gui, int actionID, TEXTID );
 0DA8: FFFFFFFF E14EEF44 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
-0DAC: FFFFFFFF 854FEF44 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
+;0DAC: xxxxxxxx yyyyyyyy ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
 0DB0: FFFFFFFF 314FEF44 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
 0DB4: FFFFFFFF A1BE0C45 ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
 0DB8: FFFFFFFF 45651745 ; 36E: void DispObject_Show( DISP_OBJ*, int mode );
@@ -719,7 +719,7 @@
 0F68: FFFFFFFF 71D63A45 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
-;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+0F74: FFFFFFFF A1B20045 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
 ;0F78: xxxxxxxx yyyyyyyy ; 3DE:
 ;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
