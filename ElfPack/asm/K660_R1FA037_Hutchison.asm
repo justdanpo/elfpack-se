@@ -15,10 +15,10 @@ a       EQU     b
         defadr   DB_PATCH4_RET,0x1100E910+1
         defadr   DB_PATCH5_RET,0x1100DF8C+1
         defadr   DB_PATCH6_RET,0x1100DFC0+1
-        defadr   MESS_HOOK_RET,0x107626E4+1
+        defadr   MESS_HOOK_RET,0x107626E2+1
 
-        defadr  memalloc,0x28B001C4
-        defadr  memfree,0x28B001D4
+        defadr  memalloc,0x1009ED00
+        defadr  memfree,0x1009ED28
 
 LastExtDB EQU 0x11A385E8
 
@@ -134,9 +134,10 @@ NEW_KEYHANDLER3:
         RSEG   CODE
         CODE16
 MESS_HOOK:
-	LDR     R6, [R6, #0]
-        BLX     ParseHelperMessage
-	LDR     R2, =0x2A23D534
+	LDR     R6, [SP,#4]
+	MOV     R7, #1
+	LDR     R6, [R6,#0]
+	BLX     ParseHelperMessage
         LDR     R3, =MESS_HOOK_RET
         BX      R3
 

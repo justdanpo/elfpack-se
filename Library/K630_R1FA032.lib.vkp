@@ -515,7 +515,7 @@
 0C34: 00000000 51846411 ; 30D: GUI* CreateProgressBar( BOOK* book, int display );
 0C38: 00000000 69876411 ; 30E: void ProgressBar_SetText( GUI*, TEXTID text );
 0C3C: 00000000 85886411 ; 30F: void ProgressBar_SetIcon( GUI*, u16 icon_id );
-0C40: 00000000 0D7F6C11 ; 310: void ProgressBar_SetPercentValue(GUI*,int value );
+0C40: 00000000 25876411 ; 310: void ProgressBar_SetPercentValue(GUI*,int value );
 0C44: 00000000 95886411 ; 311: void ProgressBar_SetBarDisabled( GUI*, BOOL );
 0C48: 00000000 E5F95B11 ; 312: void StringInput_DispObject_SetText( DISP_OBJ*, TEXTID );
 0C4C: 00000000 D11BA5ED ; 313: void GUIObject_SetTitleBackgroundImage( GUI*, IMAGEID );
