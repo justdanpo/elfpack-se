@@ -62,11 +62,11 @@
 0524: 00000000 81C43145 ; 149: int OneOfMany_GetSelected( GUI_ONEOFMANY* );
 0528: 00000000 5DFF2B45 ; 14A: void StatusIndication_Item8_SetText( TEXTID );
 052C: 00000000 25D53745 ; 14B: void GUIObject_SoftKeys_SetAction( GUI*, u16 actionID, SKACTIONPROC proc );
-;0530: xxxxxxxx yyyyyyyy ; 14C: void GUIObject_SoftKeys_SetText( GUI*, u16 actionID, TEXTID );
-;0534: xxxxxxxx yyyyyyyy ; 14D: void GUIObject_SoftKeys_SetEnable( GUI*, u16 actionID, BOOL );
+0530: 00000000 9DD53745 ; 14C: void GUIObject_SoftKeys_SetText( GUI*, u16 actionID, TEXTID );
+0534: 00000000 59D63745 ; 14D: void GUIObject_SoftKeys_SetEnable( GUI*, u16 actionID, BOOL );
 0538: 00000000 11D63745 ; 14E: void GUIObject_SoftKeys_AddErrorStr( GUI*, u16 actionID, TEXTID );
 053C: 00000000 E9D43745 ; 14F: void GUIObject_SoftKeys_RemoveItem( GUI*, u16 actionID );
-;0540: xxxxxxxx yyyyyyyy ; 150: void GUIObject_SoftKeys_SetVisible( GUI*, u16 actionID, BOOL );
+0540: 00000000 EDD53745 ; 150: void GUIObject_SoftKeys_SetVisible( GUI*, u16 actionID, BOOL );
 0544: 00000000 5DD83745 ; 151: void GUIObject_SoftKeys_SuppressDefaultAction( GUI*, u16 actionID );
 0548: 00000000 55D95544 ; 152: wchar_t* wstrcpy( wchar_t* dest, const wchar_t* source );
 054C: 00000000 01DA5544 ; 153: wchar_t* wstrncpy( wchar_t* dest, const wchar_t* source, int maxlen );
@@ -123,14 +123,14 @@
 0618: 00000000 FCEF3044 ; 186: OSBOOLEAN hunt( const char* name, OSUSER user, PROCESS* name_, union SIGNAL** hunt_sig );
 061C: 00000000 28F03044 ; 187: void kill_proc( PROCESS pid );
 ;0620: xxxxxxxx yyyyyyyy ; 188:
-;0624: xxxxxxxx yyyyyyyy ; 189: union SIGNAL* receive_w_tmo( OSTIME timeout, SIGSELECT* sel );
+0624: 00000000 60EE3044 ; 189: union SIGNAL* receive_w_tmo( OSTIME timeout, SIGSELECT* sel );
 ;0628: xxxxxxxx yyyyyyyy ; 18A:
-;062C: xxxxxxxx yyyyyyyy ; 18B: void stop( PROCESS pid );
+062C: 00000000 10F13044 ; 18B: void stop( PROCESS pid );
 0630: 00000000 7CEF3044 ; 18C: OSBOOLEAN get_mem( PROCESS pid, OSADDRESS from, void* to, OSADDRESS size );
 0634: 00000000 91632C44 ; 18D: OSADDRESS get_envp( PROCESS pid, char* name );
 0638: 00000000 A5632C44 ; 18E: OSBOOLEAN set_envp( PROCESS pid, char* name, OSADDRESS value );
 063C: 00000000 34EF3044 ; 18F: PROCESS get_bid( PROCESS pid );
-;0640: xxxxxxxx yyyyyyyy ; 190: int datetime2unixtime( DATETIME* dt );
+0640: 00000000 E1360045 ; 190: int datetime2unixtime( DATETIME* dt );
 ;0644: xxxxxxxx yyyyyyyy ; 191:
 ;0648: xxxxxxxx yyyyyyyy ; 192:
 ;064C: xxxxxxxx yyyyyyyy ; 193:
@@ -270,7 +270,7 @@
 0864: 00000000 8147D744 ; 219: int REQUEST_PHONEBOOK_ACCESSSTATUS_TOTAL_GET( const int* sync, int* );
 0868: 00000000 40F20920 ;821A: PROCESS* PID_MMI( void );
 ;086C: xxxxxxxx yyyyyyyy ; 21B:
-;0870: xxxxxxxx yyyyyyyy ; 21C: GUI* DispObject_GetGUI( DISP_OBJ* );
+0870: 00000000 E5663545 ; 21C: GUI* DispObject_GetGUI( DISP_OBJ* );
 0874: 00000000 35663545 ; 21D: DISP_OBJ* Display_GetFocusedDispObject( int display );
 0878: 00000000 E96B3545 ; 21E: char DispObject_GetVisible( DISP_OBJ* );
 087C: 00000000 99654245 ; 21F: DISP_DESC* DispObject_GetDESC( DISP_OBJ* ); //not real; don't port from here
@@ -299,7 +299,7 @@
 08D8: 00000000 65273545 ; 236: void DISP_DESC_SetOnLayout( DISP_DESC*, DISP_OBJ_ONLAYOUT_METHOD );
 08DC: 00000000 95283545 ; 237: DISP_OBJ_ONLAYOUT_METHOD DispObject_GetOnLayout( DISP_OBJ* );
 08E0: 00000000 69273545 ; 238: void DISP_DESC_SetOnConfig( DISP_DESC*, DISP_OBJ_ONCONFIG_METHOD );
-;08E4: xxxxxxxx yyyyyyyy ; 239: DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
+08E4: 00000000 B1283545 ; 239: DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
 ;08E8: xxxxxxxx yyyyyyyy ; 23A: void DISP_DESC_SetMethod0A( DISP_DESC*, void (*)( void* ) );
 ;08EC: xxxxxxxx yyyyyyyy ; 23B: DISP_OBJ_METHOD DispObject_GetMethod0A( DISP_OBJ* );
 ;08F0: xxxxxxxx yyyyyyyy ; 23C: void DISP_DESC_SetMethod0B( DISP_DESC*, void (*)( void* ) );
@@ -310,12 +310,12 @@
 0904: 00000000 71171145 ; 241: TEXTID JavaSession_GetName( void ); //nullsub(ret 0x6FFFFFFF)
 0908: 00000000 E1333445 ; 242: TEXTID TextID_Copy( TEXTID );
 090C: 00000000 85B62A45 ; 243: UI_APP_SESSION* BookObj_GetSession( BOOK* book );
-;0910: xxxxxxxx yyyyyyyy ; 244: void GUIonMessage_SetNumberOfSubItems( GUI_MESSAGE* msg, int unk, int num_sub_items );
+0910: 00000000 C5AE3145 ; 244: void GUIonMessage_SetNumberOfSubItems( GUI_MESSAGE* msg, int unk, int num_sub_items );
 0914: 00000000 3DAF3145 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: 00000000 31AF3145 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: 00000000 914A2145 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: 00000000 01AF3145 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: 00000000 91AF3145 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: 00000000 351E0145 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: 00000000 412AFE44 ; 24B: int GetSilent( void );
 0930: 00000000 7D02FE44 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );
@@ -372,7 +372,7 @@
 09FC: 00000000 F9D05544 ; 27F: char* strncpy( char* dest, const char* source, int maxlen );
 0A00: 00000000 F5CF5544 ; 280: char* strcat( char* dest, const char* src );
 0A04: 00000000 25113645 ; 281: void GUIObject_SetTitleType( GUI*, int type );
-;0A08: xxxxxxxx yyyyyyyy ; 282: void GUIonMessage_SetItemDisabled( GUI_MESSAGE* msg, BOOL );
+0A08: 00000000 D1AE3145 ; 282: void GUIonMessage_SetItemDisabled( GUI_MESSAGE* msg, BOOL );
 0A0C: 00000000 2DD1E444 ; 283: int REQUEST_IMAGEHANDLER_INTERNAL_REGISTER( const int* sync, u16 ImageHandler, wchar_t* path, wchar_t* fname, int unk, IMAGEID*, char* error );
 0A10: 00000000 DDD1E444 ; 284: int REQUEST_IMAGEHANDLER_INTERNAL_UNREGISTER( const int* sync, u16 ImageHandler, u16*, u16*, IMAGEID, int unk_1, char* error );
 0A14: 00000000 14972F20 ;8285: SURFACE** get_Surfaces( void );
@@ -447,7 +447,7 @@
 0B28: 00000000 951C3645 ; 2CA: void TabMenuBar_SetOnTabSwitch( GUI_TABMENUBAR*, void (*proc)( BOOK*, int act_tab ) );
 0B2C: 00000000 21BD0245 ; 2CB: TEXTID KeyCode2Name( int key_code );
 0B30: 00000000 1988E444 ; 2CC: int ImageID_Get( const wchar_t* fpath, const wchar_t* fname, IMAGEID* );
-0B34: 00000000 0D88E444 ; 2CD: void ImageID_Free( IMAGEID );
+0B34: 00000000 BD92E444 ; 2CD: void ImageID_Free( IMAGEID );
 0B38: 00000000 6DB9EB44 ; 2CE: SUB_EXECUTE* DataBrowser_CreateSubExecute( int BookID, FILEITEM* );
 0B3C: 00000000 8DC3EB44 ; 2CF: int DataBrowser_ExecuteSubroutine( SUB_EXECUTE* sub, int action, u16* unk );
 0B40: 00000000 81BBED44 ; 2D0: int FILEITEM_SetFname( FILEITEM*, const wchar_t* fname );
@@ -471,7 +471,7 @@
 0B88: 00000000 C1283845 ; 2E2: IMAGEID Shortcut_Get_MenuItemIconID( void* );
 0B8C: 00000000 61A82A45 ; 2E3: BOOK* FindBookEx( int (*cmp_proc)( BOOK* book_from_list, int* param ), int* param );
 0B90: 00000000 D5B9ED44 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
-;0B94: xxxxxxxx yyyyyyyy ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
+0B94: 00000000 A586E444 ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
 0B98: 00000000 D5B52A45 ; 2E6: int BookObj_GetSessionID( BOOK* book );
 0B9C: 00000000 B59A2A45 ; 2E7: void UI_Event_toSID( int event, int sess_id );
 0BA0: 00000000 71322344 ; 2E8: char* GetIMSI( void );
@@ -534,7 +534,7 @@
 0C84: 00000000 39E53745 ; 321: void SetTheme( wchar_t* path, wchar_t* name, int bookid, int unk_1 );
 0C88: 00000000 85D03745 ; 322: void SoftKeys_GetLabel( DISP_OBJ* softkeys, SKLABEL* lbl, int id );
 0C8C: 00000000 49CC3745 ; 323: void SoftKeys_Update( DISP_OBJ* softkeys );
-;0C90: xxxxxxxx yyyyyyyy ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
+0C90: 00000000 8DD63E45 ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
 0C94: 00000000 AD3ADC44 ; 325: void* IncommingCall_Reject( BOOK* book );
 0C98: 00000000 AD4BDC44 ; 326: void* IncommingCall_Mute( BOOK* book );
 0C9C: 00000000 F98D1A44 ; 327: int GetRadioState( char* level, char* flag );

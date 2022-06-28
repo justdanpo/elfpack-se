@@ -607,7 +607,7 @@
 0DA4: 00000000 71054314 ; 369: void MediaPlayer_SoftKeys_SetText( GUI* player_gui, int actionID, TEXTID );
 0DA8: 00000000 29054314 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
 0DAC: 00000000 E9024314 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
-;0DB0: xxxxxxxx yyyyyyyy ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
+0DB0: 00000000 A9024314 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
 ;0DB4: xxxxxxxx yyyyyyyy ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
 0DB8: 00000000 71A80C14 ; 36E: void DispObject_Show( DISP_OBJ*, int mode );
 0DBC: 00000000 51217B10 ; 36F: int Request_EventChannel_Subscribe( const int* sync, int mode, int event );

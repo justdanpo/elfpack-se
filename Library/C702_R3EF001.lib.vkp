@@ -1,4 +1,4 @@
-;C702 C702_R3EF001
+;C702_R3EF001
 ;Function library
 ;v
 ;(c) Hussein , IronMaster
@@ -63,7 +63,7 @@
 0528: 00000000 DDF9DF10 ; 14A: void StatusIndication_Item8_SetText( TEXTID );
 052C: 00000000 112D8810 ; 14B: void GUIObject_SoftKeys_SetAction( GUI*, u16 actionID, SKACTIONPROC proc );
 0530: 00000000 892D8810 ; 14C: void GUIObject_SoftKeys_SetText( GUI*, u16 actionID, TEXTID );
-0534: 00000000 D12E8810 ; 14D: void GUIObject_SoftKeys_SetEnable( GUI*, u16 actionID, BOOL );
+0534: 00000000 792E8810 ; 14D: void GUIObject_SoftKeys_SetEnable( GUI*, u16 actionID, BOOL );
 0538: 00000000 312E8810 ; 14E: void GUIObject_SoftKeys_AddErrorStr( GUI*, u16 actionID, TEXTID );
 053C: 00000000 C52C8810 ; 14F: void GUIObject_SoftKeys_RemoveItem( GUI*, u16 actionID );
 0540: 00000000 0D2E8810 ; 150: void GUIObject_SoftKeys_SetVisible( GUI*, u16 actionID, BOOL );
@@ -182,7 +182,7 @@
 0704: 00000000 456DAF11 ; 1C1: void ListMenu_SetItemCount( GUI_LIST*, int item_count );
 0708: 00000000 9C9FFA2A ;81C2: LIST** ROOT_APP( void );
 070C: 00000000 752D8810 ; 1C3: void GUIObject_SoftKeys_SetInfoText( GUI*, u16 actionID, TEXTID );
-0710: 00000000 792E8810 ; 1C4: void GUIObject_SoftKeys_SetItemAsSubItem( GUI*, u16 actionID, int subitem );
+0710: 00000000 AD2E8810 ; 1C4: void GUIObject_SoftKeys_SetItemAsSubItem( GUI*, u16 actionID, int subitem );
 0714: 00000000 554CAD11 ; 1C5: int REQUEST_SYSTEM_SHUTDOWN( void );
 0718: 00000000 654CAD11 ; 1C6: int REQUEST_SYSTEM_RESTART( void );
 071C: 00000000 E12D8810 ; 1C7: void GUIObject_SoftKeys_SetTexts( GUI*, u16 actionID, TEXTID short_text, TEXTID full_text );
@@ -329,7 +329,7 @@
 0950: 00000000 C55F9C10 ; 254: void DestroyDirHandle( DIR_HANDLE* handle );
 0954: 00000000 F0BBEF11 ;8255: DB_EXT* LastExtDB( void );
 0958: 00000000 D1308611 ; 256: void GetOtherExtMethods( FILESUBROUTINE** );
-095C: 00000000 851EE310 ; 257: int MessageBox( TEXTID header_text, TEXTID message_text, IMAGEID, int style, int time, BOOK* book );
+095C: 00000000 41E8AC11 ; 257: int MessageBox( TEXTID header_text, TEXTID message_text, IMAGEID, int style, int time, BOOK* book );
 0960: 00000000 F97C7F11 ; 258: int Display_GetHeight( int display );
 0964: 00000000 057D7F11 ; 259: int Display_GetWidth( int display );
 0968: 00000000 1D94A511 ; 25A: void PlaySystemSound( int SndNumber );
@@ -597,9 +597,9 @@
 0D80: 00000000 1920E810 ; 360: char* CreateURI( wchar_t* fpath, wchar_t* fname, char* URIScheme );
 0D84: 00000000 F9D18611 ; 361: void DataBrowserDesc_SetViewModeAndSortOrder( void* DataBrowserDesc, int view_sort_ID );
 0D88: 00000000 29E98110 ; 362: int Alarm_GetCurrentTypeAndAlarmID( char* type, wchar_t* AlarmID );
-;0D8C: xxxxxxxx yyyyyyyy ; 363: int Alarm_GetState( char* state, int AlarmID );
-;0D90: xxxxxxxx yyyyyyyy ; 364: int Alarm_GetTIME( TIME* AlarmTime, int AlarmID );
-;0D94: xxxxxxxx yyyyyyyy ; 365: int Alarm_GetWeekSettings( void* week, int AlarmID );
+0D8C: 00000000 59D18110 ; 363: int Alarm_GetState( char* state, int AlarmID );
+0D90: 00000000 35E18110 ; 364: int Alarm_GetTIME( TIME* AlarmTime, int AlarmID );
+0D94: 00000000 6DF08110 ; 365: int Alarm_GetWeekSettings( void* week, int AlarmID );
 ;0D98: xxxxxxxx yyyyyyyy ; 366: int IrDa_GetState( char* state );
 0D9C: 00000000 753BB111 ; 367: void REQUEST_SETTING_ALLOWEDCALLERS_GET( const int* sync, int ProfileNum, char* state );
 0DA0: 00000000 35B3E710 ; 368: void* IncommingCall_Accept( BOOK* book );

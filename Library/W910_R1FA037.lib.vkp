@@ -604,9 +604,9 @@
 0D9C: 00000000 65257711 ; 367: void REQUEST_SETTING_ALLOWEDCALLERS_GET( const int* sync, int ProfileNum, char* state );
 0DA0: 00000000 0945F010 ; 368: void* IncommingCall_Accept( BOOK* book );
 0DA4: 00000000 BDAC5811 ; 369: void MediaPlayer_SoftKeys_SetText( GUI* player_gui, int actionID, TEXTID );
-0DA8: 00000000 59BE4E11 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
-0DAC: 00000000 EDAC5811 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
-0DB0: 00000000 1DAD5811 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
+0DA8: 00000000 75AC5811 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
+0DAC: 00000000 1DAD5811 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
+0DB0: 00000000 4DAD5811 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
 ;0DB4: xxxxxxxx yyyyyyyy ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
 0DB8: 00000000 09B56611 ; 36E: void DispObject_Show( DISP_OBJ*, int mode );
 0DBC: 00000000 35F30310 ; 36F: int Request_EventChannel_Subscribe( const int* sync, int mode, int event );
