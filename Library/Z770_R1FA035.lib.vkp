@@ -241,7 +241,7 @@
 07EC: 00000000 BD385510 ; 1FB: int wstrncmp( const wchar_t*, const wchar_t*, int );
 07F0: 00000000 510A6B11 ; 1FC: int DispObject_GetAbsoluteXPos( DISP_OBJ* );
 07F4: 00000000 850A6B11 ; 1FD: int DispObject_GetAbsoluteYPos( DISP_OBJ* );
-07F8: 00000000 19FD6A11 ; 1FE: WINDOW* DispObject_GetWindow( DISP_OBJ* );
+;07F8: xxxxxxxx yyyyyyyy ; 1FE:
 07FC: 00000000 657B6D11 ; 1FF: int GetThemeColor( int, int );
 0800: 00000000 7D2F7B11 ; 200: int REQUEST_SETTING_SILENCE_SET( const int* sync, u16 profile, u16 value);
 0804: 00000000 252F7B11 ; 201: int REQUEST_SETTING_SILENCE_GET( const int* sync, u16 profile, char* silence_mode );

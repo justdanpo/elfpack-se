@@ -106,7 +106,7 @@
 05D4: FFFFFFFF 7D393D45 ; 175: char* manifest_GetParam( const char* buf, const char* param_name, int unk );
 05D8: FFFFFFFF 65804245 ; 176: int lseek( int file, int offset, int mode );
 05DC: FFFFFFFF B471064C ;8177: int get_VBUFFER( void );
-05E0: FFFFFFFF 6B16C444 ; 178: void SetLampLevel( int level ); //nullsub(void)
+05E0: FFFFFFFF 4193F844 ; 178: void SetLampLevel( int level ); //nullsub(void)
 05E4: FFFFFFFF F5390F45 ; 179: void* List_RemoveAt( LIST* lst, int index );
 05E8: FFFFFFFF 7DA11444 ; 17A: PROCESS GetCurrentPID( void );
 05EC: FFFFFFFF 2D3A0F45 ; 17B: int List_IndexOf( LIST* lst, void* item );
@@ -167,7 +167,7 @@
 06C8: FFFFFFFF 39B3FC44 ; 1B2: int PlayFile( const wchar_t* path, const wchar_t* fname );
 ;06CC: xxxxxxxx yyyyyyyy ; 1B3:
 06D0: FFFFFFFF C9154B45 ; 1B4: int REQUEST_PROFILE_GETACTIVEPROFILE( const int* sync, int* level );
-06D4: FFFFFFFF 25164B45 ; 1B5: int Profile_SetActive( int NUMprof, int set_in_gdfs_flag );
+06D4: FFFFFFFF 8D631245 ; 1B5: int Profile_SetActive( int NUMprof, int set_in_gdfs_flag );
 ;06D8: xxxxxxxx yyyyyyyy ; 1B6:
 06DC: FFFFFFFF 0DF7FC44 ; 1B7: int isKeylocked( void );
 06E0: FFFFFFFF 313F2B45 ; 1B8: int IsMediaPlayerVideoBook( BOOK* bk );
@@ -542,11 +542,11 @@
 ;0CA4: xxxxxxxx yyyyyyyy ; 329: int Bluetooth_GetPhoneVisibility( void );
 ;0CA8: xxxxxxxx yyyyyyyy ; 32A: int Bluetooth_isBusy( void );
 0CAC: FFFFFFFF 7DB43B45 ; 32B: int USB_isConnected( void );
-0CB0: FFFFFFFF E9220B45 ; 32C: void* w_diropen( const wchar_t* dir );
-0CB4: FFFFFFFF 895A2D45 ; 32D: wchar_t* w_dirread( void* );
-0CB8: FFFFFFFF 55260B45 ; 32E: int w_dirclose( void* );
-0CBC: FFFFFFFF 315B2D45 ; 32F: int w_rename( const wchar_t* dst, const wchar_t* src );
-0CC0: FFFFFFFF D55A2D45 ; 330: int w_remove( const wchar_t* dir );
+0CB0: FFFFFFFF 59344545 ; 32C: void* w_diropen( const wchar_t* dir );
+0CB4: FFFFFFFF 1164F844 ; 32D: wchar_t* w_dirread( void* );
+0CB8: FFFFFFFF D5364545 ; 32E: int w_dirclose( void* );
+0CBC: FFFFFFFF 1961F844 ; 32F: int w_rename( const wchar_t* dst, const wchar_t* src );
+0CC0: FFFFFFFF D560F844 ; 330: int w_remove( const wchar_t* dir );
 0CC4: FFFFFFFF 059DF844 ; 331: int ConnectionManager_Connection_GetState( void );
 0CC8: FFFFFFFF 2DBCA544 ; 332: int GetSignalQuality( char* rssi, char* ber );
 0CCC: FFFFFFFF DDEB2C45 ; 333: int IsCameraBook( BOOK* bk );
@@ -570,18 +570,18 @@
 0D14: FFFFFFFF 650F2A45 ; 345: void Audio_Play( BOOK* );
 0D18: FFFFFFFF F1734A45 ; 346: GUI* CreatePercentInputVA( int zero, ... );
 0D1C: FFFFFFFF 91754A45 ; 347: int PercentInput_GetPercent( GUI* PercentInput );
-0D20: FFFFFFFF 99294545 ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
+0D20: FFFFFFFF 7D08FE44 ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
 0D24: FFFFFFFF DD373A45 ; 349: int PHF_GetState( void );
 0D28: FFFFFFFF E9373A45 ; 34A: int CHF_GetState( void );
 ;0D2C: xxxxxxxx yyyyyyyy ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* );
 ;0D30: xxxxxxxx yyyyyyyy ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* );
 0D34: FFFFFFFF 79271245 ; 34D: void SetTrayIcon( IMAGEID, char mode );
-0D38: FFFFFFFF 358B4145 ; 34E: int REQUEST_SETTING_RINGVOLUME_SET( const int* sync, int unk, int null, int vol );
-0D3C: FFFFFFFF 258E4145 ; 34F: int REQUEST_SETTING_VIBRATOR_SET( const int* sync, int unk, int mode );
-0D40: FFFFFFFF 258D4145 ; 350: int REQUEST_SETTING_RINGTYPESOUNDFILE_SET( const int* sync, int null, wchar_t* path, wchar_t* name );
-0D44: FFFFFFFF C1924145 ; 351: int REQUEST_SETTING_ANSWERINGMODE_SET( const int* sync, int unk, int mode );
-0D48: FFFFFFFF F18B4145 ; 352: int REQUEST_SETTING_INCREASINGRING_SET( const int* sync, int unk, int unk2, int mode );
-0D4C: FFFFFFFF 95904145 ; 353: int REQUEST_SETTING_ALLOWEDCALLERS_SET( const int* sync, int unk, int mode );
+0D38: FFFFFFFF 21094B45 ; 34E: int REQUEST_SETTING_RINGVOLUME_SET( const int* sync, int unk, int null, int vol );
+0D3C: FFFFFFFF 290C4B45 ; 34F: int REQUEST_SETTING_VIBRATOR_SET( const int* sync, int unk, int mode );
+0D40: FFFFFFFF 090B4B45 ; 350: int REQUEST_SETTING_RINGTYPESOUNDFILE_SET( const int* sync, int null, wchar_t* path, wchar_t* name );
+0D44: FFFFFFFF F1104B45 ; 351: int REQUEST_SETTING_ANSWERINGMODE_SET( const int* sync, int unk, int mode );
+0D48: FFFFFFFF E5094B45 ; 352: int REQUEST_SETTING_INCREASINGRING_SET( const int* sync, int unk, int unk2, int mode );
+0D4C: FFFFFFFF B10E4B45 ; 353: int REQUEST_SETTING_ALLOWEDCALLERS_SET( const int* sync, int unk, int mode );
 0D50: FFFFFFFF 21A7E944 ; 354: int JavaAppDesc_GetJavaAppFullpath( void* JavaDesc, JavaAppFullpath* );
 0D54: FFFFFFFF D18A2B45 ; 355: void* SoundRecorderDesc_Create( void );
 0D58: FFFFFFFF FD8A2B45 ; 356: void SoundRecorderDesc_Destroy( void* desc );

@@ -471,7 +471,7 @@
 0B88: FFFFFFFF 89E44545 ; 2E2: IMAGEID Shortcut_Get_MenuItemIconID( void* );
 0B8C: FFFFFFFF C5414545 ; 2E3: BOOK* FindBookEx( int (*cmp_proc)( BOOK* book_from_list, int* param ), int* param );
 0B90: FFFFFFFF 25434F45 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
-;0B94: xxxxxxxx yyyyyyyy ; 2E5:
+0B94: FFFFFFFF 29BA3445 ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
 0B98: FFFFFFFF 597C1C45 ; 2E6: int BookObj_GetSessionID( BOOK* book );
 0B9C: FFFFFFFF 89424545 ; 2E7: void UI_Event_toSID( int event, int sess_id );
 0BA0: FFFFFFFF 115F8F44 ; 2E8: char* GetIMSI( void );

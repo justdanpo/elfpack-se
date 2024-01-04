@@ -56,10 +56,10 @@
 050C: FFFFFFFF 250FEA44 ; 143: void StatusIndication_ShowNotes( TEXTID );
 0510: FFFFFFFF D9E2D444 ; 144: GUI* CreateStringInputVA( int, ... );
 0514: FFFFFFFF 71B3D544 ; 145: GUI_ONEOFMANY* CreateOneOfMany( BOOK* book );
-0518: FFFFFFFF BD4DD344 ; 146: void OneOfMany_SetItemCount( GUI_ONEOFMANY*, int count );
+0518: FFFFFFFF ADB4D544 ; 146: void OneOfMany_SetItemCount( GUI_ONEOFMANY*, int count );
 051C: FFFFFFFF CDB4D544 ; 147: void OneOfMany_SetChecked( GUI_ONEOFMANY*, int checked );
 0520: FFFFFFFF F5B4D544 ; 148: void OneOfMany_SetTexts( GUI_ONEOFMANY*, TEXTID* strids, int Count );
-0524: FFFFFFFF 6D4ED344 ; 149: int OneOfMany_GetSelected( GUI_ONEOFMANY* );
+0524: FFFFFFFF DDB4D544 ; 149: int OneOfMany_GetSelected( GUI_ONEOFMANY* );
 0528: FFFFFFFF 410EEA44 ; 14A: void StatusIndication_Item8_SetText( TEXTID );
 052C: FFFFFFFF D10BD344 ; 14B: void GUIObject_SoftKeys_SetAction( GUI*, u16 actionID, SKACTIONPROC proc );
 0530: FFFFFFFF C50CD344 ; 14C: void GUIObject_SoftKeys_SetText( GUI*, u16 actionID, TEXTID );
@@ -314,8 +314,8 @@
 0914: FFFFFFFF 95A5D544 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: FFFFFFFF 85A5D544 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: FFFFFFFF 0128D144 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: FFFFFFFF 45A5D544 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: FFFFFFFF 01A6D544 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: FFFFFFFF 7136D344 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: FFFFFFFF F545F844 ; 24B: int GetSilent( void );
 0930: FFFFFFFF B912F844 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );
@@ -473,7 +473,7 @@
 0B90: FFFFFFFF A1C50E45 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
 0B94: FFFFFFFF 79CAF444 ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
 0B98: FFFFFFFF 15A0FB44 ; 2E6: int BookObj_GetSessionID( BOOK* book );
-0B9C: FFFFFFFF B51AFB44 ; 2E7: void UI_Event_toSID( int event, int sess_id );
+0B9C: FFFFFFFF F5D40445 ; 2E7: void UI_Event_toSID( int event, int sess_id );
 0BA0: FFFFFFFF F52A6C44 ; 2E8: char* GetIMSI( void );
 0BA4: FFFFFFFF 3DE6D344 ; 2E9: void UI_CONTROLLED_SHUTDOWN_RESPONSE( int book_id );
 ;0BA8: xxxxxxxx yyyyyyyy ; 2EA: int MainInput_getCurPos( GUI* );
@@ -573,8 +573,8 @@
 0D20: FFFFFFFF 2DA5D544 ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
 0D24: FFFFFFFF 99BF0545 ; 349: int PHF_GetState( void );
 0D28: FFFFFFFF B1BF0545 ; 34A: int CHF_GetState( void );
-;0D2C: xxxxxxxx yyyyyyyy ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* );
-;0D30: xxxxxxxx yyyyyyyy ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* );
+0D2C: FFFFFFFF 79F0E944 ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* ); //nullsub(void)
+0D30: FFFFFFFF 79F0E944 ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* ); //nullsub(void)
 0D34: FFFFFFFF 3511EA44 ; 34D: void SetTrayIcon( IMAGEID, char mode );
 0D38: FFFFFFFF 95321545 ; 34E: int REQUEST_SETTING_RINGVOLUME_SET( const int* sync, int unk, int null, int vol );
 0D3C: FFFFFFFF 75351545 ; 34F: int REQUEST_SETTING_VIBRATOR_SET( const int* sync, int unk, int mode );

@@ -56,10 +56,10 @@
 050C: FFFFFFFF DDF7EA44 ; 143: void StatusIndication_ShowNotes( TEXTID );
 0510: FFFFFFFF DDCBD544 ; 144: GUI* CreateStringInputVA( int, ... );
 0514: FFFFFFFF 7D9BD644 ; 145: GUI_ONEOFMANY* CreateOneOfMany( BOOK* book );
-0518: FFFFFFFF 4930D444 ; 146: void OneOfMany_SetItemCount( GUI_ONEOFMANY*, int count );
+0518: FFFFFFFF B99CD644 ; 146: void OneOfMany_SetItemCount( GUI_ONEOFMANY*, int count );
 051C: FFFFFFFF D99CD644 ; 147: void OneOfMany_SetChecked( GUI_ONEOFMANY*, int checked );
 0520: FFFFFFFF 019DD644 ; 148: void OneOfMany_SetTexts( GUI_ONEOFMANY*, TEXTID* strids, int Count );
-0524: FFFFFFFF F930D444 ; 149: int OneOfMany_GetSelected( GUI_ONEOFMANY* );
+0524: FFFFFFFF E99CD644 ; 149: int OneOfMany_GetSelected( GUI_ONEOFMANY* );
 0528: FFFFFFFF F9F6EA44 ; 14A: void StatusIndication_Item8_SetText( TEXTID );
 052C: FFFFFFFF D5EED344 ; 14B: void GUIObject_SoftKeys_SetAction( GUI*, u16 actionID, SKACTIONPROC proc );
 0530: FFFFFFFF BDEFD344 ; 14C: void GUIObject_SoftKeys_SetText( GUI*, u16 actionID, TEXTID );
@@ -157,7 +157,7 @@
 06A0: FFFFFFFF 25220645 ; 1A8: void UI_Event( int event );
 06A4: FFFFFFFF 31220645 ; 1A9: void UI_Event_wData( int event, void* message, void (*free_proc)( void* ) );
 06A8: FFFFFFFF 55220645 ; 1AA: void UI_Event_toBookID( int event, int BookID );
-06AC: FFFFFFFF 55220645 ; 1AB: void UI_Event_toBookIDwData( int event, int BookID, void* message, void (*free_proc)( void* ) );
+06AC: FFFFFFFF 65220645 ; 1AB: void UI_Event_toBookIDwData( int event, int BookID, void* message, void (*free_proc)( void* ) );
 06B0: FFFFFFFF 99D7E544 ; 1AC: int List_Find( LIST* lst, void* itemtofind, LISTFINDCALLBACK cmp_proc );
 06B4: FFFFFFFF 65D6E544 ; 1AD: void* List_Get( LIST* lst, int index );
 06B8: FFFFFFFF DD5FBF44 ; 1AE: wchar_t* wstrrchr( const wchar_t* wstr, wchar_t wchar );
@@ -186,7 +186,7 @@
 0714: FFFFFFFF 117F1545 ; 1C5: int REQUEST_SYSTEM_SHUTDOWN( void );
 0718: FFFFFFFF 217F1545 ; 1C6: int REQUEST_SYSTEM_RESTART( void );
 071C: FFFFFFFF 05F0D344 ; 1C7: void GUIObject_SoftKeys_SetTexts( GUI*, u16 actionID, TEXTID short_text, TEXTID full_text );
-0720: FFFFFFFF CDF31245 ; 1C8: int IsRightNowBook( BOOK* book );
+0720: FFFFFFFF 81800745 ; 1C8: int IsRightNowBook( BOOK* book );
 0724: FFFFFFFF F97B1545 ; 1C9: int IsVolumeControllerBook( BOOK* book );
 0728: FFFFFFFF A9F7D344 ; 1CA: GUI_TABMENUBAR* CreateTabMenuBar( BOOK* book );
 072C: FFFFFFFF C9F8D344 ; 1CB: void TabMenuBar_SetTabCount( GUI_TABMENUBAR*, int count );
@@ -278,7 +278,7 @@
 0884: FFFFFFFF BD1CE944 ; 221: char* DispObject_GetName( DISP_OBJ* );
 0888: FFFFFFFF 9DF5E844 ; 222: void DISP_DESC_SetSize( DISP_DESC*, u16 size );
 ;088C: xxxxxxxx yyyyyyyy ; 223: u16 DISP_DESC_GetSize( DISP_OBJ* );
-0890: FFFFFFFF 3DC8EE44 ; 224: void DISP_DESC_SetOnCreate( DISP_DESC*, DISP_OBJ_ONCREATE_METHOD );
+0890: FFFFFFFF BDF5E844 ; 224: void DISP_DESC_SetOnCreate( DISP_DESC*, DISP_OBJ_ONCREATE_METHOD );
 0894: FFFFFFFF 69F9E844 ; 225: DISP_OBJ_ONCREATE_METHOD DispObject_GetOnCreate( DISP_OBJ* );
 0898: FFFFFFFF DDF5E844 ; 226: void DISP_DESC_SetOnClose( DISP_DESC*, DISP_OBJ_ONCLOSE_METHOD );
 089C: FFFFFFFF 7DF9E844 ; 227: DISP_OBJ_ONCLOSE_METHOD DispObject_GetOnClose( DISP_OBJ* );
@@ -293,7 +293,7 @@
 ;08C0: xxxxxxxx yyyyyyyy ; 230: void DISP_DESC_SetMethod05( DISP_DESC*, void (*)( void* ) );
 ;08C4: xxxxxxxx yyyyyyyy ; 231: DISP_OBJ_METHOD DispObject_GetMethod05( DISP_OBJ* );
 08C8: FFFFFFFF 5DF6E844 ; 232: void DISP_DESC_SetMethod06( DISP_DESC*, DISP_OBJ_METHOD );
-08CC: FFFFFFFF 5DF6E844 ; 233: DISP_OBJ_METHOD DispObject_GetMethod06( DISP_OBJ* );
+08CC: FFFFFFFF CDF9E844 ; 233: DISP_OBJ_METHOD DispObject_GetMethod06( DISP_OBJ* );
 ;08D0: xxxxxxxx yyyyyyyy ; 234: void DISP_DESC_SetMethod07( DISP_DESC*, void (*)( void* ) );
 ;08D4: xxxxxxxx yyyyyyyy ; 235: DISP_OBJ_METHOD DispObject_GetMethod07( DISP_OBJ* );
 08D8: FFFFFFFF 9DF6E844 ; 236: void DISP_DESC_SetOnLayout( DISP_DESC*, DISP_OBJ_ONLAYOUT_METHOD );
@@ -314,8 +314,8 @@
 0914: FFFFFFFF 6D8DD644 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: FFFFFFFF 5D8DD644 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: FFFFFFFF 5D0AD244 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: FFFFFFFF 2D8DD644 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: FFFFFFFF D98DD644 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: FFFFFFFF E518D444 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: FFFFFFFF 692EF944 ; 24B: int GetSilent( void );
 0930: FFFFFFFF 25FBF844 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );
@@ -473,7 +473,7 @@
 0B90: FFFFFFFF C1141045 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
 0B94: FFFFFFFF C5A9F544 ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
 0B98: FFFFFFFF 1591E844 ; 2E6: int BookObj_GetSessionID( BOOK* book );
-0B9C: FFFFFFFF 75F8FB44 ; 2E7: void UI_Event_toSID( int event, int sess_id );
+0B9C: FFFFFFFF 45220645 ; 2E7: void UI_Event_toSID( int event, int sess_id );
 0BA0: FFFFFFFF 651A6D44 ; 2E8: char* GetIMSI( void );
 0BA4: FFFFFFFF 39C9D444 ; 2E9: void UI_CONTROLLED_SHUTDOWN_RESPONSE( int book_id );
 ;0BA8: xxxxxxxx yyyyyyyy ; 2EA: int MainInput_getCurPos( GUI* );
@@ -556,7 +556,7 @@
 0CDC: FFFFFFFF F998F744 ; 337: void Video_ActionBack( BOOK* VideoPlayerBook, void* );
 0CE0: FFFFFFFF C5B0F744 ; 338: void Video_ExtractFrame( BOOK* VideoPlayerBook, void* );
 ;0CE4: xxxxxxxx yyyyyyyy ; 339: void Video_ZoomOn( BOOK* VideoPlayerBook, void* );
-0CE8: FFFFFFFF D1F4C544 ; 33A: void RightNow_SetActive( int flag );
+0CE8: FFFFFFFF AD506A44 ; 33A: void RightNow_SetActive( int flag ); //nullsub(void)
 0CEC: FFFFFFFF 099CF744 ; 33B: void VideoResize_AutomateMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
 0CF0: FFFFFFFF 45E2F744 ; 33C: void VideoResize_AllScreenMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
 ;0CF4: xxxxxxxx yyyyyyyy ; 33D: int Video_GetCurrentSkinID( BOOK* VideoPlayerBook );
@@ -573,8 +573,8 @@
 0D20: FFFFFFFF 218DD644 ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
 0D24: FFFFFFFF 190F0745 ; 349: int PHF_GetState( void );
 0D28: FFFFFFFF 310F0745 ; 34A: int CHF_GetState( void );
-;0D2C: xxxxxxxx yyyyyyyy ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* );
-;0D30: xxxxxxxx yyyyyyyy ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* );
+0D2C: FFFFFFFF 65D9D344 ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* ); //nullsub(void)
+0D30: FFFFFFFF 65D9D344 ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* ); //nullsub(void)
 0D34: FFFFFFFF EDF9EA44 ; 34D: void SetTrayIcon( IMAGEID, char mode );
 0D38: FFFFFFFF 29331645 ; 34E: int REQUEST_SETTING_RINGVOLUME_SET( const int* sync, int unk, int null, int vol );
 0D3C: FFFFFFFF 09361645 ; 34F: int REQUEST_SETTING_VIBRATOR_SET( const int* sync, int unk, int mode );
