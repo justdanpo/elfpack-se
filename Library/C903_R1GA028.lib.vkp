@@ -728,7 +728,7 @@
 0F88: 00000000 A5140148 ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
 0F8C: 00000000 39110148 ; 3E3: void fs_demand_remove_from_queue( pageCache* page_p_to_remove, wchar_t page_i_to_insert );
 0F90: 00000000 D5110148 ; 3E4: int fs_demand_kick_out_page( wchar_t page_i, int intrMask );
-0F94: 00000000 002C0C48 ;83E5: char* getSWAP_DATA_BASE( void );
+0F94: 00000000 00280C48 ;83E5: char* getSWAP_DATA_BASE( void );
 
 
 

@@ -266,7 +266,7 @@
 0850: 00000000 A5085414 ; 214: TEXTID AB_NUM_ITEM2TextID( AB_NUM_ITEM* ab_num_item );
 0854: 00000000 89400014 ; 215: int GetABRecNum( AB_GET_STRUCT* ); //nullsub(void)
 0858: 00000000 401C9115 ;8216: AB_ITEM_DESC* get_AB_ITEMS_DESC( void );
-085C: 00000000 795A3415 ; 217: GUI* SBY_GetMainInput( BOOK* StandBy ); //not real; don't port from here
+085C: 00000000 2D114115 ; 217: GUI* SBY_GetMainInput( BOOK* StandBy ); //not real; don't port from here
 0860: 00000000 755A3415 ; 218: GUI* SBY_GetStatusIndication( BOOK* StandBy ); //not real; don't port from here
 0864: 00000000 55382414 ; 219: int REQUEST_PHONEBOOK_ACCESSSTATUS_TOTAL_GET( const int* sync, int* );
 0868: 00000000 849DA24B ;821A: PROCESS* PID_MMI( void );
