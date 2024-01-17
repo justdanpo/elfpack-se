@@ -1,6 +1,6 @@
 ;K800 SW-R8BF003
-;elf library
-;v
+;Function library
+;v240101
 ;(c) Hussein , IronMaster
 ;(p) hippy dave, michlantecuhtli, MaPkiZzz, Alex_1992
 +45D1FC00
@@ -358,7 +358,7 @@
 09C4: 00000000 9D6FBF44 ; 271: png_uint_32 png_get_valid( png_structp png_ptr, png_infop info_ptr, png_uint_32 flag );
 09C8: 00000000 7986BF44 ; 272: void png_set_tRNS_to_alpha( png_structp png_ptr );
 09CC: 00000000 BDB3BF44 ; 273: void png_set_filler( png_structp png_ptr, png_uint_32 filler, int flags );
-09D0: 00000000 6186BF44 ; 274: void png_set_palette_to_rgb( png_structp png_ptr );
+09D0: 00000000 6D86BF44 ; 274: void png_set_palette_to_rgb( png_structp png_ptr );
 09D4: 00000000 B56FBF44 ; 275: png_uint_32 png_get_rowbytes( png_structp png_ptr, png_infop info_ptr );
 09D8: 00000000 2183BF44 ; 276: void png_progressive_combine_row( png_structp png_ptr, png_bytep old_row, png_bytep new_row );
 09DC: 00000000 056ABF44 ; 277: int png_sig_cmp( png_bytep sig, png_size_t start, png_size_t num_to_check );

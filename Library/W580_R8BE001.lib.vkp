@@ -1,6 +1,6 @@
 ;W580 SW-R8BE001
 ;Function library
-;v2022
+;v240101
 ;(c) Hussein , IronMaster
 ;(p) -=Tanusha_Se=-, UltraShot
 +45C3FC00
@@ -314,8 +314,8 @@
 0914: 00000000 ADF03145 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: 00000000 A1F03145 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: 00000000 2D632145 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: 00000000 71F03145 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: 00000000 01F13145 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: 00000000 35480045 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: 00000000 0555FD44 ; 24B: int GetSilent( void );
 0930: 00000000 6D2BFD44 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );

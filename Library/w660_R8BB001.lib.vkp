@@ -1,6 +1,6 @@
 ;w660_r8bb001
 ;Function library
-;v
+;v240101
 ;(c) Hussein , IronMaster
 ;
 +45C3FC00
@@ -123,14 +123,14 @@
 0618: 00000000 8CD34244 ; 186: OSBOOLEAN hunt( const char* name, OSUSER user, PROCESS* name_, union SIGNAL** hunt_sig );
 061C: 00000000 B8D34244 ; 187: void kill_proc( PROCESS pid );
 ;0620: xxxxxxxx yyyyyyyy ; 188:
-;0624: xxxxxxxx yyyyyyyy ; 189: union SIGNAL* receive_w_tmo( OSTIME timeout, SIGSELECT* sel );
+0624: 00000000 F0D14244 ; 189: union SIGNAL* receive_w_tmo( OSTIME timeout, SIGSELECT* sel );
 ;0628: xxxxxxxx yyyyyyyy ; 18A:
-;062C: xxxxxxxx yyyyyyyy ; 18B: void stop( PROCESS pid );
+062C: 00000000 A0D44244 ; 18B: void stop( PROCESS pid );
 0630: 00000000 0CD34244 ; 18C: OSBOOLEAN get_mem( PROCESS pid, OSADDRESS from, void* to, OSADDRESS size );
 0634: 00000000 21473E44 ; 18D: OSADDRESS get_envp( PROCESS pid, char* name );
 0638: 00000000 35473E44 ; 18E: OSBOOLEAN set_envp( PROCESS pid, char* name, OSADDRESS value );
 063C: 00000000 C4D24244 ; 18F: PROCESS get_bid( PROCESS pid );
-;0640: xxxxxxxx yyyyyyyy ; 190: int datetime2unixtime( DATETIME* dt );
+0640: 00000000 31D91245 ; 190: int datetime2unixtime( DATETIME* dt );
 ;0644: xxxxxxxx yyyyyyyy ; 191:
 ;0648: xxxxxxxx yyyyyyyy ; 192:
 ;064C: xxxxxxxx yyyyyyyy ; 193:
@@ -298,15 +298,15 @@
 ;08D4: xxxxxxxx yyyyyyyy ; 235: DISP_OBJ_METHOD DispObject_GetMethod07( DISP_OBJ* );
 08D8: 00000000 09D64745 ; 236: void DISP_DESC_SetOnLayout( DISP_DESC*, DISP_OBJ_ONLAYOUT_METHOD );
 08DC: 00000000 39D74745 ; 237: DISP_OBJ_ONLAYOUT_METHOD DispObject_GetOnLayout( DISP_OBJ* );
-;08E0: xxxxxxxx yyyyyyyy ; 238: void DISP_DESC_SetOnConfig( DISP_DESC*, DISP_OBJ_ONCONFIG_METHOD );
-;08E4: xxxxxxxx yyyyyyyy ; 239: DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
-;08E8: xxxxxxxx yyyyyyyy ; 23A: void DISP_DESC_SetMethod0A( DISP_DESC*, void (*)( void* ) );
-;08EC: xxxxxxxx yyyyyyyy ; 23B: DISP_OBJ_METHOD DispObject_GetMethod0A( DISP_OBJ* );
-;08F0: xxxxxxxx yyyyyyyy ; 23C: void DISP_DESC_SetMethod0B( DISP_DESC*, void (*)( void* ) );
-;08F4: xxxxxxxx yyyyyyyy ; 23D: DISP_OBJ_METHOD DispObject_GetMethod0B( DISP_OBJ* );
+08E0: 00000000 0DD64745 ; 238: void DISP_DESC_SetOnConfig( DISP_DESC*, DISP_OBJ_ONCONFIG_METHOD );
+08E4: 00000000 55D74745 ; 239: DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
+08E8: 00000000 11D64745 ; 23A: void DISP_DESC_SetMethod0A( DISP_DESC*, void (*)( void* ) );
+08EC: 00000000 71D74745 ; 23B: DISP_OBJ_METHOD DispObject_GetMethod0A( DISP_OBJ* );
+08F0: 00000000 15D64745 ; 23C: void DISP_DESC_SetMethod0B( DISP_DESC*, void (*)( void* ) );
+08F4: 00000000 8DD74745 ; 23D: DISP_OBJ_METHOD DispObject_GetMethod0B( DISP_OBJ* );
 ;08F8: xxxxxxxx yyyyyyyy ; 23E: void DISP_DESC_SetMethod0C( DISP_DESC*, void (*)( void* ) );
 ;08FC: xxxxxxxx yyyyyyyy ; 23F: DISP_OBJ_METHOD DispObject_GetMethod0C( DISP_OBJ* );
-0900: 00000000 DB051444 ; 240: void JavaSession_Manager( int cmd ); //nullsub(void)
+0900: 00000000 61601744 ; 240: void JavaSession_Manager( int cmd ); //nullsub(void)
 0904: 00000000 19A82345 ; 241: TEXTID JavaSession_GetName( void ); //nullsub(ret 0x6FFFFFFF)
 0908: 00000000 85E24645 ; 242: TEXTID TextID_Copy( TEXTID );
 090C: 00000000 65653D45 ; 243: UI_APP_SESSION* BookObj_GetSession( BOOK* book );
@@ -314,8 +314,8 @@
 0914: 00000000 015E4445 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: 00000000 F55D4445 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: 00000000 29EB3345 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: 00000000 C55D4445 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: 00000000 555E4445 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: 00000000 21C01345 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: 00000000 79E30F45 ; 24B: int GetSilent( void );
 0930: 00000000 B5BB0F45 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );
@@ -570,7 +570,7 @@
 0D14: 00000000 0D050645 ; 345: void Audio_Play( BOOK* );
 0D18: 00000000 31AC4945 ; 346: GUI* CreatePercentInputVA( int zero, ... );
 0D1C: 00000000 D1AD4945 ; 347: int PercentInput_GetPercent( GUI* PercentInput );
-;0D20: xxxxxxxx yyyyyyyy ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
+0D20: 00000000 AD5D4445 ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
 0D24: 00000000 1DD74045 ; 349: int PHF_GetState( void );
 0D28: 00000000 25D74045 ; 34A: int CHF_GetState( void );
 0D2C: 00000000 65874A45 ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* );
@@ -699,7 +699,7 @@
 0F18: 00000000 5D6E0F45 ; 3C6: int EqualizerGain_Get( int AudioSessionID, int Band, int* Level );
 0F1C: 00000000 D5BF4A45 ; 3C7: int Theme_DestroyMenuIcons( void );
 0F20: 00000000 ED0A4D45 ; 3C8: void CoCreateInstance( PUUID cid, PUUID iid, void** pInterface );
-0F24: 00000000 01C03745 ; 3C9: void GUIObject_SetSecondRowTitleText( GUI*, TEXTID );
+0F24: 00000000 01C04845 ; 3C9: void GUIObject_SetSecondRowTitleText( GUI*, TEXTID );
 0F28: 00000000 D9514445 ; 3CA: int ListMenu_GetItemCount( GUI_LIST* );
 0F2C: 00000000 A9CF1245 ; 3CB: void OSE_GetShell( void** pInterface );
 0F30: 00000000 3DB16744 ; 3CC: int swscanf( const wchar_t* buffer, const wchar_t* format, ... );
@@ -712,7 +712,7 @@
 0F4C: 00000000 C1504A45 ; 3D3: void DispObject_SoftKeys_ExecuteAction( DISP_OBJ*, u16 actionID );
 0F50: 00000000 69B4FE44 ; 3D4: LIST* DataBrowserBook_GetCurrentFoldersList( BOOK* DataBrowserBook );
 0F54: 00000000 893B4845 ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
-0F58: 00000000 81BB3745 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
+0F58: 00000000 81BB4845 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
 0F5C: 00000000 BDDB4145 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
 0F60: 00000000 45C93545 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
 0F64: 00000000 ADF7F144 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );

@@ -1,6 +1,6 @@
 ;K550 SW-R8BA024
 ;Function Library
-;v2022
+;v240101
 ;(c) Hussein , IronMaster
 ;(p) kirpeace, Done4, farid
 +45A4FC00
@@ -698,7 +698,7 @@
 0F18: 00000000 91FBFA44 ; 3C6: int EqualizerGain_Get( int AudioSessionID, int Band, int* Level );
 0F1C: 00000000 598E3445 ; 3C7: int Theme_DestroyMenuIcons( void );
 0F20: 00000000 51D33645 ; 3C8: void CoCreateInstance( PUUID cid, PUUID iid, void** pInterface );
-0F24: 00000000 99933245 ; 3C9: void GUIObject_SetSecondRowTitleText( GUI*, TEXTID );
+0F24: 00000000 41943245 ; 3C9: void GUIObject_SetSecondRowTitleText( GUI*, TEXTID );
 0F28: 00000000 B12B2E45 ; 3CA: int ListMenu_GetItemCount( GUI_LIST* );
 0F2C: 00000000 B972FD44 ; 3CB: void OSE_GetShell( void** pInterface );
 0F30: 00000000 91C95544 ; 3CC: int swscanf( const wchar_t* buffer, const wchar_t* format, ... );
