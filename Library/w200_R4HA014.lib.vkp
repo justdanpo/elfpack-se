@@ -314,8 +314,8 @@
 0914: FFFFFFFF E508FE44 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: FFFFFFFF D508FE44 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: FFFFFFFF F58CFA44 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: FFFFFFFF 9508FE44 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: FFFFFFFF 4D09FE44 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: FFFFFFFF 39B3FC44 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: FFFFFFFF 51B22C45 ; 24B: int GetSilent( void );
 0930: FFFFFFFF 21892C45 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );
@@ -505,8 +505,8 @@
 0C10: FFFFFFFF 89390F45 ; 304: int List_Insert( LIST* lst, int i, void* item );
 0C14: FFFFFFFF 81744245 ; 305: int FileCopy( wchar_t* src_path, wchar_t* src_name, wchar_t* dest_path, wchar_t* dest_name, int );
 0C18: FFFFFFFF 11764245 ; 306: int FileMove( wchar_t* src_path, wchar_t* src_name, wchar_t* dest_path, wchar_t* dest_name, int );
-0C1C: FFFFFFFF BD87C644 ; 307: void RedLED_On( int __NULL );
-0C20: FFFFFFFF 0D88C644 ; 308: void RedLED_Off( int __NULL );
+0C1C: FFFFFFFF E148C544 ; 307: void RedLED_On( int __NULL );
+0C20: FFFFFFFF 3549C544 ; 308: void RedLED_Off( int __NULL );
 0C24: FFFFFFFF 359E1745 ; 309: void DispObject_SetLayerColor( DISP_OBJ*, int color );
 0C28: FFFFFFFF 3935EA44 ; 30A: int JavaAppDesc_GetJavaAppID( void* JavaDesc );
 0C2C: FFFFFFFF D9E24345 ; 30B: void REQUEST_UI_OAF_START_APPLICATION( const int* sync, int appID, char* flag );
@@ -534,7 +534,7 @@
 0C84: FFFFFFFF 758E1245 ; 321: void SetTheme( wchar_t* path, wchar_t* name, int bookid, int unk_1 );
 0C88: FFFFFFFF 31901845 ; 322: void SoftKeys_GetLabel( DISP_OBJ* softkeys, SKLABEL* lbl, int id );
 0C8C: FFFFFFFF E58B1845 ; 323: void SoftKeys_Update( DISP_OBJ* softkeys );
-0C90: FFFFFFFF DC36024C ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
+0C90: FFFFFFFF BDB23B45 ; 324: int get_CellData( PLMN_LAC_DESC* desc1, RAT_CI_DESC* desc2, char* CSReg );
 0C94: FFFFFFFF D5B20745 ; 325: void* IncommingCall_Reject( BOOK* book );
 0C98: FFFFFFFF 55C50745 ; 326: void* IncommingCall_Mute( BOOK* book );
 0C9C: FFFFFFFF 1DBCA544 ; 327: int GetRadioState( char* level, char* flag );
@@ -700,7 +700,7 @@
 0F1C: FFFFFFFF 95D71645 ; 3C7: int Theme_DestroyMenuIcons( void );
 0F20: FFFFFFFF 81860145 ; 3C8: void CoCreateInstance( PUUID cid, PUUID iid, void** pInterface );
 0F24: FFFFFFFF C5350045 ; 3C9: void GUIObject_SetSecondRowTitleText( GUI*, TEXTID );
-0F28: FFFFFFFF CBFCFD44 ; 3CA: int ListMenu_GetItemCount( GUI_LIST* );
+0F28: FFFFFFFF C9FCFD44 ; 3CA: int ListMenu_GetItemCount( GUI_LIST* );
 0F2C: FFFFFFFF 3184F144 ; 3CB: void OSE_GetShell( void** pInterface );
 0F30: FFFFFFFF F155CA44 ; 3CC: int swscanf( const wchar_t* buffer, const wchar_t* format, ... );
 0F34: FFFFFFFF BD801444 ; 3CD: int sscanf( const char* buffer, const char* format, ... );
