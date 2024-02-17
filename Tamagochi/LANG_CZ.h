@@ -6,7 +6,7 @@
 * Add your name to TRANSLATED_BY and set LANGUAGE to yours.
 *
 * Then give it to us somehow, so that we can make the version with your language, post at the topics
-* where we posted the elf (http://mobilefree.ru/newbb_plus/viewtopic.php?topic_id=3576)
+* where we posted the elf (https://mobilefree.justdanpo.ru/newbb_plus/viewtopic.php?topic_id=3576)
 *
 * Regards, BigHercules & Ploik
 */
