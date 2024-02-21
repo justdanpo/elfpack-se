@@ -5,7 +5,7 @@
 //   (c) nkls
 //  
 //  Use at your own risk, in any way you want. For questions to me, the threads 
-//  at se-nse.net and mobilefree.ru are open.
+//  at se-nse.net and mobilefree.justdanpo.ru are open.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
