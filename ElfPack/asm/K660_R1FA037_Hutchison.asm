@@ -17,8 +17,8 @@ a       EQU     b
         defadr   DB_PATCH6_RET,0x1100DFC0+1
         defadr   MESS_HOOK_RET,0x107626E2+1
 
-        defadr  memalloc,0x28B001C4
-        defadr  memfree,0x28B001D4
+        defadr  memalloc,0x1009ED00
+        defadr  memfree,0x1009ED28
 
 LastExtDB EQU 0x11A385E8
 

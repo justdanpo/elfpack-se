@@ -88,8 +88,8 @@
 058C: FFFFFFFF BDD11245 ; 163: int AB_READSTRING( AB_STR_ITEM*, int rec_num, int field_ID );
 0590: FFFFFFFF 65D21245 ; 164: int AB_READPHONENBR( AB_NUM_ITEM*, int rec_num, int field_ID );
 0594: FFFFFFFF 05D31245 ; 165: int AB_GETNBROFITEMS( int get_from, int sub_id );
-0598: FFFFFFFF D92A2145 ; 166: int PNUM_len( void* pnum );
-059C: FFFFFFFF 05E93045 ; 167: void PNUM2str( char* str, void* pnum, int len, int max_len );
+0598: FFFFFFFF D92A2145 ; 166: int PNUM_len( BCD_TEXT pnum );
+059C: FFFFFFFF 05E93045 ; 167: void PNUM2str( char* str, BCD_TEXT pnum, int len, int max_len );
 05A0: FFFFFFFF C1900A45 ; 168: DISP_OBJ* GUIObject_GetDispObject( GUI* );
 05A4: FFFFFFFF 61DB1845 ; 169: LIST* List_Create( void );
 05A8: FFFFFFFF 79DB1845 ; 16A: void List_Destroy( LIST* lst );
@@ -234,7 +234,7 @@
 07D4: FFFFFFFF DD6F4345 ; 1F5: BOOK* SESSION_GetTopBook( UI_APP_SESSION* );
 07D8: FFFFFFFF 21E10645 ; 1F6: int MainInput_getVisible( GUI* );
 07DC: FFFFFFFF 2DE10645 ; 1F7: int MainInput_strlen( GUI* );
-07E0: FFFFFFFF 4DE10645 ; 1F8: char* MainInput_getPNUM( GUI* );
+07E0: FFFFFFFF 4DE10645 ; 1F8: BCD_TEXT MainInput_getPNUM( GUI* );
 07E4: FFFFFFFF 59E10645 ; 1F9: int MainInput_isPlus( GUI* );
 07E8: FFFFFFFF 75F51A45 ; 1FA: int BookObj_GetBookID( BOOK* book );
 07EC: FFFFFFFF 6152D544 ; 1FB: int wstrncmp( const wchar_t*, const wchar_t*, int );
@@ -479,8 +479,8 @@
 0BA8: FFFFFFFF C5F9F844 ; 2EA: int MainInput_getCurPos( GUI* );
 0BAC: FFFFFFFF 8BF9F844 ; 2EB: void MainInput_Hide( GUI* );
 0BB0: FFFFFFFF D9E20A45 ; 2EC: void DispObject_SoftKeys_RestoreDefaultAction( DISP_OBJ*, int action );
-0BB4: FFFFFFFF 35393245 ; 2ED: TEXTID PNUM2Name( void* pnum, int isIconNeeded, int only_full_number_flag );
-0BB8: FFFFFFFF 7D9B1345 ; 2EE: int SpeedDial_GetPNUM( int _zero, char charter0__9, void* PNUM );
+0BB4: FFFFFFFF 35393245 ; 2ED: TEXTID PNUM2Name( BCD_TEXT pnum, int isIconNeeded, int only_full_number_flag );
+0BB8: FFFFFFFF 7D9B1345 ; 2EE: int SpeedDial_GetPNUM( int _zero, char charter0__9, BCD_TEXT PNUM );
 0BBC: FFFFFFFF A90A4345 ; 2EF: void* MetaData_Desc_Create( wchar_t* path, wchar_t* name );
 0BC0: FFFFFFFF 8D0B4345 ; 2F0: void MetaData_Desc_Destroy( void* MetaData_Desc );
 0BC4: FFFFFFFF 010B4345 ; 2F1: wchar_t* MetaData_Desc_GetTags( void* MetaData_Desc, int tagID );
@@ -605,7 +605,7 @@
 0DA0: FFFFFFFF 69A51145 ; 368: void* IncommingCall_Accept( BOOK* book );
 0DA4: FFFFFFFF 2DEDF844 ; 369: void MediaPlayer_SoftKeys_SetText( GUI* player_gui, int actionID, TEXTID );
 0DA8: FFFFFFFF F9ECF844 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
-0DAC: FFFFFFFF 9DEDF844 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
+;0DAC: xxxxxxxx yyyyyyyy ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
 0DB0: FFFFFFFF 49EDF844 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
 0DB4: FFFFFFFF 59961645 ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
 0DB8: FFFFFFFF 35732145 ; 36E: void DispObject_Show( DISP_OBJ*, int mode );
@@ -714,14 +714,14 @@
 0F54: FFFFFFFF 89AC2145 ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
 0F58: FFFFFFFF 69940A45 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
 0F5C: FFFFFFFF 29B70745 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
-0F60: FFFFFFFF CDE93045 ; 3D8: void str2PNUM( void* pnum, char* str, int len, int max_len );
+0F60: FFFFFFFF CDE93045 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
 0F64: FFFFFFFF 39481345 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
 0F68: FFFFFFFF A98F4445 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
 ;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
 ;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
 ;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );

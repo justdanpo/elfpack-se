@@ -313,8 +313,8 @@
 0914: FFFFFFFF CD141745 ; 245: void GUIonMessage_SubItem_SetText( GUI_MESSAGE* msg, TEXTID );
 0918: FFFFFFFF BD141745 ; 246: int GUIonMessage_SubItem_GetCreatedParentIndex( GUI_MESSAGE* msg );
 091C: FFFFFFFF 95181345 ; 247: void GoMusic( void );
-;0920: xxxxxxxx yyyyyyyy ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
-;0924: xxxxxxxx yyyyyyyy ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
+0920: FFFFFFFF 7D141745 ; 248: int GUIonMessage_SubItem_GetSelectedIndex( GUI_MESSAGE* msg );
+0924: FFFFFFFF 35151745 ; 249: void GUIonMessage_SubItem_SetDisabled( GUI_MESSAGE* msg, BOOL state );
 0928: FFFFFFFF F13E1545 ; 24A: int PlayFileV( const wchar_t* path, const wchar_t* fname, int vol );
 092C: FFFFFFFF 59C64545 ; 24B: int GetSilent( void );
 0930: FFFFFFFF 199D4545 ; 24C: int GetVibrator( int ignorevibrator, int ignoresilent );
@@ -338,13 +338,13 @@
 0978: FFFFFFFF 1D381545 ; 25E: void TabMenuBar_SetFocusedTab( GUI_TABMENUBAR*, int tab_num );
 097C: FFFFFFFF C1221945 ; 25F: int GC_GetPenColor( GC* gc );
 0980: FFFFFFFF 81221945 ; 260: void GC_SetPenColor( GC* gc, int pen_color );
-0984: FFFFFFFF FF1E1945 ; 261: void GC_SetPixel( GC* gc, int x1, int y1, int color );
+0984: FFFFFFFF FD1E1945 ; 261: void GC_SetPixel( GC* gc, int x1, int y1, int color );
 0988: FFFFFFFF D12C1945 ; 262: void GC_DrawLine( GC* gc, int x1, int y1, int x2, int y2 );
 098C: FFFFFFFF 652E1945 ; 263: void GC_DrawFRect( GC* gc, int color, int x1, int y1, int x2, int y2 );
 0990: FFFFFFFF 7D1F1945 ; 264: int GC_WritePixels( GC* gc, int x1, int y1, int x2, int y2, int* bmp );
 0994: FFFFFFFF C512E944 ; 265: png_structp png_create_read_struct_2( png_const_charp user_png_ver, png_voidp error_ptr, png_error_ptr error_fn, png_error_ptr warn_fn, png_voidp mem_ptr, png_malloc_ptr malloc_fn, png_free_ptr free_fn );
-0998: FFFFFFFF 0B13E944 ; 266: void png_destroy_read_struct( png_structpp png_ptr_ptr, png_infopp info_ptr_ptr, png_infopp end_info_ptr_ptr );
-099C: FFFFFFFF 4700E944 ; 267: png_infop png_create_info_struct( png_structp png_ptr );
+0998: FFFFFFFF E513E944 ; 266: void png_destroy_read_struct( png_structpp png_ptr_ptr, png_infopp info_ptr_ptr, png_infopp end_info_ptr_ptr );
+099C: FFFFFFFF 4500E944 ; 267: png_infop png_create_info_struct( png_structp png_ptr );
 09A0: FFFFFFFF 7100E944 ; 268: void png_destroy_info_struct( png_structp png_ptr, png_infopp info_ptr_ptr );
 09A4: FFFFFFFF A512E944 ; 269: void png_set_progressive_read_fn( png_structp png_ptr, png_voidp progressive_ptr, png_progressive_info_ptr info_fn, png_progressive_row_ptr row_fn, png_progressive_end_ptr end_fn );
 09A8: FFFFFFFF C906E944 ; 26A: void png_process_data( png_structp png_ptr, png_infop info_ptr, png_bytep buffer, png_size_t buffer_size );
@@ -353,13 +353,13 @@
 09B4: FFFFFFFF 5104E944 ; 26D: png_uint_32 png_get_IHDR( png_structp png_ptr, png_infop info_ptr, png_uint_32* width, png_uint_32* height, int* bit_depth, int* color_type, int* interlace_method, int* compression_method, int* filter_method );
 09B8: FFFFFFFF 4915E944 ; 26E: void png_set_strip_16( png_structp png_ptr );
 09BC: FFFFFFFF 5D15E944 ; 26F: void png_set_gray_1_2_4_to_8( png_structp png_ptr );
-09C0: FFFFFFFF 6315E944 ; 270: void png_set_gray_to_rgb( png_structp png_ptr );
+09C0: FFFFFFFF 6515E944 ; 270: void png_set_gray_to_rgb( png_structp png_ptr );
 09C4: FFFFFFFF 2D04E944 ; 271: png_uint_32 png_get_valid( png_structp png_ptr, png_infop info_ptr, png_uint_32 flag );
-09C8: FFFFFFFF 5F15E944 ; 272: void png_set_tRNS_to_alpha( png_structp png_ptr );
+09C8: FFFFFFFF 6115E944 ; 272: void png_set_tRNS_to_alpha( png_structp png_ptr );
 09CC: FFFFFFFF 253BE944 ; 273: void png_set_filler( png_structp png_ptr, png_uint_32 filler, int flags );
 09D0: FFFFFFFF 5115E944 ; 274: void png_set_palette_to_rgb( png_structp png_ptr );
-09D4: FFFFFFFF 3F02E944 ; 275: png_uint_32 png_get_rowbytes( png_structp png_ptr, png_infop info_ptr );
-09D8: FFFFFFFF 8B12E944 ; 276: void png_progressive_combine_row( png_structp png_ptr, png_bytep old_row, png_bytep new_row );
+09D4: FFFFFFFF 4104E944 ; 275: png_uint_32 png_get_rowbytes( png_structp png_ptr, png_infop info_ptr );
+09D8: FFFFFFFF 8912E944 ; 276: void png_progressive_combine_row( png_structp png_ptr, png_bytep old_row, png_bytep new_row );
 09DC: FFFFFFFF 69FFE844 ; 277: int png_sig_cmp( png_bytep sig, png_size_t start, png_size_t num_to_check );
 09E0: FFFFFFFF 602A1944 ; 278: int setjmp( jmp_buf jmpbuf );
 09E4: FFFFFFFF 842A1944 ; 279: void longjmp( jmp_buf, int );
@@ -498,7 +498,7 @@
 0BF8: FFFFFFFF 115C5E45 ; 2FE: int w_mkdir( const wchar_t* path, int mode );
 0BFC: FFFFFFFF 11295B45 ; 2FF: int DirHandle_SetFilterStr( DIR_HANDLE*, const wchar_t* filter );
 0C00: FFFFFFFF 99803045 ; 300: int Disp_GetTextIDWidth( TEXTID, int len );
-0C04: FFFFFFFF 7D579644 ; 301: int MetaData_Desc_GetCoverInfo( void* MetaData_Desc, char* cover_type, int* size, int* cover_offset ); //nullsub(ret 0)
+0C04: FFFFFFFF 3DEF2945 ; 301: int MetaData_Desc_GetCoverInfo( void* MetaData_Desc, char* cover_type, int* size, int* cover_offset ); //nullsub(ret 0)
 0C08: FFFFFFFF 256D4245 ; 302: int ImageID_GetIndirect( void* buf_image, int size, int __NULL, wchar_t* image_type, IMAGEID* );
 0C0C: FFFFFFFF 51C92645 ; 303: void unixtime2datetime( int, DATETIME* );
 0C10: FFFFFFFF DDEF2745 ; 304: int List_Insert( LIST* lst, int i, void* item );
@@ -604,7 +604,7 @@
 0DA0: FFFFFFFF 556A2045 ; 368: void* IncommingCall_Accept( BOOK* book );
 0DA4: FFFFFFFF E14F0745 ; 369: void MediaPlayer_SoftKeys_SetText( GUI* player_gui, int actionID, TEXTID );
 0DA8: FFFFFFFF AD4F0745 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
-0DAC: FFFFFFFF 51500745 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
+;0DAC: xxxxxxxx yyyyyyyy ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
 0DB0: FFFFFFFF FD4F0745 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
 0DB4: FFFFFFFF 99742545 ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
 0DB8: FFFFFFFF E1273045 ; 36E: void DispObject_Show( DISP_OBJ*, int mode );
@@ -718,9 +718,9 @@
 0F68: FFFFFFFF 811E5445 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
-;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
+0F74: FFFFFFFF 91BB1945 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
 ;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
 ;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
