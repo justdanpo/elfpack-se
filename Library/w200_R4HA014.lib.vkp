@@ -595,7 +595,7 @@
 0D78: FFFFFFFF 2DFA2845 ; 35E: int Browser_OpenURI( BOOK* book, char* URI, int mode );
 0D7C: FFFFFFFF C15E3945 ; 35F: char* GetURIScheme( int schemeID );
 0D80: FFFFFFFF 09633945 ; 360: char* CreateURI( wchar_t* fpath, wchar_t* fname, char* URIScheme );
-0D84: FFFFFFFF 91D9B744 ; 361: void DataBrowserDesc_SetViewModeAndSortOrder( void* DataBrowserDesc, int view_sort_ID );
+0D84: FFFFFFFF EDEE0B45 ; 361: void DataBrowserDesc_SetViewModeAndSortOrder( void* DataBrowserDesc, int view_sort_ID );
 ;0D88: xxxxxxxx yyyyyyyy ; 362: int Alarm_GetCurrentTypeAndAlarmID( char* type, wchar_t* AlarmID );
 ;0D8C: xxxxxxxx yyyyyyyy ; 363: int Alarm_GetState( char* state, int AlarmID );
 ;0D90: xxxxxxxx yyyyyyyy ; 364: int Alarm_GetTIME( TIME* AlarmTime, int AlarmID );
