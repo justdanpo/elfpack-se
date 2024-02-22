@@ -115,7 +115,7 @@ UI_MEDIAPLAYER_AUDIO_PLAYING_TIME_EVENT
 UI_MEDIAPLAYER_VIDEO_PLAYING_TIME_EVENT
 
 Все сообщения о глюках направлять сюда:
-http://mobilefree.ru/newbb_plus/viewtopic.php?topic_id=3066&start=0
+https://mobilefree.justdanpo.ru/newbb_plus/viewtopic.php?topic_id=3066&start=0
 Баги могут быть исправлены, или предложены варианты устранения. 
 Просьба не посылать уже отправленные багрепорты (т.е. хоть немного почитать тему)
 

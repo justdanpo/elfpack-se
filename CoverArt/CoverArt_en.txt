@@ -116,7 +116,7 @@ UI_MEDIAPLAYER_AUDIO_PLAYING_TIME_EVENT
 UI_MEDIAPLAYER_VIDEO_PLAYING_TIME_EVENT
 
 Write all messages about bugs here:
-http://mobilefree.ru/newbb_plus/viewtopic.php?topic_id=3066&start=0
+https://mobilefree.justdanpo.ru/newbb_plus/viewtopic.php?topic_id=3066&start=0
 or
 http://forums.se-nse.net/index.php?showtopic=34229&st=0&start=0
 

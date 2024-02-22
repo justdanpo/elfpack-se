@@ -8,7 +8,7 @@
 *
 * Then give it to us somehow, so that we can make the version with your
 * language, post at the topics where we posted the elf
-* (http://mobilefree.ru/newbb_plus/viewtopic.php?topic_id= )
+* (https://mobilefree.justdanpo.ru/newbb_plus/viewtopic.php?topic_id= )
 *
 * Regards,
 *    copini, zoyd, Ploik, mousex, Joker XT, Stonos and BigHercules
