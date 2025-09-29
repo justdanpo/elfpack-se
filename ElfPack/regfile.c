@@ -54,7 +54,7 @@ DB_EXT * OtherDbExt()
 DB_EXT * CreateDbExt()
 {
 	DB_EXT * other_db_ext = OtherDbExt();
-#if defined(DB2020) || defined(A2)
+#if defined(DB2020) || defined(PNX5230) || defined(A2)
 	DB_EXT * db_ext = malloc(sizeof(DB_EXT));
 	db_ext->type_group = other_db_ext->type_group;
 #else

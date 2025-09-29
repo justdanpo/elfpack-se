@@ -204,7 +204,7 @@ template<typename T,typename T2> LISTFINDCALLBACK MKLISTFINDCALLBACK( int(*param
 
 typedef struct DISP_OBJ
 {
-	char dummy[0x16C];
+	char dummy[0x200];
 }DISP_OBJ;
 
 typedef int (*DISP_OBJ_ONCREATE_METHOD)(DISP_OBJ*);
@@ -1078,6 +1078,9 @@ typedef struct FILESUBROUTINE
 		int (*ON_CHECK)(struct SUB_EXECUTE*, void*);
 		int (*ON_CMD_RUN_CHECK)(struct SUB_EXECUTE*);
 	};
+#ifdef DB3350
+	TEXTID StrID_1;
+#endif
 }FILESUBROUTINE;
 
 typedef struct FILEITEM

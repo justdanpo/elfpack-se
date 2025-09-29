@@ -1,8 +1,8 @@
 ;W610 SW-R6BC002
 ;Function library
-;v
+;v240101
 ;(c) Hussein , IronMaster
-;(p) -=MooN=-, Adrenalin, Ploik, Virusmater
+;(p) -=MooN=-, Adrenalin, Ploik, Virusmater, farid
 +45C3FC00
 0448: 00000000 A0531444 ; 112: void* memset( void* mem, char chr, int size );
 044C: 00000000 18532D44 ; 113: int memcpy( void* dest, const void* source, int cnt );
@@ -299,11 +299,11 @@
 08D8: 00000000 1DCF3445 ; 236: void DISP_DESC_SetOnLayout( DISP_DESC*, DISP_OBJ_ONLAYOUT_METHOD );
 08DC: 00000000 4DD03445 ; 237: DISP_OBJ_ONLAYOUT_METHOD DispObject_GetOnLayout( DISP_OBJ* );
 08E0: 00000000 21CF3445 ; 238: void DISP_DESC_SetOnConfig( DISP_DESC*, DISP_OBJ_ONCONFIG_METHOD );
-;08E4: xxxxxxxx yyyyyyyy ; 239: DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
-;08E8: xxxxxxxx yyyyyyyy ; 23A: void DISP_DESC_SetMethod0A( DISP_DESC*, void (*)( void* ) );
-;08EC: xxxxxxxx yyyyyyyy ; 23B: DISP_OBJ_METHOD DispObject_GetMethod0A( DISP_OBJ* );
-;08F0: xxxxxxxx yyyyyyyy ; 23C: void DISP_DESC_SetMethod0B( DISP_DESC*, void (*)( void* ) );
-;08F4: xxxxxxxx yyyyyyyy ; 23D: DISP_OBJ_METHOD DispObject_GetMethod0B( DISP_OBJ* );
+08E4: 00000000 69D03445 ; 239: DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
+08E8: 00000000 25CF3445 ; 23A: void DISP_DESC_SetMethod0A( DISP_DESC*, void (*)( void* ) );
+08EC: 00000000 85D03445 ; 23B: DISP_OBJ_METHOD DispObject_GetMethod0A( DISP_OBJ* );
+08F0: 00000000 29CF3445 ; 23C: void DISP_DESC_SetMethod0B( DISP_DESC*, void (*)( void* ) );
+08F4: 00000000 A1D03445 ; 23D: DISP_OBJ_METHOD DispObject_GetMethod0B( DISP_OBJ* );
 ;08F8: xxxxxxxx yyyyyyyy ; 23E: void DISP_DESC_SetMethod0C( DISP_DESC*, void (*)( void* ) );
 ;08FC: xxxxxxxx yyyyyyyy ; 23F: DISP_OBJ_METHOD DispObject_GetMethod0C( DISP_OBJ* );
 0900: 00000000 FFEEDD44 ; 240: void JavaSession_Manager( int cmd ); //nullsub(void)
@@ -720,8 +720,8 @@
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
 0F74: 00000000 3D7E3745 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
 ;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
 ;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );

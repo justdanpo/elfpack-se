@@ -9,3 +9,8 @@ Release/
 include.tmp
 *.dep
 *.ewd
+elf2vkp/
+Elfpack/vkp
+firmware/
+build/
+vkp/

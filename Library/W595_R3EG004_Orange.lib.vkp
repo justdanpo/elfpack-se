@@ -1,8 +1,8 @@
-;W595_R3EG004_Orange
+;W595 SW-R3EG004 Orange
 ;Function library
-;v221207
+;v 2025
 ;(c) Hussein , IronMaster
-;(p) Se-MaG
+;(p) Se-MaG, farid
 ;pAtChFiLe=/boot/phone_app.cxc
 +126AFC00
 0448: 00000000 C410B04B ; 112: void* memset( void* mem, char chr, int size );
@@ -413,7 +413,7 @@
 0A9C: 00000000 0D84B910 ; 2A7: void _REQUEST_OAF_START_APPLICATION( const int* sync, int __zero, MIDP_DESC*, int ___zero );
 0AA0: 00000000 217B9C10 ; 2A8: wchar_t* FSX_GetInvalidChar( wchar_t* name );
 0AA4: 00000000 CD648711 ; 2A9: void DataBrowserDesc_SetFoldersNumber( void* DataBrowserDesc, int state );
-0AA8: 00000000 81648711 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
+0AA8: 00000000 A1648711 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
 0AAC: 00000000 49648711 ; 2AB: void DataBrowserDesc_SetSelectAction( void* DataBrowserDesc, int state );
 0AB0: 00000000 51648711 ; 2AC: void DataBrowserDesc_SetSelectActionOnFolders( void* DataBrowserDesc, int state );
 0AB4: 00000000 2D648711 ; 2AD: void DataBrowserDesc_SetBookID( void* DataBrowserDesc, int BookID );
@@ -472,13 +472,13 @@
 0B88: 00000000 E193E410 ; 2E2: IMAGEID Shortcut_Get_MenuItemIconID( void* );
 0B8C: 00000000 41B7E510 ; 2E3: BOOK* FindBookEx( int (*cmp_proc)( BOOK* book_from_list, int* param ), int* param );
 0B90: 00000000 89F68711 ; 2E4: FILEITEM* FILEITEM_CreateCopy( FILEITEM* );
-;0B94: xxxxxxxx yyyyyyyy ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
+0B94: 00000000 B1E08010 ; 2E5: IMAGEID ImageID_Copy( IMAGEID );
 0B98: 00000000 9DDAE510 ; 2E6: int BookObj_GetSessionID( BOOK* book );
 0B9C: 00000000 6DC2E510 ; 2E7: void UI_Event_toSID( int event, int sess_id );
 0BA0: 00000000 D11BA5ED ; 2E8: char* GetIMSI( void );
 0BA4: 00000000 55B3AD11 ; 2E9: void UI_CONTROLLED_SHUTDOWN_RESPONSE( int book_id );
 0BA8: 00000000 D11BA5ED ; 2EA: int MainInput_getCurPos( GUI* );
-;0BAC: xxxxxxxx yyyyyyyy ; 2EB: void MainInput_Hide( GUI* );
+0BAC: 00000000 599FDF10 ; 2EB: void MainInput_Hide( GUI* );
 0BB0: 00000000 FD0E8710 ; 2EC: void DispObject_SoftKeys_RestoreDefaultAction( DISP_OBJ*, int action );
 0BB4: 00000000 010EBC10 ; 2ED: TEXTID PNUM2Name( BCD_TEXT pnum, int isIconNeeded, int only_full_number_flag );
 0BB8: 00000000 4183BE10 ; 2EE: int SpeedDial_GetPNUM( int _zero, char charter0__9, BCD_TEXT PNUM );
@@ -720,15 +720,15 @@
 0F68: 00000000 75B0EC10 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
-;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
-;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
-;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
-;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
-;0F8C: xxxxxxxx yyyyyyyy ; 3E3: void fs_demand_remove_from_queue( pageCache* page_p_to_remove, wchar_t page_i_to_insert );
-;0F90: xxxxxxxx yyyyyyyy ; 3E4: int fs_demand_kick_out_page( wchar_t page_i, int intrMask );
-;0F94: xxxxxxxx yyyyyyyy ;83E5: char* getSWAP_DATA_BASE( void );
+0F74: 00000000 714F8710 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
+0F80: 00000000 D50F0148 ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
+0F84: 00000000 15120148 ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
+0F88: 00000000 1D0D0148 ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
+0F8C: 00000000 B1090148 ; 3E3: void fs_demand_remove_from_queue( pageCache* page_p_to_remove, wchar_t page_i_to_insert );
+0F90: 00000000 4D0A0148 ; 3E4: int fs_demand_kick_out_page( wchar_t page_i, int intrMask );
+0F94: 00000000 00580C48 ;83E5: char* getSWAP_DATA_BASE( void );
 
 
 

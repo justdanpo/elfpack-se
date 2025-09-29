@@ -1,6 +1,6 @@
 ;C905 SW-R1FA035
 ;Function library
-;v
+;v 2025
 ;(c) Hussein , IronMaster
 ;(p) Blend, Cyrax, mc_kibel, KIBER-DEMON
 ;pAtChFiLe=/boot/phone_app.cxc
@@ -413,7 +413,7 @@
 0A9C: 00000000 FD300914 ; 2A7: void _REQUEST_OAF_START_APPLICATION( const int* sync, int __zero, MIDP_DESC*, int ___zero );
 0AA0: 00000000 31F81E14 ; 2A8: wchar_t* FSX_GetInvalidChar( wchar_t* name );
 0AA4: 00000000 31BF1D14 ; 2A9: void DataBrowserDesc_SetFoldersNumber( void* DataBrowserDesc, int state );
-0AA8: 00000000 35261314 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
+0AA8: 00000000 45261314 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
 0AAC: 00000000 0DDD2714 ; 2AB: void DataBrowserDesc_SetSelectAction( void* DataBrowserDesc, int state );
 0AB0: 00000000 59578115 ; 2AC: void DataBrowserDesc_SetSelectActionOnFolders( void* DataBrowserDesc, int state );
 0AB4: 00000000 51102D14 ; 2AD: void DataBrowserDesc_SetBookID( void* DataBrowserDesc, int BookID );

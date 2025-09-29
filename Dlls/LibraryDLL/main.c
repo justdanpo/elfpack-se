@@ -417,7 +417,7 @@ int dll_Disp_GetTextIDWidth_0( TEXTID strid, int len )
 }
 #endif
 
-#ifdef A2
+#if (defined(A2) || defined(PNX5230)) && !defined(Z310_R8BA024)
 #define USE_dll_TextID_CreateIntegerID_0
 TEXTID dll_TextID_CreateIntegerID_0( int num )
 {
@@ -425,7 +425,7 @@ TEXTID dll_TextID_CreateIntegerID_0( int num )
 }
 #endif
 
-#ifdef A2
+#if (defined(A2) || defined(PNX5230)) && !defined(Z310_R8BA024)
 #define USE_dll_TextID_Create_0
 TEXTID dll_TextID_Create_0( const void* wstr,int flag,int len )
 {
@@ -433,7 +433,7 @@ TEXTID dll_TextID_Create_0( const void* wstr,int flag,int len )
 }
 #endif
 
-#ifdef A2
+#if (defined(A2) || defined(PNX5230)) && !defined(Z310_R8BA024)
 #define USE_dll_TextID_GetWString_0
 int dll_TextID_GetWString_0( TEXTID strid,wchar_t * dest,int maxlen )
 {
@@ -441,7 +441,7 @@ int dll_TextID_GetWString_0( TEXTID strid,wchar_t * dest,int maxlen )
 }
 #endif
 
-#ifdef A2
+#if (defined(A2) || defined(PNX5230)) && !defined(Z310_R8BA024)
 #define USE_dll_TextID_GetLength_0
 int dll_TextID_GetLength_0( TEXTID strid )
 {
@@ -449,7 +449,7 @@ int dll_TextID_GetLength_0( TEXTID strid )
 }
 #endif
 
-#ifdef A2
+#if (defined(A2) || defined(PNX5230)) && !defined(Z310_R8BA024)
 #define USE_dll_TextID_Destroy_0
 void dll_TextID_Destroy_0( TEXTID strid )
 {
@@ -457,7 +457,7 @@ void dll_TextID_Destroy_0( TEXTID strid )
 }
 #endif
 
-#ifdef A2
+#if (defined(A2) || defined(PNX5230)) && !defined(Z310_R8BA024)
 #define USE_dll_TextID_Copy_0
 TEXTID dll_TextID_Copy_0( TEXTID strid )
 {
@@ -465,7 +465,7 @@ TEXTID dll_TextID_Copy_0( TEXTID strid )
 }
 #endif
 
-#ifdef A2
+#if (defined(A2) || defined(PNX5230)) && !defined(Z310_R8BA024)
 #define USE_dll_TextID_GetString_0
 void dll_TextID_GetString_0( TEXTID strid, char* str, int maxlen )
 {
@@ -616,11 +616,17 @@ int dll_get_CellData_0( PLMN_LAC_DESC * plmn_lac, RAT_CI_DESC * rat_ci, char * C
 }
 #endif
 
-#ifdef A2
+#if defined(A2)
 #define USE_dll_GetChipID_0
 int dll_GetChipID_0()
 {
   return ((GetChipID_int()&0xFF) <<8);
+}
+#elif defined(PNX5230)
+#define USE_dll_GetChipID_0
+int dll_GetChipID_0()
+{
+  return ((0xD0&0xFF) <<8);
 }
 #endif
 

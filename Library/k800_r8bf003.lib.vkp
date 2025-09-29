@@ -1,6 +1,6 @@
 ;K800 SW-R8BF003
-;elf library
-;v
+;Function library
+;v240101
 ;(c) Hussein , IronMaster
 ;(p) hippy dave, michlantecuhtli, MaPkiZzz, Alex_1992
 +45D1FC00
@@ -298,7 +298,7 @@
 ;08D4: xxxxxxxx yyyyyyyy ; 235: DISP_OBJ_METHOD DispObject_GetMethod07( DISP_OBJ* );
 08D8: 00000000 C55F4545 ; 236: void DISP_DESC_SetOnLayout( DISP_DESC*, DISP_OBJ_ONLAYOUT_METHOD );
 08DC: 00000000 F5604545 ; 237: DISP_OBJ_ONLAYOUT_METHOD DispObject_GetOnLayout( DISP_OBJ* );
-08E0: 00000000 F5604545 ; 238: void DISP_DESC_SetOnConfig( DISP_DESC*, DISP_OBJ_ONCONFIG_METHOD );
+08E0: 00000000 C95F4545 ; 238: void DISP_DESC_SetOnConfig( DISP_DESC*, DISP_OBJ_ONCONFIG_METHOD );
 08E4: 00000000 11614545 ; 239: DISP_OBJ_ONCONFIG_METHOD DispObject_GetOnConfig( DISP_OBJ* );
 08E8: 00000000 CD5F4545 ; 23A: void DISP_DESC_SetMethod0A( DISP_DESC*, void (*)( void* ) );
 08EC: 00000000 2D614545 ; 23B: DISP_OBJ_METHOD DispObject_GetMethod0A( DISP_OBJ* );
@@ -358,7 +358,7 @@
 09C4: 00000000 9D6FBF44 ; 271: png_uint_32 png_get_valid( png_structp png_ptr, png_infop info_ptr, png_uint_32 flag );
 09C8: 00000000 7986BF44 ; 272: void png_set_tRNS_to_alpha( png_structp png_ptr );
 09CC: 00000000 BDB3BF44 ; 273: void png_set_filler( png_structp png_ptr, png_uint_32 filler, int flags );
-09D0: 00000000 6186BF44 ; 274: void png_set_palette_to_rgb( png_structp png_ptr );
+09D0: 00000000 6D86BF44 ; 274: void png_set_palette_to_rgb( png_structp png_ptr );
 09D4: 00000000 B56FBF44 ; 275: png_uint_32 png_get_rowbytes( png_structp png_ptr, png_infop info_ptr );
 09D8: 00000000 2183BF44 ; 276: void png_progressive_combine_row( png_structp png_ptr, png_bytep old_row, png_bytep new_row );
 09DC: 00000000 056ABF44 ; 277: int png_sig_cmp( png_bytep sig, png_size_t start, png_size_t num_to_check );
@@ -720,8 +720,8 @@
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
 0F74: 00000000 81084845 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
 ;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
 ;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );

@@ -555,13 +555,13 @@
 0CD8: 00000000 D90A0445 ; 336: void VideoPlayerControl( BOOK* VideoPlayerBook, int );
 0CDC: 00000000 11030445 ; 337: void Video_ActionBack( BOOK* VideoPlayerBook, void* );
 0CE0: 00000000 191B0445 ; 338: void Video_ExtractFrame( BOOK* VideoPlayerBook, void* );
-0CE4: 00000000 35050445 ; 339: void Video_ZoomOn( BOOK* VideoPlayerBook, void* );
+0CE4: 00000000 45070445 ; 339: void Video_ZoomOn( BOOK* VideoPlayerBook, void* );
 0CE8: 00000000 CDC14545 ; 33A: void RightNow_SetActive( int flag );
 0CEC: 00000000 05060445 ; 33B: void VideoResize_AutomateMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
 0CF0: 00000000 A1050445 ; 33C: void VideoResize_AllScreenMode( BOOK* VideoPlayerBook, u16 VideoWidth, u16 VideoHeight, u16* NewWidth, u16* NewHeight );
 0CF4: 00000000 C9140445 ; 33D: int Video_GetCurrentSkinID( BOOK* VideoPlayerBook );
 0CF8: 00000000 81EB0345 ; 33E: void Video_SetSkin( GUI* VideoPlayerGUI, int skinID );
-;0CFC: xxxxxxxx yyyyyyyy ; 33F: int Video_SetPermit( BOOK* VideoPlayerBook, u16 NewWidth, u16 NewHeight );
+0CFC: 00000000 3D120445 ; 33F: int Video_SetPermit( BOOK* VideoPlayerBook, u16 NewWidth, u16 NewHeight );
 0D00: 00000000 59010445 ; 340: int Video_Refresh( BOOK* VideoPlayerBook, GUI* VideoPlayerGUI );
 0D04: 00000000 91030445 ; 341: void Video_Play( BOOK* VideoPlayerBook, void* );
 0D08: 00000000 C9040445 ; 342: void Video_Pause( BOOK* VideoPlayerBook, void* );
@@ -571,8 +571,8 @@
 0D18: 00000000 F14E4445 ; 346: GUI* CreatePercentInputVA( int zero, ... );
 0D1C: 00000000 91504445 ; 347: int PercentInput_GetPercent( GUI* PercentInput );
 0D20: 00000000 19043F45 ; 348: void GUIonMessage_SetLineSeparator( GUI_MESSAGE* msg, int _unk1 );
-;0D24: xxxxxxxx yyyyyyyy ; 349: int PHF_GetState( void );
-;0D28: xxxxxxxx yyyyyyyy ; 34A: int CHF_GetState( void );
+0D24: 00000000 CD7E3B45 ; 349: int PHF_GetState( void );
+0D28: 00000000 D57E3B45 ; 34A: int CHF_GetState( void );
 0D2C: 00000000 E12A4545 ; 34B: void GUIObject_SoftKeys_RemoveBackground( GUI* );
 0D30: 00000000 ED2A4545 ; 34C: void GUIObject_SoftKeys_RestoreBackground( GUI* );
 0D34: 00000000 25563945 ; 34D: void SetTrayIcon( IMAGEID, char mode );
@@ -714,14 +714,14 @@
 0F54: 00000000 29E04245 ; 3D5: void DispObject_SetAnimation( DISP_OBJ*, int style );
 0F58: 00000000 61604345 ; 3D6: void GUIObject_SetZOrder( GUI*, char, GUI* );
 0F5C: 00000000 61833C45 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
-;0F60: xxxxxxxx yyyyyyyy ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
-;0F64: xxxxxxxx yyyyyyyy ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
-;0F68: xxxxxxxx yyyyyyyy ; 3DA: int ThemeImage_Delete( int theme_image_type );
+0F60: 00000000 D1FB3045 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
+0F64: 00000000 F599EE44 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
+0F68: 00000000 594E4245 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
-;0F74: xxxxxxxx yyyyyyyy ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
+0F74: 00000000 F5284545 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
 ;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
 ;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
 ;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );

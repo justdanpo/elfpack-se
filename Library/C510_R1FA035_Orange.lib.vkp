@@ -1,6 +1,6 @@
 ;C510 SW-R1FA035 Orange
 ;Function library
-;ver. 20.08.11
+;v 2025
 ;(c) Hussein, IronMaster
 ;(p) Vov4ик, E1kolyan
 ;pAtChFiLe=/boot/phone_app.cxc
@@ -413,7 +413,7 @@
 0A9C: 00000000 DD2C0614 ; 2A7: void _REQUEST_OAF_START_APPLICATION( const int* sync, int __zero, MIDP_DESC*, int ___zero );
 0AA0: 00000000 A52C0A14 ; 2A8: wchar_t* FSX_GetInvalidChar( wchar_t* name );
 0AA4: 00000000 196B1F14 ; 2A9: void DataBrowserDesc_SetFoldersNumber( void* DataBrowserDesc, int state );
-0AA8: 00000000 D5C43814 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
+0AA8: 00000000 C9C43814 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
 0AAC: 00000000 555E2914 ; 2AB: void DataBrowserDesc_SetSelectAction( void* DataBrowserDesc, int state );
 0AB0: 00000000 09EB7B15 ; 2AC: void DataBrowserDesc_SetSelectActionOnFolders( void* DataBrowserDesc, int state );
 0AB4: 00000000 E1293014 ; 2AD: void DataBrowserDesc_SetBookID( void* DataBrowserDesc, int BookID );
@@ -463,7 +463,7 @@
 0B64: 00000000 85820214 ; 2D9: int JavaAppDesc_GetFirstApp( void* JavaDesc );
 0B68: 00000000 FDAE3E14 ; 2DA: int JavaAppDesc_GetNextApp( void* JavaDesc );
 0B6C: 00000000 251D4D14 ; 2DB: int JavaAppDesc_GetJavaAppInfo( void* JavaDesc, int ID, wchar_t** wstr );
-0B70: 00000000 D11BA5ED ; 2DC: void OrangeLED_Control( int _free_val, int or_LED_ID, int level, int fade_time );
+;0B70: xxxxxxxx yyyyyyyy ; 2DC: void OrangeLED_Control( int _free_val, int or_LED_ID, int level, int fade_time );
 0B74: 00000000 31CB1214 ; 2DD: void DispObject_SetRefreshTimer( DISP_OBJ*, int time );
 0B78: 00000000 D5954914 ; 2DE: void DispObject_KillRefreshTimer( DISP_OBJ* );
 0B7C: 00000000 69322C14 ; 2DF: int IsDataBrowserBook( BOOK* book );
@@ -717,18 +717,18 @@
 0F5C: 00000000 AD0A2014 ; 3D7: int StringInput_GetCursorPosition( GUI*, u16* pos, char* _zero );
 0F60: 00000000 01FA0814 ; 3D8: void str2PNUM( BCD_TEXT pnum, char* str, int len, int max_len );
 0F64: 00000000 319EE314 ; 3D9: void pb_ui_search_bk_create_search_menu( int BookID, int mode );
-;0F68: xxxxxxxx yyyyyyyy ; 3DA: int ThemeImage_Delete( int theme_image_type );
+0F68: 00000000 2D414714 ; 3DA: int ThemeImage_Delete( int theme_image_type );
 ;0F6C: xxxxxxxx yyyyyyyy ; 3DB:
 ;0F70: xxxxxxxx yyyyyyyy ; 3DC:
 0F74: 00000000 95AF1914 ; 3DD: void GUIObject_SoftKeys_SubActionPressedNotification( GUI*, u16 actionID, BOOL );
-;0F78: xxxxxxxx yyyyyyyy ; 3DE: int fs_memmap( int virtAddr, int physAddr, int size, int flags );
-;0F7C: xxxxxxxx yyyyyyyy ; 3DF: int fs_GetMemMap( int virtAddr, int* flags );
-;0F80: xxxxxxxx yyyyyyyy ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
-;0F84: xxxxxxxx yyyyyyyy ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
-;0F88: xxxxxxxx yyyyyyyy ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
-;0F8C: xxxxxxxx yyyyyyyy ; 3E3: void fs_demand_remove_from_queue( pageCache* page_p_to_remove, wchar_t page_i_to_insert );
-;0F90: xxxxxxxx yyyyyyyy ; 3E4: int fs_demand_kick_out_page( wchar_t page_i, int intrMask );
-;0F94: xxxxxxxx yyyyyyyy ;83E5: char* getSWAP_DATA_BASE( void );
+;0F78: xxxxxxxx yyyyyyyy ; 3DE:
+;0F7C: xxxxxxxx yyyyyyyy ; 3DF:
+0F80: 00000000 59170148 ; 3E0: int fs_demand_cache_page( int virtAddr, int mode, int intrMask );
+0F84: 00000000 BD190148 ; 3E1: int fs_demand_pagePool_alloc_mem( pagePool* pagePool_p, int intrMask );
+0F88: 00000000 A5140148 ; 3E2: wchar_t fs_demand_get_page_i_from_queue( wchar_t* queue, char only_allocked_pool, int page_count );
+0F8C: 00000000 39110148 ; 3E3: void fs_demand_remove_from_queue( pageCache* page_p_to_remove, wchar_t page_i_to_insert );
+0F90: 00000000 D5110148 ; 3E4: int fs_demand_kick_out_page( wchar_t page_i, int intrMask );
+0F94: 00000000 002C0C48 ;83E5: char* getSWAP_DATA_BASE( void );
 
 
 

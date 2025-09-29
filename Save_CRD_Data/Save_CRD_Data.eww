@@ -2,7 +2,7 @@
 
 <workspace>
   <project>
-    <path>$WS_DIR$\main.ewp</path>
+    <path>$WS_DIR$\Save_CRD_Data.ewp</path>
   </project>
   <batchBuild/>
 </workspace>

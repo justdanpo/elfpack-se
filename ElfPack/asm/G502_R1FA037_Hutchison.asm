@@ -9,7 +9,7 @@ a       EQU     b
         ENDM
 
         RSEG  CODE
-        defadr MESS_HOOK_RET,0x107626E2+1
+        defadr MESS_HOOK_RET,0x107626E4+1
 
         defadr memalloc,0x1009ED08
         defadr memfree,0x1009ED30
@@ -128,10 +128,9 @@ NEW_KEYHANDLER3:
         RSEG    CODE
         CODE16
 MESS_HOOK:
-        LDR     R0, [SP,#4]
-        MOV     R7, #1
-        LDR     R6, [R0,#0]
+        LDR     R6, [R6, #0]
         BLX     ParseHelperMessage
+	LDR     R2, =0x2A23D54C
         LDR     R3, =MESS_HOOK_RET
         BX      R3
 

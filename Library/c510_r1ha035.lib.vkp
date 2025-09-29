@@ -1,6 +1,6 @@
 ;C510 SW-R1HA035
 ;Function library
-;v200210
+;v 2025
 ;(c) Hussein , IronMaster
 ;(p) E1kolyan, timos_06
 ;pAtChFiLe=/boot/phone_app.cxc
@@ -262,7 +262,7 @@
 0840: 00000000 685DB215 ;8210: void* get_APP_DESC_TABLE( void );
 ;0844: xxxxxxxx yyyyyyyy ; 211:
 0848: 00000000 2DFD2715 ; 212: int AB_POSITIONNBR_GET( void* ab_name, char*, u16*, void* ab_num );
-084C: 00000000 DBFC2715 ; 213: TEXTID AB_NAME_ITEM2TextID( AB_STR_ITEM* ab_name );
+084C: 00000000 D9FC2715 ; 213: TEXTID AB_NAME_ITEM2TextID( AB_STR_ITEM* ab_name );
 0850: 00000000 6D50E014 ; 214: TEXTID AB_NUM_ITEM2TextID( AB_NUM_ITEM* ab_num_item );
 0854: 00000000 EB871B14 ; 215: int GetABRecNum( AB_GET_STRUCT* ); //nullsub(void)
 0858: 00000000 7CDC9215 ;8216: AB_ITEM_DESC* get_AB_ITEMS_DESC( void );
@@ -338,7 +338,7 @@
 ;0970: xxxxxxxx yyyyyyyy ; 25C:
 0974: 00000000 E5B92214 ; 25D: int TabMenuBar_GetFocusedTab( GUI_TABMENUBAR* );
 0978: 00000000 1D741214 ; 25E: void TabMenuBar_SetFocusedTab( GUI_TABMENUBAR*, int tab_num );
-097C: 00000000 41544314 ; 25F: int GC_GetPenColor( GC* gc );
+097C: 00000000 ADD14C14 ; 25F: int GC_GetPenColor( GC* gc );
 0980: 00000000 8DE14914 ; 260: void GC_SetPenColor( GC* gc, int pen_color );
 0984: 00000000 9DE30C14 ; 261: void GC_SetPixel( GC* gc, int x1, int y1, int color );
 0988: 00000000 BD170914 ; 262: void GC_DrawLine( GC* gc, int x1, int y1, int x2, int y2 );
@@ -413,7 +413,7 @@
 0A9C: 00000000 FD370614 ; 2A7: void _REQUEST_OAF_START_APPLICATION( const int* sync, int __zero, MIDP_DESC*, int ___zero );
 0AA0: 00000000 053C0A14 ; 2A8: wchar_t* FSX_GetInvalidChar( wchar_t* name );
 0AA4: 00000000 45961F14 ; 2A9: void DataBrowserDesc_SetFoldersNumber( void* DataBrowserDesc, int state );
-0AA8: 00000000 310D3914 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
+0AA8: 00000000 250D3914 ; 2AA: void DataBrowserDesc_SetActions( void* DataBrowserDesc, char* actions );
 0AAC: 00000000 A1962914 ; 2AB: void DataBrowserDesc_SetSelectAction( void* DataBrowserDesc, int state );
 0AB0: 00000000 D5F97415 ; 2AC: void DataBrowserDesc_SetSelectActionOnFolders( void* DataBrowserDesc, int state );
 0AB4: 00000000 7D683014 ; 2AD: void DataBrowserDesc_SetBookID( void* DataBrowserDesc, int BookID );
@@ -607,7 +607,7 @@
 0DA4: 00000000 71054314 ; 369: void MediaPlayer_SoftKeys_SetText( GUI* player_gui, int actionID, TEXTID );
 0DA8: 00000000 29054314 ; 36A: void MediaPlayer_SoftKeys_SetAction( GUI* player_gui, int actionID, SKACTIONPROC proc );
 0DAC: 00000000 E9024314 ; 36B: void MediaPlayer_SoftKeys_SetItemAsSubItem( GUI* player_gui, int item, int subitem );
-;0DB0: xxxxxxxx yyyyyyyy ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
+0DB0: 00000000 A9024314 ; 36C: void MediaPlayer_SoftKeys_AddHelpStr( GUI* player_gui, int item, TEXTID );
 ;0DB4: xxxxxxxx yyyyyyyy ; 36D: void MediaPlayer_ShowNowPlaying( DISP_OBJ*, int );
 0DB8: 00000000 71A80C14 ; 36E: void DispObject_Show( DISP_OBJ*, int mode );
 0DBC: 00000000 51217B10 ; 36F: int Request_EventChannel_Subscribe( const int* sync, int mode, int event );

@@ -4,6 +4,8 @@
 #define EXT_TABLE 0x11E61B3C
 #define HELPER_SIG 0x6FF0
 
+#define DAEMONS_INTERNAL
+
 #define PATH_USER_INT           L"/usb"
 #define PATH_USER_EXT           L"/usb"
 #define PATH_AUDIO_INT          L"/usb/music"

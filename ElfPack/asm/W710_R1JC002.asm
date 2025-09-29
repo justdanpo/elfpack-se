@@ -5,8 +5,6 @@
 
 TABMENUBAR_NAME EQU 0x45A65CB0
 
-//EXT_TABLE EQU 0x4597994C
-
 defadr  MACRO   a,b
         PUBLIC  a
 a       EQU     b
@@ -74,8 +72,8 @@ NEW_KEYHANDLER1:
 
 	RSEG  PATCH_KEYHANDLER1_CHANGE3(1)
         CODE16
-	MOV	R3, SP
-	LDRH	R2, [R2,#0x8]
+	MOV	R2, SP
+	LDRH	R3, [R2,#0x8]
 
 
 	RSEG  PATCH_KEYHANDLER1_CHANGE4(1)
@@ -204,9 +202,8 @@ DB_PATCH:
 
         RSEG   CODE
         CODE16
-
+        
 DBEXT:
-
         SUB     R2, R2, #1
         ADD     R2, R2, #1
         ADD     R1, R5, #0

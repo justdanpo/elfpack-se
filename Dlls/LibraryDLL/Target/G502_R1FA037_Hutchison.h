@@ -17,15 +17,12 @@ int (*REQUEST_HPHONEBOOK_READSTRING)(const int *sync, void *buf) = (int (*)(cons
 void (*AB_STR_ITEM_Copy)(AB_STR_ITEM *dest, AB_STR_ITEM *source) = (void (*)(AB_STR_ITEM *dest, AB_STR_ITEM *source))0x10F681DD;
 int (*GetImageHeight_int)(wchar_t ImageID) = (int (*)(wchar_t ImageID))0x116A0689;
 void (*Display_SetBrightnessLevel)(int level) = (void (*)(int level))0x11625591;
-TEXTID (*TextID_CreateIntegerID_int)
-(int num, char *filename, int line_num) = (TEXTID(*)(int num, char *filename, int line_num))0x1168426D;
-TEXTID (*TextID_Create_int)
-(const void *wstr, int flag, int len, char *filename, int line_num) = (TEXTID(*)(const void *wstr, int flag, int len, char *filename, int line_num))0x1168442D;
+TEXTID (*TextID_CreateIntegerID_int)(int num, char *filename, int line_num) = (TEXTID(*)(int num, char *filename, int line_num))0x1168426D;
+TEXTID (*TextID_Create_int)(const void *wstr, int flag, int len, char *filename, int line_num) = (TEXTID(*)(const void *wstr, int flag, int len, char *filename, int line_num))0x1168442D;
 int (*TextID_GetWString_int)(TEXTID strid, wchar_t *dest, int maxlen, char *filename, int line_num) = (int (*)(TEXTID strid, wchar_t *dest, int maxlen, char *filename, int line_num))0x11684899;
 int (*TextID_GetLength_int)(TEXTID strid, char *filename, int line_num) = (int (*)(TEXTID strid, char *filename, int line_num))0x11684799;
 void (*TextID_Destroy_int)(TEXTID strid, char *filename, int line_num) = (void (*)(TEXTID strid, char *filename, int line_num))0x116846C5;
-TEXTID (*TextID_Copy_int)
-(TEXTID strid, char *filename, int line_num) = (int (*)(TEXTID strid, char *filename, int line_num))0x116845D1;
+TEXTID (*TextID_Copy_int)(TEXTID strid, char *filename, int line_num) = (int (*)(TEXTID strid, char *filename, int line_num))0x116845D1;
 int (*Request_SIM_IMSI_Read)(const int *sync, const int unk, char *imsi, char *error_cause) = (int (*)(const int *sync, const int unk, char *imsi, char *error_cause))0x107F1DB1;
 int (*get_imsi_const)() = (int (*)())0x107558E9;
 int (*Request_SL_GetRadioState)(const int *sync, char *level, char *flag, char *error_cause) = (int (*)(const int *sync, char *level, char *flag, char *error_cause))0x2A202251;

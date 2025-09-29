@@ -2,9 +2,7 @@
 
 <workspace>
   <project>
-    <path>$WS_DIR$\srec.ewp</path>
+    <path>$WS_DIR$\asr.ewp</path>
   </project>
   <batchBuild/>
 </workspace>
-
-
